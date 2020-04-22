@@ -138,4 +138,73 @@ class DLL {
         }
         return this;
     }
+    isPalindrome() {
+        let headrunner = this.head;
+        let tailrunner = this.tail;
+        if(headrunner == null) {
+            return false;
+        }
+        if(headrunner == tailrunner) {
+            return true;
+        }
+        while(headrunner != tailrunner) {
+            if(headrunner.data != tailrunner.data) {
+                return false;
+            }
+            headrunner = headrunner.next;
+            tailrunner = tailrunner.prev;
+            if(headrunner.prev == tailrunner) {
+                return true;
+            }
+        }
+        return true;
+    }
+    reverse() {
+        let headrunner = this.head;
+        let temphead = this.head;
+        let pointer;
+        while(headrunner != null) {
+            pointer = headrunner.next;
+            headrunner.next = headrunner.prev;
+            headrunner.prev = pointer;
+            headrunner = pointer;
+            this.head = pointer;
+        }
+        this.tail = temphead;
+        return this;
+    }
+    
+    // return true or false if DLL1 is a rotation of DLL2
+
+    // DLL1 = (1)  (2)  (3)  (4)
+    // DLL2 = (4)  (1)  (2)  (3)
+    isRotation(DLL1, DLL2) {
+        let myArr = [];
+        let DLL1runner = DLL1.head;
+        let DLL2runner
+        while(DLL1runner != null) {
+            myArr.push(runner.data);
+        }
+        while(DLL2runner != null) {
+            if(DLL2runner.data == myArr[0]) {
+                break;
+            }
+            DLL2runner = DLL2runner.next
+        }
+        let i = 0
+        while(i < myArr.length) {
+            if(myArr[i] == DLL2runner.data) {
+                if(DLL2runner.next == null) {
+                    DLL2runner = DLL2.head;
+                } else {
+                DLL2runner= DLL2runner.next
+                }
+                i++;
+            } else {
+                return false
+            }
+        }
+        return true;
+    }
+
 }
