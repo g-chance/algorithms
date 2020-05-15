@@ -1,4 +1,57 @@
+#   ==================== DISTRIBUTE CANDIES TO PEOPLE ====================
+
+# candies = 40
+# num_people = 4
+
+# def distributeCandies(candies: int, num_people: int):
+#     myList = [0] * num_people
+#     count = 0
+#     while candies > 0:
+#         for i in range(num_people):
+#             if (candies - (1+count)) > 0:
+#                 myList[i] += (1+count)
+#                 candies -= (1+count)
+#                 count += 1
+#             else:
+#                 myList[i] += candies
+#                 candies -= candies
+#     return myList
+# print(distributeCandies(candies, num_people))
+
+
 #   ==================== REMOVE ELEMENT ====================
+
+# nums = [3,3,3,2] 
+# val = 3
+
+# def removeElement(nums, val: int) -> int:
+#     i = 0
+#     for j in range(len(nums)):
+#         if nums[j] != val:
+#             nums[i] = nums[j]
+#             i += 1
+#     print(nums)
+#     return i
+# print(removeElement(nums, val))
+
+# def removeElement(nums, val: int) -> int:
+#     for i in range(len(nums)):
+#         if nums[i] == val:
+#             for j in range(i+1,len(nums)):
+#                 if nums[j] != val:
+#                     temp = nums[i]
+#                     nums[i] = nums[j]
+#                     nums[j] = temp
+#                     break
+#             else:
+#                 length = 0
+#                 for num in nums:
+#                     if num != val:
+#                         length += 1
+#                 print(nums)
+#                 return length
+#     return len(nums)
+# print(removeElement(nums, val))
 
 
 #   ==================== PLUS ONE ====================
