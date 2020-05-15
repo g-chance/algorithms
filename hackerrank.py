@@ -10,7 +10,8 @@
 # print(myList)
 # print(marksheet)
 
-#   ==================== LIST COMPREHENSIONS ====================
+
+#   ==================== RUNNER-UP ====================
 
 # n = 5
 # arr = [2,3,6,6,5]

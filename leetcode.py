@@ -1,17 +1,124 @@
+#   ==================== REMOVE ELEMENT ====================
+
+
+#   ==================== PLUS ONE ====================
+
+# nums = [9,9,9]
+
+# def plusOne(digits):
+#     count = 0
+#     for i in range(len(digits)-1,-1,-1):
+#         if digits[i] == 9:
+#             digits[i] = 0
+#             count += 1
+#         else:
+#             digits[i] += 1
+#             return digits
+#     if count == len(digits):
+#         digits[i] = 1
+#         digits.append(0)
+#     return digits
+# print(plusOne(nums))
+
+    # Build the digit, add 1 to it, then rebuild the list
+# def plusOne(digits):
+#     digit = 0
+#     for i in range(len(digits)):
+#         digit += digits[i]*(10**(len(digits)-i-1))
+#     digit += 1
+#     print(digit)
+#     digits = []
+#     while digit != 0:
+#         digits = [digit % 10] + digits
+#         digit //= 10
+#     return digits
+# print(plusOne(nums))
+
+    # Convert list to str, str to int, int back to str, then rebuilding the list
+# def plusOne(digits):
+#     myStr = ""
+#     for digit in digits:
+#         myStr += str(digit)
+#     digit = int(myStr)
+#     digit += 1
+#     myStr = str(digit)
+#     digits = [int(char) for char in myStr]
+#     return digits
+# print(plusOne(nums))
+
+
+#   ==================== SINGLE NUMBER ====================
+
+# nums = [2,3,3,4,1,1,2]
+
+# def singleNumber(nums) -> int:
+#     s_num = 0
+#     for num in nums:
+#         s_num ^= num
+#     return s_num
+# print(singleNumber(nums))
+
+    # Works but is too slow
+# def singleNumber(nums) -> int:
+#     for i in range(len(nums)):
+#         if(nums[i] != None):
+#             for j in range(i+1,len(nums)):
+#                 if nums[i] == nums[j]:
+#                     nums[i] = nums[j] = None
+#     for k in nums:
+#         if k != None:
+#             return k
+# print(singleNumber(nums))
+
+    # With dictionary
+# def singleNumber(nums) -> int:
+#     myDict = {}
+#     for num in nums:
+#         if num in myDict:
+#             del myDict[num]
+#         else:
+#             myDict[num] = num
+#     for key in myDict:
+#         return key
+# print(singleNumber(nums))
+
+
+#   ==================== ROTATE ARRAY ====================
+
+# nums = [-1,-100,3,99]
+# k = 7
+# def rotate(nums, k: int) -> None:
+#     temp_list = []
+#     if k > len(nums):
+#         k -= len(nums)
+#     for i in range(len(nums)-k):
+#         temp_list.append(nums[i])
+#     for i in range(len(nums)):
+#         if i < k:
+#             nums[i] = nums[len(nums)-k+i]
+#         else:
+#             nums[i] = temp_list[i-k]
+#     print(nums)
+#     return None
+
+# rotate(nums, k)
+
+
 #   ==================== COUNT PRIMES ====================
 
-def countPrimes(n: int) -> int:
-    primes_list = [0] * n
-    count = 0
-    if n < 3:
-        return 0
-    for i in range(2,n):
-        if primes_list[i] == 0:
-            count += 1
-            for j in range(i*i,n,i):
-                primes_list[j] = 1
-    return count
+# def countPrimes(n: int) -> int:
+#     primes_list = [0] * n
+#     count = 0
+#     if n < 3:
+#         return 0
+#     for i in range(2,n):
+#         if primes_list[i] == 0:
+#             count += 1
+#             for j in range(i*i,n,i):
+#                 primes_list[j] = 1
+#     return count
 
+    # Leet code didn't accept this because it was too slow, but it does work
 # def countPrimes(n: int) -> int:
 #     if n < 3:
 #         return 0
@@ -26,7 +133,7 @@ def countPrimes(n: int) -> int:
 #             primes_list.append(i)
 #     return len(primes_list)
 
-print(countPrimes(100))
+# print(countPrimes(100))
 
 
 #   ==================== MOVE ZEROES ====================
@@ -56,6 +163,7 @@ print(countPrimes(100))
 #     print(nums)
 
 # moveZeroes(nums)
+
 
 #   ==================== BULLS AND COWS ====================
 
