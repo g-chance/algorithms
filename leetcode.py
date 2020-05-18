@@ -1,3 +1,61 @@
+#   ==================== ADD TWO NUMBERS ====================
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    def addTwoNumbers(self, l1, l2):
+        def getTotal(list, total):
+            myList = []
+            runner = list
+            while runner != None:
+                myList.append(runner.val)
+                runner = runner.next
+            for i in reversed(range(len(myList))):
+                total += myList[i]*10**(i)
+            return total
+        total = 0
+        total = getTotal(l1, total)
+        total = getTotal(l2, total)
+        l3 = ListNode(total % 10)
+        total //= 10
+        runner = l3
+        while total != 0:
+            runner.next = ListNode(total % 10)
+            runner = runner.next
+            total //= 10
+        return l3
+
+list_one = ListNode(2)
+runner = list_one
+runner.next = ListNode(4)
+runner = runner.next
+runner.next = ListNode(3)
+
+list_two = ListNode(5)
+runner = list_two
+runner.next = ListNode(6)
+runner = runner.next
+runner.next = ListNode(4)
+
+list_three = ListNode()
+print(list_three.addTwoNumbers(list_one,list_two).val)
+
+# runner = list_three.head
+# while runner != None:
+#     print("list_three",runner.val)
+#     runner = runner.next
+
+# class SLL:
+#     def __init__(self):
+#         self.head = None
+#     def addToFront(self, val):
+#         new_node = ListNode(val)
+#         new_node.next = self.head
+#         self.head = new_node
+#         return self
+
 #   ==================== DISTRIBUTE CANDIES TO PEOPLE ====================
 
 # candies = 40

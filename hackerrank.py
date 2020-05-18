@@ -1,3 +1,33 @@
+#   ==================== sWAP cASE ====================
+
+s = 'HackerRank.com presents "Pythonist 2".'
+
+def swap_case(s):
+    s = s.swapcase()
+    return s
+
+# def swap_case(s):
+#     x = "".join([char.upper() if char.islower() else char.lower() for char in s])
+#     print(x)
+    # new_str = "".join[char.upper() for char in s if char.islower()]
+    # return new_str
+
+# def swap_case(s):
+#     new_str = ""
+#     print(s)
+#     for char in s:
+#         if char.isupper():
+#             new_str += char.lower()
+#         elif char.islower():
+#             new_str += char.upper()
+#         else:
+#             new_str += char
+#     return new_str
+
+result = swap_case(s)
+print(result)
+
+
 #   ==================== NESTED LISTS ====================
 
     # Not the complete code -- completed code on hackerrank
