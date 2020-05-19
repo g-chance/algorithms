@@ -1,60 +1,227 @@
+#   ==================== GEN STR W/ CHARS THAT HAVE ODD COUNTS ====================
+
+def generateTheString(n: int) -> str:
+    my_str = ""
+    if n % 2 == 1:
+        my_str += "a"*n
+    else:
+        my_str += "a"*(n-1)
+        my_str += "b"
+    return my_str
+
+print(generateTheString(6))
+
+
+#   ==================== MATRIX CELLS IN DISTANCE ORDER ====================
+
+# R = 2
+# C = 3
+# r0 = 1
+# c0 = 2
+# def allCellsDistOrder(R: int, C: int, r0: int, c0: int):
+#     matrix = []
+#     ordered = []
+#     myDict = {}
+#     for r in range(R):
+#         for c in range(C):
+#             matrix += [[r, c]]
+#     print(matrix)
+#     for cell in matrix:
+#         dist = abs(r0-cell[0])+abs(c0-cell[1])
+#         if dist in myDict:
+#             myDict[dist] += [cell]
+#         else:
+#             myDict[dist] = [cell]
+#     i = 0
+#     while i in myDict:
+#         ordered += myDict[i]
+#         i += 1
+#     print(myDict)
+#     print(ordered)
+
+# allCellsDistOrder(R,C,r0,c0)
+
+
+#   ==================== ODD CELLS ====================
+
+    # matrix = [[0]*m]*n
+
+# def oddCells(n, m, indices) -> int:
+#     matrix = [[0]*m for i in range(n)]
+#     for pair in indices:
+#         matrix[pair[0]] = [x+1 for x in matrix[pair[0]]]
+#         for j in range(len(matrix)):
+#             matrix[j][pair[1]] += 1
+#     count = 0
+#     for row in matrix:
+#         for col in row:
+#             if col % 2 == 1:
+#                 count += 1
+#     return count
+
+# print(oddCells(2,2,[[1,1],[0,0]]))
+
+
+#   ==================== MAX NUM OF BALLOONS ====================
+
+# def maxNumberOfBalloons(text: str) -> int:
+#     text_dict = {}
+#     for char in text:
+#         if char in "balloon":
+#             if char in text_dict:
+#                 text_dict[char] += 1
+#             else:
+#                 text_dict[char] = 1
+#     print(text_dict)
+#     min = 2**64
+#     for char in "balon":
+#         if char not in text_dict:
+#             return 0
+#         elif char == "l" or char == "o":
+#             text_dict[char] //= 2
+#         if text_dict[char] < min:
+#             min = text_dict[char]
+#     return min
+
+# def maxNumberOfBalloons(text: str) -> int:
+#     balloon_dict = {}
+#     text_dict = {}
+#     for char in "balloon":
+#         if char in balloon_dict:
+#             balloon_dict[char] += 1
+#         else:
+#             balloon_dict[char] = 1
+#     for char in text:
+#         if char in balloon_dict:
+#             if char in text_dict:
+#                 text_dict[char] += 1
+#             else:
+#                 text_dict[char] = 1
+#     count = 0
+#     while True:
+#         for key in balloon_dict:
+#             if key not in text_dict:
+#                 return 0
+#             text_dict[key] -= balloon_dict[key]
+#             if text_dict[key] < 0:
+#                 return count
+#         count += 1
+#     return count
+
+# print(maxNumberOfBalloons("nlaebolko"))
+
+
+#   ==================== NUM STEPS TOP REDUCE A NUMBER TO 0 ====================
+
+# num = 14
+
+# def numberOfSteps (num: int) -> int:
+#     count = 0
+#     while num != 0:
+#         if num % 2 == 0:
+#             num /= 2
+#             count += 1
+#         else:
+#             num -= 1 
+#             count += 1
+#     return count
+
+# print(numberOfSteps(num))
+
+#   ==================== strStr ====================
+
+# haystack = "mississippi"
+# needle = "pi"
+
+    # Most thoughtful solution
+# def strStr(haystack: str, needle: str) -> int:
+#     if len(needle) == 0:
+#         return 0
+#     for i in range(len(haystack)):
+#         if haystack[i] == needle[0] and i+len(needle) <= len(haystack):
+#             if haystack[i:i+len(needle)] == needle:
+#                 print(haystack[i:i+len(needle)], i)
+#                 print(needle)
+#                 return i
+#     return -1
+
+    # Using .find (fastest)
+# def strStr(haystack: str, needle: str) -> int:
+#     if needle == "":
+#         return 0
+#     if needle in haystack:
+#         return haystack.find(needle)
+#     return -1
+
+    # This breaks when the inputs are really long
+# def strStr(haystack: str, needle: str) -> int:
+#     if needle == "":
+#         return 0
+#     if len(needle) > len(haystack):
+#         return -1
+#     i = 0
+#     while i < len(haystack):
+#         needleCount = len(needle)
+#         if haystack[i] == needle[0]:
+#             print(haystack[i])
+#             print(i)
+#             for j in range(i, len(haystack)):
+#                 if haystack[j] == needle[j-i]:
+#                     needleCount -= 1
+#                 else:
+#                     print(i)
+#                     break
+#                 if needleCount == 0:
+#                     return i
+#         i += 1
+#     return -1
+
+# print(strStr(haystack,needle))
+
+
 #   ==================== ADD TWO NUMBERS ====================
 
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-    def addTwoNumbers(self, l1, l2):
-        def getTotal(list, total):
-            myList = []
-            runner = list
-            while runner != None:
-                myList.append(runner.val)
-                runner = runner.next
-            for i in reversed(range(len(myList))):
-                total += myList[i]*10**(i)
-            return total
-        total = 0
-        total = getTotal(l1, total)
-        total = getTotal(l2, total)
-        l3 = ListNode(total % 10)
-        total //= 10
-        runner = l3
-        while total != 0:
-            runner.next = ListNode(total % 10)
-            runner = runner.next
-            total //= 10
-        return l3
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#     def addTwoNumbers(self, l1, l2):
+#         def getTotal(list, total):
+#             myList = []
+#             runner = list
+#             while runner != None:
+#                 myList.append(runner.val)
+#                 runner = runner.next
+#             for i in reversed(range(len(myList))):
+#                 total += myList[i]*10**(i)
+#             return total
+#         total = 0
+#         total = getTotal(l1, total)
+#         total = getTotal(l2, total)
+#         l3 = ListNode(total % 10)
+#         total //= 10
+#         runner = l3
+#         while total != 0:
+#             runner.next = ListNode(total % 10)
+#             runner = runner.next
+#             total //= 10
+#         return l3
 
-list_one = ListNode(2)
-runner = list_one
-runner.next = ListNode(4)
-runner = runner.next
-runner.next = ListNode(3)
+# list_one = ListNode(2)
+# runner = list_one
+# runner.next = ListNode(4)
+# runner = runner.next
+# runner.next = ListNode(3)
 
-list_two = ListNode(5)
-runner = list_two
-runner.next = ListNode(6)
-runner = runner.next
-runner.next = ListNode(4)
+# list_two = ListNode(5)
+# runner = list_two
+# runner.next = ListNode(6)
+# runner = runner.next
+# runner.next = ListNode(4)
 
-list_three = ListNode()
-print(list_three.addTwoNumbers(list_one,list_two).val)
+# list_three = ListNode()
+# print(list_three.addTwoNumbers(list_one,list_two).val)
 
-# runner = list_three.head
-# while runner != None:
-#     print("list_three",runner.val)
-#     runner = runner.next
-
-# class SLL:
-#     def __init__(self):
-#         self.head = None
-#     def addToFront(self, val):
-#         new_node = ListNode(val)
-#         new_node.next = self.head
-#         self.head = new_node
-#         return self
 
 #   ==================== DISTRIBUTE CANDIES TO PEOPLE ====================
 
