@@ -1,25 +1,80 @@
+#   ==================== 997 ====================
+
+def findJudge(self, N: int, trust: List[List[int]]) -> int:
+    
+
+
+#   ==================== 389 ====================
+
+# def findTheDifference(s: str, t: str) -> str:
+#     dict_s = {}
+#     for char in s:
+#         if char in dict_s:
+#             dict_s[char] += 1
+#         else:
+#             dict_s[char] = 1
+#     for char in t:
+#         if char not in dict_s:
+#             return char
+#         dict_s[char] -= 1
+#         if dict_s[char] < 0:
+#             return char
+
+# def findTheDifference(s: str, t: str) -> str:
+#     list_s = list(s)
+#     list_t = list(t)
+#     list_s.sort()
+#     list_t.sort()
+#     print(list_s,list_t)
+#     for i in range(len(list_s)):
+#         if list_s[i] != list_t[i]:
+#             return list_t[i]
+#     return list_t[len(t)-1]
+
+print(findTheDifference("abcd","abedc"))
+
+#   ==================== 1200 ====================
+
+# def minimumAbsDifference(arr):
+    # arr.sort()
+    # min_dist = 10**6
+    # min_list = []
+    # print(arr)
+    # for i in reversed(range(1,len(arr))):
+    #     if abs(arr[i] - arr[i-1]) < min_dist:
+    #         min_dist = abs(arr[i] - arr[i-1])
+    # print(min_dist)
+    # for i in range(len(arr)-1):
+    #     if abs(arr[i+1] - arr[i]) == min_dist:
+    #         min_list.append([arr[i],arr[i+1]])
+    # print(min_list)
+    # return min_list
+
+# print(minimumAbsDifference([4,2,1,3]))
+
+
 #   ==================== 463 ====================
 
-def islandPerimeter(grid) -> int:
-    def checkSides(grid, i, j):
-        sum = 4
-        if j < len(grid[0])-1 and grid[i][j+1] == 1:
-            sum -= 2
-        if i < len(grid)-1 and grid[i+1][j] == 1:
-            sum -= 2
-        return sum
-    perim = 0
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j] == 1:
-                perim += checkSides(grid,i,j)
-    return perim
-print(islandPerimeter(
-    [[0,1,0,0],
-    [1,1,1,0],
-    [0,1,0,0],
-    [1,1,0,0]]
-))
+# def islandPerimeter(grid) -> int:
+#     def checkSides(grid, i, j):
+#         sum = 4
+#         if j < len(grid[0])-1 and grid[i][j+1] == 1:
+#             sum -= 2
+#         if i < len(grid)-1 and grid[i+1][j] == 1:
+#             sum -= 2
+#         return sum
+#     perim = 0
+#     for i in range(len(grid)):
+#         for j in range(len(grid[0])):
+#             if grid[i][j] == 1:
+#                 perim += checkSides(grid,i,j)
+#     return perim
+# print(islandPerimeter(
+#     [[0,1,0,0],
+#     [1,1,1,0],
+#     [0,1,0,0],
+#     [1,1,0,0]]
+# ))
 
 
 #   ==================== 125 ====================
