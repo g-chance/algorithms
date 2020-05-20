@@ -1,15 +1,158 @@
+#   ==================== 463 ====================
+
+def islandPerimeter(grid) -> int:
+    def checkSides(grid, i, j):
+        sum = 4
+        if j < len(grid[0])-1 and grid[i][j+1] == 1:
+            sum -= 2
+        if i < len(grid)-1 and grid[i+1][j] == 1:
+            sum -= 2
+        return sum
+    perim = 0
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == 1:
+                perim += checkSides(grid,i,j)
+    return perim
+print(islandPerimeter(
+    [[0,1,0,0],
+    [1,1,1,0],
+    [0,1,0,0],
+    [1,1,0,0]]
+))
+
+
+#   ==================== 125 ====================
+
+# def isPalindrome(s: str) -> bool:
+#     l = 0
+#     r = len(s)-1
+#     while l < r:
+#         while l < len(s) and not s[l].isalnum():
+#             l += 1
+#         while r > -1 and not s[r].isalnum():
+#             r -= 1
+#         if l == len(s):
+#             return True
+#         if s[l].lower() != s[r].lower():
+#             return False
+#         l += 1
+#         r -= 1
+#     return True
+
+# def isPalindrome(s: str) -> bool:
+#     new_str = ""
+#     for char in s:
+#         if char.isalnum():
+#             new_str += char.lower()
+#     print(new_str)
+#     for i in range(len(new_str)//2):
+#         if new_str[i] != new_str[len(new_str)-i-1]:
+#             return False
+#     return True
+
+# print(isPalindrome(",a,aa,"))
+
+#   ========================================
+
+# def validPalindrome(s: str) -> bool:
+#     count = 0
+#     l = [char for char in s]
+#     for i in range(len(l)//2):
+#         if l[i] != l[len(l)-i-1]:
+#             l1 = l[i+1:len(l)-i]
+#             l2 = l[i:len(l)-i-1]
+#             for j in range(len(l1)//2):
+#                 if l1[j] != l1[len(l1)-j-1]:
+#                     if l2:
+#                         break
+#                     return False
+#             else: return True
+#             for k in range(len(l2)//2):
+#                 if l2[k] != l2[len(l2)-k-1]:
+#                     return False
+#             return True
+#     return True
+
+# print(validPalindrome("abca"))
+
+
+#   ========================================
+
+# def isPalindrome(x: int) -> bool:
+#     s = str(x)
+#     for i in range(len(s)//2):
+#         if s[i] == s[len(s)-i-1]:
+#             pass
+#         else:
+#             return False
+#     return True
+
+# def isPalindrome(x: int) -> bool:
+#     if x < 0:
+#         return False
+#     if x % 10 == 0:
+#         return False
+#     poop = x
+#     reverse = 0
+#     while x != 0:
+#         reverse = reverse*10 + (x % 10)
+#         x //= 10
+#     print(reverse)
+#     print(x)
+#     if poop == reverse:
+#         return True
+#     return False
+
+# print(isPalindrome(50505))
+
+
+#   ========================================
+
+    # With math (slower)
+# def findNumbers(nums) -> int:
+#     count = 0
+#     for i in range(1,7,2):
+#         for num in nums:
+#             if num >= 10**i and num < 10**(i+1):
+#                 print("i",i)
+#                 print(10**0)
+#                 count += 1
+#     return count
+
+# def findNumbers(nums) -> int:
+#     count = 0
+#     for num in nums:
+#         count += len(str(num)) % 2 == 0
+#     return count
+# print(findNumbers([12,345,2,6,7896]))
+
+
+#   ========================================
+
+# def subtractProductAndSum(n: int) -> int:
+#     mult = 1
+#     add = 0
+#     while n != 0:
+#         mult *= (n % 10)
+#         add += (n % 10)
+#         n //= 10
+#     return mult - add
+# print(subtractProductAndSum(234))
+
+
 #   ==================== GEN STR W/ CHARS THAT HAVE ODD COUNTS ====================
 
-def generateTheString(n: int) -> str:
-    my_str = ""
-    if n % 2 == 1:
-        my_str += "a"*n
-    else:
-        my_str += "a"*(n-1)
-        my_str += "b"
-    return my_str
+# def generateTheString(n: int) -> str:
+#     my_str = ""
+#     if n % 2 == 1:
+#         my_str += "a"*n
+#     else:
+#         my_str += "a"*(n-1)
+#         my_str += "b"
+#     return my_str
 
-print(generateTheString(6))
+# print(generateTheString(6))
 
 
 #   ==================== MATRIX CELLS IN DISTANCE ORDER ====================
