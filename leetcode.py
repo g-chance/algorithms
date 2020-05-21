@@ -1,7 +1,177 @@
+#   ==================== 83 ====================
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def deleteDuplicates(head: ListNode) -> ListNode:
+    runner = head
+    while runner != None and runner.next != None:
+        if runner.val == runner.next.val:
+            runner.next = runner.next.next
+        else:
+            runner = runner.next
+    return head
+
+list1 = ListNode(1)
+runner = list1
+runner.next = ListNode(1); runner = runner.next
+runner.next = ListNode(2); runner = runner.next
+runner.next = ListNode(2); runner = runner.next
+runner.next = ListNode(3); runner = runner.next
+print(list1.next.val)
+
+print(deleteDuplicates(list1))
+new_list = deleteDuplicates(list1)
+print(new_list.val,new_list.next.val,new_list.next.next.val)
+
+#   ==================== 1047 ====================
+
+# def removeDuplicates(S: str) -> str:
+#     stack = []
+#     for char in S:
+#         if len(stack) > 0 and stack[len(stack)-1] == char:
+#             stack.pop()
+#         else:
+#             stack.append(char)
+#     return "".join(stack)
+
+# def removeDuplicates(S: str) -> str:
+#     while True:
+#         for i in range(len(S)-1):
+#             if S[i] == S[i+1]:
+#                 S = S[:i]+S[i+2:]
+#                 break
+#         else:
+#             if len(S) < 2 or len(S) == 2 and S[0] != S[1]:
+#                 return S
+#             if len(S) == 2 and S[0] == S[1]:
+#                 return ""
+#             return S
+
+# def removeDuplicates(S: str) -> str:
+#     if len(S) < 2 or len(S) == 2 and S[0] != S[1]:
+#         return S
+#     if len(S) == 2 and S[0] == S[1]:
+#         return ""
+#     new_str = ""
+#     for i in range(len(S)-1):
+#         if S[i] == S[i+1]:
+#             new_str += S[:i]+S[i+2:]
+#             return removeDuplicates(new_str)
+#     return S
+
+# print(removeDuplicates("abbbabaaa"))
+
+
+#   ==================== 219 ====================
+
+# def containsNearbyDuplicate(nums, k: int) -> bool:
+#     my_dict = {}
+#     for i in range(len(nums)):
+#         if nums[i] in my_dict:
+#             my_dict[nums[i]] += [i]
+#             if abs(my_dict[nums[i]][0] - my_dict[nums[i]][1]) <= k:
+#                 return True
+#             my_dict[nums[i]].pop(0)
+#         else:
+#             my_dict[nums[i]] = [i]
+#     return False
+
+# print(containsNearbyDuplicate([1,2,3,1,2,3], 2))
+
+
+#   ==================== 217 ====================
+
+# def containsDuplicate(nums) -> bool:
+#     myDict = {}
+#     for num in nums:
+#         if num in myDict:
+#             return True
+#         myDict[num] = 0
+#     return False
+
+# def containsDuplicate(nums) -> bool:
+#     nums.sort()
+#     for i in range(len(nums)-1):
+#         if nums[i] == nums[i+1]:
+#             return True
+#     return False
+
+# print(containsDuplicate([1,2,3,1]))
+
+
+#   ==================== 500 ====================
+
+# def findWords(words):
+#     words_arr = []
+#     keyboard = {
+#         "row1": set("qwertyuiop"),
+#         "row2": set("asdfghjkl"),
+#         "row3": set("zxcvbnm")
+#     }
+#     for word in words:
+#         for row in keyboard:
+#             print(set(word.lower()) - keyboard[row])
+#             print(keyboard[row])
+#             if set(word.lower()) - keyboard[row] == set():
+#                 words_arr.append(word)
+#     return words_arr
+
+# def findWords(words):
+#     words_arr = []
+#     keyboard = {
+#         "row1": "qwertyuiop",
+#         "row2": "asdfghjkl",
+#         "row3": "zxcvbnm"
+#     }
+#     for word in words:
+#         for row in keyboard:
+#             if word[0].lower() in keyboard[row]:
+#                 for char in word:
+#                     if char.lower() not in keyboard[row]:
+#                         break
+#                 else:
+#                     words_arr.append(word)
+#     return(words_arr)
+
+# print(findWords(["Hello", "Alaska", "Dad", "Peace"]))
+
 #   ==================== 997 ====================
 
-def findJudge(self, N: int, trust: List[List[int]]) -> int:
-    
+# def findJudge(N: int, trust) -> int:
+#     graph = [0]*(N+1)
+#     for i, j in trust:
+#         graph[i] -= 1
+#         graph[j] += 1
+#     for p in graph:
+#         if p == N-1:
+#             return p
+#     return -1
+
+# def findJudge(N: int, trust) -> int:
+#     trust_dict = {}
+#     for i in range(len(trust)):
+#         if trust[i][0] not in trust_dict:
+#             trust_dict[trust[i][0]] = [trust[i][1]]
+#         else:
+#             trust_dict[trust[i][0]] += [trust[i][1]]
+#     print(trust_dict)
+#     for i in range(1, N+1):
+#         if i not in trust_dict:
+#             count = 0
+#             for key, val in trust_dict.items():
+#                 print(val)
+#                 if i not in val:
+#                     break
+#                 count += 1
+#             else:
+#                 if count == N-1:
+#                     return i
+#     return -1
+
+# print(findJudge(4, [[1,3],[1,4],[2,3]]))
 
 
 #   ==================== 389 ====================
@@ -31,7 +201,7 @@ def findJudge(self, N: int, trust: List[List[int]]) -> int:
 #             return list_t[i]
 #     return list_t[len(t)-1]
 
-print(findTheDifference("abcd","abedc"))
+# print(findTheDifference("abcd","abedc"))
 
 #   ==================== 1200 ====================
 
