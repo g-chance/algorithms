@@ -1,30 +1,153 @@
+#   ==================== 237 ====================
+
+
+#   ==================== 160 ====================
+
+    # Got this from discussion.. genius
+# def getIntersectionNode(headA, headB):
+#     runnera = headA
+#     runnerb = headB
+#     while runnera != runnerb:
+#         if runnera == None:
+#             runnera = headB
+#         if runnerb == None:
+#             runnerb = headA
+#         runnera = runnera.next
+#         runnerb = runnerb.next
+#     return runnera
+
+# def getIntersectionNode(headA, headB):
+#     my_arr = []
+#     runnera = headA
+#     runnerb = headB
+#     while runnera != None and runnerb != None:
+#         print(runnera.val, runnerb.val)
+#         if runnera in my_arr:
+#             return runnera
+#         my_arr.append(runnera)
+#         if runnerb in my_arr:
+#             return runnerb
+#         my_arr.append(runnerb)
+#         runnera = runnera.next
+#         runnerb = runnerb.next
+#     runner = None
+#     print(runnera,runnerb)
+#     if runnera:
+#         runner = runnera
+#         print("runnera")
+#     elif runnerb:
+#         runner = runnerb
+#         print("runnerb")
+#     while runner != None:
+#         if runner in my_arr:
+#             return runner
+#         runner = runner.next
+#     return None
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# list1 = ListNode(1)
+# runner = list1
+# runner.next = ListNode(3); runner = runner.next
+# runner.next = ListNode(5); runner = runner.next
+# temp = runner.next = ListNode(7); runner = runner.next
+# # runner.next = ListNode(9); runner = runner.next
+# list2 = ListNode(2)
+# runner = list2
+# runner.next = ListNode(4); runner = runner.next
+# runner.next = temp; runner = runner.next
+# print(list2.next.next.val)
+
+# print(getIntersectionNode(list1,list2).val)
+
+#   ==================== 819 ====================
+
+# import re
+
+    # With REGEX
+# def mostCommonWord(paragraph: str, banned) -> str:
+#     alnum = re.compile(r"\w+")
+#     word_list = alnum.findall(paragraph)
+#     word_dict = {}
+#     count = 0
+#     result = ""
+#     for word in word_list:
+#         print(word.lower())
+#         if word.lower() not in banned and word.lower() not in word_dict:
+#             word_dict[word.lower()] = 1
+#         elif word.lower() not in banned:
+#             word_dict[word.lower()] +=1
+#     print(word_dict)
+#     for word, val in word_dict.items():
+#         if val > count:
+#             count = val
+#             result = word
+#     return result
+
+
+# def mostCommonWord(paragraph: str, banned) -> str:
+#     word_list = []
+#     new_idx = 0
+#     for i, char in enumerate(paragraph):
+#         if not char.isalpha():
+#             word_list.append(paragraph[new_idx:i])
+#             new_idx = i+1
+#         elif i == len(paragraph)-1:
+#             word_list.append(paragraph[new_idx:i+1])
+#     print(word_list)
+#     word_dict = {}
+#     result = ""
+#     count = 0
+#     for i, word in enumerate(word_list):
+#         print(word)
+#         if not word.isalpha():
+#             new_word = ""
+#             for char in word:
+#                 if char.isalpha():
+#                     new_word += char
+#             word = new_word
+#         if word.lower() not in banned and word.lower() not in word_dict and not word == "":
+#             word_dict[word.lower()] = 1
+#         elif word.lower() not in banned and not word == "":
+#             word_dict[word.lower()] += 1
+#     for word,val in word_dict.items():
+#         if val > count:
+#             result = word
+#             count = val
+#     return result
+
+# print(mostCommonWord(paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.", banned = ["hit"]))
+
 #   ==================== 83 ====================
 
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
-def deleteDuplicates(head: ListNode) -> ListNode:
-    runner = head
-    while runner != None and runner.next != None:
-        if runner.val == runner.next.val:
-            runner.next = runner.next.next
-        else:
-            runner = runner.next
-    return head
+# def deleteDuplicates(head: ListNode) -> ListNode:
+#     runner = head
+#     while runner != None and runner.next != None:
+#         if runner.val == runner.next.val:
+#             runner.next = runner.next.next
+#         else:
+#             runner = runner.next
+#     return head
 
-list1 = ListNode(1)
-runner = list1
-runner.next = ListNode(1); runner = runner.next
-runner.next = ListNode(2); runner = runner.next
-runner.next = ListNode(2); runner = runner.next
-runner.next = ListNode(3); runner = runner.next
-print(list1.next.val)
+# list1 = ListNode(1)
+# runner = list1
+# runner.next = ListNode(1); runner = runner.next
+# runner.next = ListNode(2); runner = runner.next
+# runner.next = ListNode(2); runner = runner.next
+# runner.next = ListNode(3); runner = runner.next
+# print(list1.next.val)
 
-print(deleteDuplicates(list1))
-new_list = deleteDuplicates(list1)
-print(new_list.val,new_list.next.val,new_list.next.next.val)
+# print(deleteDuplicates(list1))
+# new_list = deleteDuplicates(list1)
+# print(new_list.val,new_list.next.val,new_list.next.next.val)
 
 #   ==================== 1047 ====================
 
