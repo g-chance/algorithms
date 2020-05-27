@@ -1,5 +1,357 @@
-#   ==================== 237 ====================
+#   ================== REVIEW ====================
+#   ==================== 53 ====================
+#   ================== REVIEW ====================
 
+    # After looking at discussion
+# def maxSubArray(nums) -> int:
+#     max = nums[0]
+#     temp = nums[0]
+#     for i in range(1, len(nums)):
+#         temp += nums[i]
+#         if nums[i] > temp:
+#             temp = nums[i]
+#         if temp > max:
+#             max = temp
+#     return max
+
+# def maxSubArray(nums) -> int:
+#     max_sum = -(2**32)
+#     for i in range(len(nums)):
+#         for j in range(i,len(nums)):
+#             if sum(nums[i:j+1]) > max_sum:
+#                 max_sum = sum(nums[i:j+1])
+#     return max_sum
+
+# def maxSubArray(nums) -> int:
+#     max_sum = nums[0]
+#     i = 0
+#     while True:
+#         for j in range(len(nums)):
+#             if sum(nums[i:j+1]) > 0:
+#                 if sum(nums[i:j+1]) > max_sum:
+#                     max_sum = sum(nums[i:j+1])
+#                     print(max_sum)
+#             elif j < len(nums)-1 and nums[j] > max_sum:
+#                 max_sum = nums[j]
+#                 i = j
+#                 print(max_sum)
+#             else:
+#                 i = j
+#         if j == len(nums)-1:
+#             break
+#     return max_sum
+
+print(maxSubArray([1]))
+
+
+#   ==================== 38 ====================
+
+# def countAndSay(n: int) -> str:
+#     if n == 1:
+#         return "1"
+#     my_str = ""
+#     freq = 1
+#     num = countAndSay(n-1)
+#     for i in range(len(num)-1):
+#         val = str(num[i])
+#         if num[i] == num[i+1]:
+#             freq += 1
+#         else:
+#             my_str += str(freq)+val
+#             freq = 1
+#     val = num[-1]
+#     my_str += str(freq)+val
+#     return my_str 
+
+# def countAndSay(n: int) -> str:
+#     if n == 1:
+#         return str(n)
+#     num = "11"
+#     for i in range(2,n):
+#         frequency = 1
+#         my_str = ""
+#         for j in range(len(num)-1):
+#             value = num[j]
+#             if num[j] == num[j+1]:
+#                 frequency += 1
+#             else:
+#                 my_str += str(frequency)+str(value)
+#                 frequency = 1
+#         value = num[-1]
+#         my_str += str(frequency)+str(value)
+#         num = my_str
+#     return num
+
+# print(countAndSay(5))
+
+
+#   ==================== Remove Duplicates ====================
+
+# def removeDuplicates(nums) -> int:
+#     if len(nums) < 2:
+#         return len(nums)
+#     i = 0
+#     while True:
+#         if nums[i] == nums[i+1]:
+#             nums.pop(i)
+#         else:
+#             i += 1
+#         if i >= len(nums)-1:
+#             return len(nums)
+#     return len(nums)
+
+# print(removeDuplicates([1,1,1]))
+
+
+#   ==================== 21 ====================
+
+#     # Not functional - just here for reference
+# def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+#     dummy = l3 = ListNode(0)
+#     while l1 and l2:
+#         if l1.val <= l2.val:
+#             l3.next = ListNode(l1.val)
+#             l1 = l1.next
+#         else:
+#             l3.next = ListNode(l2.val)
+#             l2 = l2.next
+#         l3 = l3.next
+#     l3.next = l1 or l2
+#     return dummy.next
+
+
+#   ==================== 20 ====================
+
+    # After looking at discussion - doing it with a dictionary
+# def isValid(s: str) -> bool:
+#     my_dict = { "}": "{", "]": "[", ")": "(" }
+#     stack = []
+#     for i, c in enumerate(s):
+#         if c in my_dict.values():
+#             stack.append(c)
+#         elif c in my_dict:
+#             if stack and my_dict[c] != stack.pop():
+#                 return False
+#             elif not stack:
+#                 return False
+#     return True
+
+    # How I did it
+# def isValid(s: str) -> bool:
+#     my_stack = []
+#     for i, c in enumerate(s):
+#         if c == ")" or c == "}" or c == "]":
+#             if len(my_stack) == 0:
+#                 return False
+#         if c == ")" and my_stack[-1] != "(":
+#             return False
+#         if c == "}" and my_stack[-1] != "{":
+#             return False
+#         if c == "]" and my_stack[-1] != "[":
+#             return False
+#         elif c == "(" or c == "{" or c == "[":
+#             my_stack.append(c)
+#             continue
+#         my_stack.pop()
+#     if len(my_stack) > 0:
+#         return False
+#     return True
+
+# print(isValid("(()())"))
+
+#   ==================== Namespace / Scope Practice ====================
+
+# a = "butts"
+# print("global",a)
+
+# def outer_func():
+#     # global a
+#     # nonlocal a
+#     a = "poops"
+#     print("outer",a)
+#     def middle_scope():
+#         # global a
+#         # nonlocal a
+#         a = "cacos"
+#         print("middle",a)
+#         def inner():
+#             # global a
+#             # nonlocal a
+#             a = "dingding"
+#             print("inner",a)
+#             # global b
+#             # b = "stuff"
+#         inner()
+#         print("middle",a)
+#     middle_scope()
+#     print("outer",a)
+# outer_func()
+
+# print("global",a)
+# # print("global",b)
+
+#   ==================== Longest Common Prefix ====================
+
+
+# def longestCommonPrefix(strs) -> str:
+#     if len(strs) == 1:
+#         return strs[0]
+#     my_str = ""
+#     j = 0
+#     while strs:
+#         for i in range(len(strs)-1):
+#             if j >= len(strs[i]) or j >= len(strs[i+1]):
+#                 return my_str
+#             if strs[i][j] == strs[i+1][j]:
+#                 continue
+#             return my_str
+#         my_str += strs[0][j]
+#         j += 1
+#     return my_str
+
+# print(longestCommonPrefix(["flower", "flow"]))
+
+
+#   ==================== 13 ====================
+
+# def romanToInt(s: str) -> int:
+#     romans = {
+#         "I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100, "D" : 500, "M" : 1000
+#     }
+#     count = 0
+#     for i in range(len(s)-1):
+#         if romans[s[i]] < romans[s[i+1]]:
+#             count -= romans[s[i]]
+#         else:
+#             count += romans[s[i]]
+#     return count + romans[s[i+1]]
+
+# print(romanToInt("MCMXCIV"))
+
+
+#   :===================,1221 ====================
+
+# def balancedStringSplit(s: str) -> int:
+#     count = 0
+#     splits = 0
+#     for char in s:
+#         if char == "L":
+#             count -=1
+#         if char == "R":
+#             count += 1
+#         if count == 0:
+#             splits += 1
+#     return splits
+
+# print(balancedStringSplit("RLLLLRRRLR"))
+
+
+#   ==================== 1408 ====================
+
+# def diStringMatch(S: str):
+#     my_arr = [0]*(len(S)+1)
+#     count_d = 0
+#     for i in range(len(S)):
+#         if S[i] == 'D':
+#             count_d += 1
+#     my_arr[0] = count_d
+#     inc = dec = count_d
+#     for i in range(len(S)):
+#         if S[i] == 'I':
+#             inc += 1
+#             my_arr[i+1] = inc
+#         else:
+#             dec -= 1
+#             my_arr[i+1] = dec
+#     return my_arr
+
+# print(diStringMatch("IDIDI"))
+
+
+#   ==================== 1408 ====================
+
+# def stringMatching(words):
+#     my_arr = []
+#     for i in range(len(words)):
+#         for j in range(len(words)):
+#             if i != j:
+#                 if words[i] in words[j] and words[i] not in my_arr:
+#                     my_arr += [words[i]]
+#     return my_arr
+
+# print(stringMatching(words = ["leetcoder","leetcode","od","hamlet","am"]))
+
+
+#   ==================== 387 ====================
+
+# def missingNumber(nums) -> int:
+#     my_arr = [0]*(len(nums)+1)
+#     for i in range(len(nums)):
+#         my_arr[abs(nums[i])] = 1
+#     print(my_arr)
+#     for i, num in enumerate(my_arr):
+#         if num == 0:
+#             return i
+#     return
+
+# def missingNumber(nums) -> int:
+#     total = sum([i for i in range(len(nums)+1)])
+#     missing_total = 0
+#     for num in nums:
+#         missing_total += num
+#     return total - missing_total
+
+# print(missingNumber([9,6,4,2,3,5,7,0,1]))
+
+
+#   ==================== 387 ====================
+
+# def firstUniqChar(s: str) -> int:
+#     my_dict = {}
+#     my_set = set()
+#     for i, char in enumerate(s):
+#         if char not in my_set:
+#             my_dict[char] = i
+#             my_set.add(char)
+#         elif char in my_dict:
+#             del my_dict[char]
+#     if not my_dict:
+#         return -1
+#     for key in my_dict:
+#         return my_dict[key]
+
+# def firstUniqChar(s: str) -> int:
+#     if not s:
+#         return -1
+#     my_str = list(s).reverse()
+#     for i in range(len(s)-1,-1,-1):
+#         popped = my_str.pop(i)
+#         if popped not in my_str:
+#             return len(s)-i
+#         my_str.append(popped)
+#     return -1
+
+# def firstUniqChar(s: str) -> int:
+#     if not s:
+#         return -1
+#     for i, char in enumerate(s):
+#         if s.count(char) == 1:
+#             return i
+#     return -1
+
+# def firstUniqChar(s: str) -> int:
+#     if not s:
+#         return -1
+#     if len(s) == 1:
+#         return 0
+#     for i in range(len(s)-1):
+#         if s[i] not in s[:i]+s[i+1:]:
+#             return i
+#     if s[i+1] not in s[:i+1]:
+#         return i+1
+#     return -1
+
+# print(firstUniqChar("leetcode"))
 
 #   ==================== 160 ====================
 

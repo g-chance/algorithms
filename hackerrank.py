@@ -1,10 +1,82 @@
+set_1 = set((1,2,3))
+set_2 = set((3,4,5))
+print(set_1 - set_2)
+print(set_1)
+
+
+#   ==================== Iterator Practice ====================
+
+# my_gen = (x*x for x in range(5))
+# print(my_gen)
+# my_list = [x*x for x in range(5)]
+# print("my_list",my_list)
+# iter_ml = my_list.__iter__()
+# print("iter_ml.__next__",iter_ml.__next__())
+# print("iter_ml.__next__",iter_ml.__next__())
+# print("*my_list",*my_list)
+# butts, farts, *therest = my_list
+# print("therest",therest)
+# print(*my_gen)
+# for num in my_gen:
+#     print(num)
+# print(my_gen)
+# for num in my_gen:
+#     print(num)
+# print(*my_gen.__next__())
+
+
+#   ==================== The Minion Game ====================
+
+# def minion_game(s = "BAANANAS"):
+#     kev_count = 0
+#     stu_count = 0
+#     for i in range(len(s)):
+#         if s[i].lower() in "aeiou":
+#             kev_count += len(s)-i
+#         else:
+#             stu_count += len(s)-i
+#     if kev_count > stu_count:
+#         print('Kevin', kev_count)
+#     if kev_count < stu_count:
+#         print('Stuart', stu_count)
+#     else:
+#         print('Draw')
+# minion_game()
+
+# def minion_game(s = "BAANANAS"):
+#     stu_count = 0
+#     kev_count = 0
+#     my_set = set()
+#     for i, char in enumerate(list(s)):
+#         if char.lower() not in "aeiou":
+#             for j in range(i+1,len(s)+1):
+#                 if s[i:j] not in my_set:
+#                     my_set.add(s[i:j])
+#                     for k in range(i,len(s)):
+#                         if s[i:j] == s[k:k+len(s[i:j])]:
+#                             stu_count += 1
+#     my_set = set()
+#     for i, char in enumerate(list(s)):
+#         if char.lower() in "aeiou":
+#             for j in range(i+1,len(s)+1):
+#                 if s[i:j] not in my_set:
+#                     my_set.add(s[i:j])
+#                     for k in range(i,len(s)):
+#                         if s[i:j] == s[k:k+len(s[i:j])]:
+#                             kev_count += 1
+#     if kev_count > stu_count:
+#         return f'Kevin {kev_count}'
+#     return f"Stuart {stu_count}"
+# print(minion_game())
+
+
 #   ==================== sWAP cASE ====================
 
-s = 'HackerRank.com presents "Pythonist 2".'
+# s = 'HackerRank.com presents "Pythonist 2".'
 
-def swap_case(s):
-    s = s.swapcase()
-    return s
+# def swap_case(s):
+#     s = s.swapcase()
+#     return s
 
 # def swap_case(s):
 #     x = "".join([char.upper() if char.islower() else char.lower() for char in s])
@@ -24,8 +96,8 @@ def swap_case(s):
 #             new_str += char
 #     return new_str
 
-result = swap_case(s)
-print(result)
+# result = swap_case(s)
+# print(result)
 
 
 #   ==================== NESTED LISTS ====================
