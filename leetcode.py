@@ -1,3 +1,299 @@
+#   ==================== 70 ====================
+
+def climbStairs(n: int) -> int:
+    if n < 3:
+        return n
+    st1 = 1
+    st2 = 2
+    tot = 0
+    for i in range(3,n+1):
+        tot = st1 + st2
+        st1 = st2
+        st2 = tot
+    return tot
+
+print(climbStairs(5))
+
+
+#   ==================== 69 ====================
+
+# def mySqrt(x: int) -> int:
+#     if x == 1:
+#         return 1
+#     l = 1
+#     r = x // 2
+#     m = (l + r) // 2
+#     while l < r:
+#         if m * m == x:
+#             return int(m) // 1
+#         elif x > m * m and x < (m+1)*(m+1):
+#             return int(m) // 1
+#         elif m * m > x:
+#             r = m - 1
+#         else:
+#             l = m + 1
+#         m = (l + r) // 2
+#     return int(m) // 1
+
+# print(mySqrt(1))
+
+
+#   ==================== 840 ====================
+
+    # With List comprehension
+# def numMagicSquaresInside(grid) -> int:
+#     count = 0
+#     magic = [grid[i][j:j+3]+grid[i+1][j:j+3]+grid[i+2][j:j+3] 
+#         for i in range(len(grid)) if i+2 < len(grid) 
+#         for j in range(len(grid[i])) if j+2 < len(grid[i])]
+#     for row in magic:
+#         if len(set(row)) == 9 and sum(row) == sum(i for i in range(10)) and 0 not in row:
+#             if sum(row[:3]) == sum(row[3:6]) == sum(row[6:9]) == \
+#             sum(row[::3]) == sum(row[1::3]) == sum(row[2::3]) == \
+#             sum(row[::4]) == sum(row[2:8:2]):
+#                 count += 1
+#     return count
+
+# def numMagicSquaresInside(grid) -> int:
+#     for i, row in enumerate(grid):
+#         magic = []
+#         if i+2 < len(grid):
+#             for j in range(len(row)):
+#                 if j + 2 < len(row):
+#                     magic = grid[i][j:j+3]+grid[i+1][j:j+3]+grid[i+2][j:j+3]
+#                     if len(set(magic)) == 9 and sum(magic) == sum(i for i in range(10)) and 0 not in magic:
+#                         if sum(magic[:3]) == sum(magic[3:6]) == sum(magic[6:9]) == \
+#                         sum(magic[::3]) == sum(magic[1::3]) == sum(magic[2::3]) == \
+#                         sum(magic[::4]) == sum(magic[2:8:2]):
+#                             count += 1
+#     return count
+
+# print(numMagicSquaresInside([[4,3,8,4],[9,5,1,9],[2,7,6,2]]))
+
+# def isPerfectSquare(num: int) -> bool:
+#     if num == 1:
+#         return True
+#     l = 1
+#     r = num // 2
+#     m = (l+r) // 2
+#     while l < r:
+#         print("l",l,"r",r,"m",m)
+#         if m*m == num:
+#             return True
+#         elif m*m > num:
+#             r = m-1
+#         else:
+#             l = m+1
+#         m = (l+r) // 2
+#     # if m*m == num:
+#     #     return True
+#     return False
+
+# print(isPerfectSquare(598))
+
+
+#   ==================== 242 ====================
+
+# def isAnagram(s: str, t: str) -> bool:
+#     my_dict = {}
+#     for char in s:
+#         if char not in t:
+#             return False
+#         if char not in my_dict:
+#             my_dict[char] = 1
+#         else:
+#             my_dict[char] += 1
+#     for char in t:
+#         if char not in s:
+#             return False
+#         my_dict[char] -= 1
+#         if my_dict[char] < 0:
+#             return False
+#     for val in my_dict.values():
+#         if val != 0: 
+#             return False
+#     return True
+
+# print(isAnagram(s = "rat", t = "car"))
+
+
+#   ==================== 412 ====================
+
+# def fizzBuzz(n: int):
+#     my_list = []
+#     for i in range(1, n+1):
+#         if i % 3 == 0 and i % 5 == 0:
+#             my_list += ["FizzBuzz"]
+#         elif i % 3 == 0:
+#             my_list += ["Fizz"]
+#         elif i % 5 == 0:
+#             my_list += ["Buzz"]
+#         else:
+#             my_list += [str(i)]
+#     return my_list
+# print(fizzBuzz(15))
+
+
+#   ==================== 350 ====================
+
+# def intersect(nums1, nums2):
+#     inter = []
+#     checked = {}
+#     for num in nums1:
+#         if num in nums2 and num not in checked:
+#             checked[num] = 1
+#             m = min(nums1.count(num), nums2.count(num))
+#             inter += [num for i in range(m)]
+#     return inter
+
+# def intersect(nums1, nums2):
+#     inter_dict = {}
+#     inter_list = []
+#     for num in nums1:
+#         if num in nums2:
+#             if num not in inter_dict:
+#                 inter_dict[num] = 1
+#             else:
+#                 inter_dict[num] += 1
+#     for num in nums2:
+#         if num in inter_dict and inter_dict[num] > 0:
+#             inter_dict[num] -= 1
+#             inter_list.append(num)
+#     return inter_list
+
+# print(intersect(nums1 = [1,2,2,1], nums2 = [2,2]))
+
+
+#   ==================== 349 ====================
+
+# def intersection(nums1, nums2):
+#     set1 = set(nums1)
+#     set2 = set(nums2)
+#     return set1.intersection(set2)
+
+    # This is wrong - I thought an intersection was where there was an identical overlap, so that's what this produces
+# def intersection(nums1, nums2):
+#     inter = []
+#     i = 0
+#     for i, num in enumerate(nums1):
+#         if num in nums2:
+#             i2 = nums2.index(num)
+#             break
+#     while i < len(nums1) and i2 < len(nums2):
+#         if nums1[i] != nums2[i2]:
+#             return inter
+#         inter.append(nums1[i])
+#         i += 1; i2 += 1
+#     return set(inter)
+
+# print(intersection(nums1 = [1,2,2,1], nums2 = [2,2]))
+
+
+#   ==================== 1394 ====================
+
+# def findLucky(arr) -> int:
+#     lucky = -1
+#     my_dict = {}
+#     for num in arr:
+#         if num not in my_dict:
+#             my_dict[num] = 1
+#         else:
+#             my_dict[num] += 1
+#     for key, val in my_dict.items():
+#         print(key, val)
+#         if key == val and key > lucky:
+#             lucky = key
+#     return lucky
+
+# print(findLucky([2,2,2,3,3]))
+
+
+#   ==================== 989 ====================
+
+# def addToArrayForm(A, K: int):
+#     dummy = []
+#     car = 0
+#     i = len(A)-1
+#     while i > -1 or K or car:
+#         num = 0 + car
+#         if i > -1:
+#             num += A[i]
+#             i -= 1
+#         if K:
+#             num += K % 10
+#             K //= 10
+#         if num > 9:
+#             dummy.append(num % 10)
+#             car = num // 10
+#         else:
+#             dummy.append(num)
+#             car = 0
+#     dummy.reverse()
+#     return dummy
+
+# print(addToArrayForm(A = [9,9,9,9], K = 39))
+
+
+#   ==================== 67 ====================
+
+# def addBinary(a: str, b: str) -> str:
+#     temp = 0
+#     new_bin = ""
+#     while a or b or temp:
+#         if a: 
+#             temp += int(a[-1])
+#             a = a[:-1]
+#         if b:
+#             temp += int(b[-1])
+#             b = b[:-1]
+#         new_bin += str(temp % 2)
+#         if temp > 1:
+#             temp = 1
+#         else:
+#             temp = 0
+#     return new_bin[::-1]
+
+# def addBinary(a: str, b: str) -> str:
+#     return bin(int(a, 2) + int(b, 2))[2:]
+
+# print(addBinary("11","1"))
+
+
+#   ==================== 415 ====================
+
+# def addStrings(num1: str, num2: str) -> str:
+#     n1 = 0
+#     n2 = 0
+#     for num in num1:
+#         n1 = n1*10 + int(num)
+#     for num in num2:
+#         n2 = n2*10 + int(num)
+#     return str(n1 + n2)
+
+# print(addStrings("100","200"))
+
+
+#   ==================== 88 ====================
+
+# def merge(nums1, m: int, nums2, n: int) -> None:
+#     while m != 0 and n != 0:
+#         if nums1[m-1] >= nums2[n-1]:
+#             nums1[m+n-1] = nums1[m-1]
+#             m -= 1
+#         else:
+#             nums1[m+n-1] = nums2[n-1]
+#             n -= 1
+#     if m > 0:
+#         rem = m; lis = nums1
+#     elif n > 0:
+#         rem = n; lis = nums2
+#     while rem != 0:
+#         nums1[rem] = lis[rem]
+#         rem -= 1
+
+# print(merge(nums1 = [1,2,3,0,0], m = 3, nums2 = [5,6], n = 2))
+
+
 #   ================== REVIEW ====================
 #   ==================== 53 ====================
 #   ================== REVIEW ====================
@@ -41,7 +337,7 @@
 #             break
 #     return max_sum
 
-print(maxSubArray([1]))
+# print(maxSubArray([1]))
 
 
 #   ==================== 38 ====================
