@@ -1,18 +1,229 @@
+def rob(nums) -> int:
+    return
+
+print(rob())
+
+
+#   ==================== 191 ====================
+
+# def hammingWeight(n: int) -> int:
+#     bin_str = f'{n:b}'
+#     return bin_str.count("1")
+
+# print(hammingWeight(11))
+
+
+#   ================== REVIEW ====================
+#   ==================== 190 ====================
+#   =================== REVIEW ====================
+
+# def reverseBits(n: int) -> int:
+#     bit_str = f'{n:b}'
+#     bit_str = '0'*(32-len(bit_str)) + bit_str
+#     bit_str = bit_str[::-1]
+#     return int(bit_str, 2)
+# print(reverseBits(43261596))
+
+
+#   ================== REVIEW ====================
+#   ==================== 172 ====================
+#   =================== REVIEW ====================
+
+# def trailingZeroes(n: int) -> int:
+#     count = 0
+#     exp = 1
+#     while 5**exp <= n:
+#         count += (n // 5**exp)
+#         exp += 1
+#     return count
+
+# def trailingZeroes(n: int) -> int:
+#     my_num = n
+#     for i in range(n-1,0,-1):
+#         my_num *= i
+#     print(my_num)
+#     count = 0
+#     while my_num != 0:
+#         if my_num % 10 != 0:
+#             return count
+#         count += 1
+#         my_num //= 10
+#     return count
+
+# print(trailingZeroes(30))
+
+
+#   ==================== 171 ====================
+
+# def titleToNumber(s: str) -> int:
+#     st = ord("A")
+#     my_dict = {chr(i):i-st+1 for i in range(st, st+26)}
+#     tot = my_dict[s[len(s)-1]]
+#     for i in range(len(s)-1):
+#         tot += (my_dict[s[i]] * 26 ** (len(s)-i-1))
+#     return tot
+
+# print(titleToNumber("A"))
+
+
+#   ==================== 169 ====================
+
+# def majorityElement(nums) -> int:
+#     maj = len(nums) / 2
+#     my_dict = {}
+#     for num in nums:
+#         if num not in my_dict:
+#             my_dict[num] = 1
+#         else:
+#             my_dict[num] += 1
+#         if my_dict[num] > maj:
+#             return num
+#     return False
+
+# print(majorityElement([2,2,1,1,1,2,2]))
+
+
+# def maxProfit(prices) -> int:
+#     if not prices:
+#         return 0
+#     maxx = minn = prices[0]
+#     prof = 0
+#     for i in range(1, len(prices)):
+#         if prices[i] < minn:
+#             if maxx - minn > 0:
+#                 prof += (maxx - minn)
+#             minn = maxx = prices[i]
+#         elif prices[i] > maxx:
+#             maxx = prices[i]
+#         elif prices[i] < maxx:
+#             print(minn, maxx)
+#             if maxx - minn > 0:
+#                 prof += (maxx - minn)
+#             minn = maxx = prices[i]
+#     if maxx - minn > 0:
+#         prof += maxx - minn
+#     return prof
+
+# print(maxProfit([7,1,5,3,6,4]))
+
+
+#   ==================== 118 ====================
+
+# def maxProfit(prices) -> int:
+#     if not prices:
+#         return 0
+#     min = max = prices[0]
+#     prof = 0
+#     for i in range(1,len(prices)):
+#         if prices[i] < min:
+#             min = max = prices[i]
+#         elif prices[i] > max:
+#             max = prices[i]
+#         if max - min > prof:
+#             prof = max - min
+#     return prof
+
+# print(maxProfit([7,1,5,3,6,4]))
+
+
+# def generate(numRows: int):
+#     my_list = []
+#     if numRows == 0:
+#         return my_list
+#     if numRows == 1:
+#         return my_list + [[1]]
+#     if numRows == 2:
+#         return my_list + [[1], [1, 1]]
+#     my_list += [[1], [1, 1]]
+#     for i in range(2, numRows):
+#         temp = [1]
+#         prev = my_list[len(my_list)-1]
+#         for j in range(len(prev)):
+#             temp.append(sum(prev[j:j+2]))
+#         my_list.append(temp)
+#     return my_list
+
+# print(generate(1))
+
+#   ====================  ====================
+
+
+    # Failed sorted array to Binary Search Tree conversion
+# if not nums:
+#     return None
+# if len(nums) == 1:
+#     return TreeNode(nums[0])
+# mid = len(nums) // 2
+# root = TreeNode(nums[mid])
+# node = root
+# my_stack = []
+# for i in range(mid+1, len(nums)):
+#     if i > mid+1 and i % 2 == (mid+1) % 2:
+#         node.right = TreeNode(my_stack.pop())
+#         node.right.left = TreeNode(my_stack.pop())
+#         node = node.right
+#     my_stack.append(nums[i])
+# while my_stack:
+#     node.right = TreeNode(my_stack.pop())
+#     if my_stack:
+#         node.right.left = TreeNode(my_stack.pop())
+# node = root
+
+# for j in range(mid-1, -1, -1):
+#     if j < mid-1 and j % 2 == (mid-1) % 2:
+#         print(my_stack)
+#         node.left = TreeNode(my_stack.pop())
+#         node.left.right = TreeNode(my_stack.pop())
+#         node = node.left
+#     my_stack.append(nums[j])
+# while my_stack:
+#     node.left = TreeNode(my_stack.pop())
+#     if my_stack:
+#         node.left.right = TreeNode(my_stack.pop())
+# return root
+
+#   ==================== BST Symmetry ====================
+
+
+    # Failed Binary Tree symmetry test
+# if not root.left and not root.right:
+#     return True
+# if not root.left or not root.right:
+#     return False
+
+# def left_root(root):
+#     if not root.left and not root.right:
+#         return True
+#     if not root.left or not root.right:
+#         return False
+#     if root.left.val != root.val*2 - 1 or root.right.val != root.val*2:
+#         return False
+#     return left_root(root.left) and left_root(root.right)
+
+# def right_root(root):
+#     if not root.left and not root.right:
+#         return True
+#     if not root.left or not root.right:
+#         return False
+#     if root.right.val != root.val*2 - 1 or root.left.val != root.val*2:
+#         return False
+#     return right_root(root.left) and right_root(root.right)
+
 #   ==================== 70 ====================
 
-def climbStairs(n: int) -> int:
-    if n < 3:
-        return n
-    st1 = 1
-    st2 = 2
-    tot = 0
-    for i in range(3,n+1):
-        tot = st1 + st2
-        st1 = st2
-        st2 = tot
-    return tot
+# def climbStairs(n: int) -> int:
+#     if n < 3:
+#         return n
+#     st1 = 1
+#     st2 = 2
+#     tot = 0
+#     for i in range(3,n+1):
+#         tot = st1 + st2
+#         st1 = st2
+#         st2 = tot
+#     return tot
 
-print(climbStairs(5))
+# print(climbStairs(5))
 
 
 #   ==================== 69 ====================
