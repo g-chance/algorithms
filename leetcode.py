@@ -1,20 +1,98 @@
+#   ==================== 107 ====================
+
+#     # Won't run b/c it requires TreeNode class, but the solution I can up with made me \
+#     # feel like a genius so I pasted it here for the record
+# def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+#     if not root:
+#         return root
+#     my_dict = {0: [root.val]}
+#     level = 1
+#     left = root.left
+#     right = root.right
+#     def bottoms_up(l, r, lv):
+#         if l == r:
+#             return None
+#         nonlocal my_dict
+#         if lv not in my_dict:
+#             my_dict[lv] = []
+#         if l:
+#             my_dict[lv] += [l.val]
+#             bottoms_up(l.left, l.right, lv+1)
+#         if r:
+#             my_dict[lv] += [r.val]
+#             bottoms_up(r.left, r.right, lv+1)
+#     bottoms_up(left, right, level)
+#     my_list = [val for val in my_dict.values()]
+#     my_list.reverse()
+#     return my_list
+
+
+#   ==================== 100 ====================
+
+    # I literally feel like a genius for implementing a try/except clause in this. I also passed \
+    # this on my first attemp. It won't run here because it required a TreeNode class but I had \
+    # to paste it here for the record
+def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+    if not p and not q:
+        return True
+    if not p or not q or p.val != q.val:
+        return False
+    
+    def lets_fuckin_go(l, r):
+        if l == r:
+            return True
+        try:
+            if l.val == r.val:
+                return lets_fuckin_go(l.left, r.left) and lets_fuckin_go(l.right, r.right)
+        except:
+            return False
+        
+    return lets_fuckin_go(p.left, q.left) and lets_fuckin_go(p.right, q.right)
+
+
+#   ==================== 58 ====================
+
+# def lengthOfLastWord(s: str) -> int:
+#     my_list = s.split()
+#     print(my_list)
+#     for word in reversed(my_list):
+#         if word:
+#             return len(word)
+#     return 0
+
+# print(lengthOfLastWord("Hello World"))
+
+
+#   ==================== 35 ====================
+
+# def searchInsert(nums, target: int) -> int:
+#     for i, num in enumerate(nums):
+#         if num == target or num > target:
+#             return i
+#     else:
+#         return len(nums)
+#     return 0
+
+# print(searchInsert([7,7,7,7], 5))
+
+
 #   ==================== 202 ====================
 
-def isHappy(n: int) -> bool:
-    my_set = set()
-    while True:
-        num1 = 0
-        while n:
-            num1 += (n % 10)**2
-            n //= 10
-        if num1 == 1:
-            return True
-        if num1 in my_set:
-            return False
-        my_set.add(num1)
-        n = num1
+# def isHappy(n: int) -> bool:
+#     my_set = set()
+#     while True:
+#         num1 = 0
+#         while n:
+#             num1 += (n % 10)**2
+#             n //= 10
+#         if num1 == 1:
+#             return True
+#         if num1 in my_set:
+#             return False
+#         my_set.add(num1)
+#         n = num1
 
-print(isHappy(1))
+# print(isHappy(1))
 
 
 #   ================== REVIEW ====================
