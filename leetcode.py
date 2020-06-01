@@ -1,7 +1,62 @@
-def rob(nums) -> int:
-    return
+#   ==================== 202 ====================
 
-print(rob())
+def isHappy(n: int) -> bool:
+    my_set = set()
+    while True:
+        num1 = 0
+        while n:
+            num1 += (n % 10)**2
+            n //= 10
+        if num1 == 1:
+            return True
+        if num1 in my_set:
+            return False
+        my_set.add(num1)
+        n = num1
+
+print(isHappy(1))
+
+
+#   ================== REVIEW ====================
+#   ==================== 198 ====================
+#   =================== REVIEW ====================
+
+    # Got from discussion -- UNDERSTAND THIS
+# def rob(nums) -> int:
+#     prev = curr = 0
+#     for num in nums:
+#         temp = prev # This represents the nums[i-2]th value
+#         prev = curr # This represents the nums[i-1]th value
+#         curr = max(num + temp, prev) # Here we just plug into the formula
+#     return curr
+
+    # My solution (took me 4+ hours) == not as good as solution from discussion
+# def rob(nums) -> int:
+    # if not nums:
+    #     return 0
+    # if len(nums) < 2:
+    #     return max(nums)
+    # left = nums[0]
+    # right = nums[1]
+    # maxx = max(left, right)
+    # i = 0
+    # for i in range(2,len(nums)-1,2):
+    #     if maxx == left:
+    #         right = left + nums[i+1]
+    #         left += nums[i]
+    #         maxx = max(left, right)
+    #     elif maxx == right:
+    #         left += nums[i]
+    #         if left < right:
+    #             left = right
+    #         right += nums[i+1]
+    #         maxx = max(left, right)
+    # if i+2 == len(nums)-1:
+    #     if left + nums[i+2] > right:
+    #         maxx = left + nums[i+2]
+    # return maxx
+
+# print(rob([8,9,9,4,10,5,6,9,7,9]))
 
 
 #   ==================== 191 ====================
