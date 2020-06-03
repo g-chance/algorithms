@@ -1,3 +1,188 @@
+def isIsomorphic(s: str, t: str) -> bool:
+    dic, se = {}, set()
+    for i, char in enumerate(s):
+        if char not in dic and t[i] in se:
+            return False
+        elif char not in dic:
+            dic[char] = t[i]
+            se.add(t[i])
+        elif dic[char] != t[i]:
+            return False
+    return True
+
+print(isIsomorphic(s = "abb", t = "acd"))
+
+
+#   ==================== 1313 ======================
+
+# def decompressRLElist(nums):
+#     lis = []
+#     for i in range(0,len(nums),2):
+#         sub_list = [nums[i+1] for j in range(nums[i])]
+#         lis += sub_list
+#     return lis
+
+# def decompressRLElist(nums):
+#     lis = [nums[i+1] for i in range(0,len(nums),2) for j in range(nums[i])]
+#     return lis
+
+# print(decompressRLElist(nums = [1,2,3,4]))
+
+
+#   ==================== 1365 ======================
+
+# def smallerNumbersThanCurrent(nums):
+    # lis = [0 for num in nums]
+    # for i in range(len(nums)-1):
+    #     for j in range(i+1, len(nums)):
+    #         if nums[i] > nums[j]:
+    #             lis[i] += 1
+    #         elif nums[i] < nums[j]:
+    #             lis[j] += 1
+    # return lis
+
+#     count = [0] * 102
+#     for num in nums:
+#         count[num+1] += 1    
+#     print(count)
+#     for i in range(1, 102):
+#         count[i] += count[i-1]
+#     print(count)
+
+# print(smallerNumbersThanCurrent(nums = [8,1,2,2,3]))
+
+
+#   ================== REVIEW =====================
+#   ==================== 168 ======================
+#   =================== REVIEW ====================
+
+
+# def convertToTitle(n: int) -> str:
+#     dic = {i-ord("A"):chr(i) for i in range(ord("A"),ord("A")+26)}
+#     print(dic)
+#     col = ""
+#     while n != 0:
+#         col += dic[(n-1) % 26]
+#         n = (n-1) // 26
+#     return col[::-1]
+
+# print(convertToTitle(27))
+
+
+# def numJewelsInStones(J: str, S: str) -> int:
+#     return
+
+# print(numJewelsInStones())
+
+
+#   ==================== 167 ======================
+
+# def twoSum(numbers, target: int):
+#     i = 0
+#     while i < len(numbers)-1:
+#         l, r = i+1, len(numbers)-1
+#         id1 = numbers[i]
+#         while l <= r:
+#             m = (l + r) // 2
+#             if id1 + numbers[m] == target:
+#                 return [i+1, m+1]
+#             elif id1 + numbers[m] > target:
+#                 r = m - 1
+#             elif id1 + numbers[m] < target:
+#                 l = m + 1
+#         i += 1
+
+    # for i in range(len(numbers)-1):
+    #     for j in range(i+1, len(numbers)):
+    #         if numbers[i] + numbers[j] == target:
+    #             return [i+1, j+1]
+    #         if numbers[i] + numbers[j] > target:
+    #             break
+
+# print(twoSum([2,7,11,15], 9))
+
+
+#   ================== REVIEW =====================
+#   ==================== 111 ======================
+#   =================== REVIEW ====================
+
+    # # Won't run b/c it requires TreeNode class, struggled with this alot but I'm proud of my solution
+    # def minDepth(self, root: TreeNode) -> int:
+        
+    #     if not root:
+    #         return 0
+    #     if root.left == root.right:
+    #         return 1
+        
+    #     def find_leaf(node):
+    #         if not node:
+    #             return 0
+            
+    #         left = find_leaf(node.left)
+    #         right = find_leaf(node.right)
+            
+    #         if left == 0 or right == 0:
+    #             return 1 + max(left, right)
+            
+    #         return 1 + min(left, right)
+        
+    #     return find_leaf(root)
+
+
+#   =================== REVIEW =====================
+#   ===================== 110 ====================
+#   ==================== REVIEW ====================
+
+#     # After looking at discussion -- much better solution
+# def isBalanced(self, root: TreeNode) -> bool:
+
+#     def checker(node):
+#         if not node:
+#             return 0
+        
+#         left = checker(node.left)
+#         right = checker(node.right)
+        
+#         if left == -1 or right == -1 or abs(left - right) > 1:
+#             return -1
+        
+#         return 1 + max(left, right)
+
+#     return checker(root) != -1
+
+#     # How I did it first (took me 6 hours, see above for better solution)
+# def isBalanced(self, root: TreeNode) -> bool:
+#     if not root:
+#         return True
+
+#     def go_diggin(left, right):
+#         if left == right:
+#             return True
+        
+#         depth = 0
+        
+#         def find_depth(node, depth):
+#             if not node:
+#                 return depth
+#             depth += 1
+#             if node.left == node.right:
+#                 return depth
+#             return max(find_depth(node.left, depth), find_depth(node.right, depth))
+            
+#         diff = abs(find_depth(left, depth) - find_depth(right, depth))
+#         if diff > 1:
+#             return False
+        
+#         if left and right:
+#             return go_diggin(left.left, left.right) and go_diggin(right.left, right.right)
+#         elif left:
+#             return go_diggin(left.left, left.right)
+#         elif right:
+#             return go_diggin(right.left, right.right)
+
+#     return go_diggin(root.left, root.right)
+
+
 #   ==================== 107 ====================
 
 #     # Won't run b/c it requires TreeNode class, but the solution I can up with made me \
@@ -29,25 +214,25 @@
 
 #   ==================== 100 ====================
 
-    # I literally feel like a genius for implementing a try/except clause in this. I also passed \
-    # this on my first attemp. It won't run here because it required a TreeNode class but I had \
-    # to paste it here for the record
-def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-    if not p and not q:
-        return True
-    if not p or not q or p.val != q.val:
-        return False
+#     # I literally feel like a genius for implementing a try/except clause in this. I also passed \
+#     # this on my first attemp. It won't run here because it required a TreeNode class but I had \
+#     # to paste it here for the record
+# def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+#     if not p and not q:
+#         return True
+#     if not p or not q or p.val != q.val:
+#         return False
     
-    def lets_fuckin_go(l, r):
-        if l == r:
-            return True
-        try:
-            if l.val == r.val:
-                return lets_fuckin_go(l.left, r.left) and lets_fuckin_go(l.right, r.right)
-        except:
-            return False
+#     def lets_fuckin_go(l, r):
+#         if l == r:
+#             return True
+#         try:
+#             if l.val == r.val:
+#                 return lets_fuckin_go(l.left, r.left) and lets_fuckin_go(l.right, r.right)
+#         except:
+#             return False
         
-    return lets_fuckin_go(p.left, q.left) and lets_fuckin_go(p.right, q.right)
+#     return lets_fuckin_go(p.left, q.left) and lets_fuckin_go(p.right, q.right)
 
 
 #   ==================== 58 ====================
