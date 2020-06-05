@@ -1,16 +1,245 @@
-def isIsomorphic(s: str, t: str) -> bool:
-    dic, se = {}, set()
-    for i, char in enumerate(s):
-        if char not in dic and t[i] in se:
-            return False
-        elif char not in dic:
-            dic[char] = t[i]
-            se.add(t[i])
-        elif dic[char] != t[i]:
-            return False
-    return True
+#   ====================  ======================
 
-print(isIsomorphic(s = "abb", t = "acd"))
+num = 4
+num <<= 4
+print(num)
+
+#   ==================== 292 ======================
+
+# def canWinNim(n: int) -> bool:
+    
+#     return
+
+# print(canWinNim)
+
+
+#   ==================== 290 ======================
+
+# def wordPattern(pattern: str, str: str) -> bool:
+#     dic, lis, se = {}, str.split(), set()
+#     if len(lis) != len(pattern):
+#         return False
+#     for i, c in enumerate(pattern):
+#         if c not in dic and lis[i] not in se:
+#             dic[c] = lis[i]
+#             se.add(lis[i])
+#         elif c not in dic or dic[c] != lis[i]:
+#             return False
+#     return True
+
+# print(wordPattern(pattern = "abba", str = "dog dog dog dog"))
+
+
+#   ==================== 278 ======================
+
+    # def firstBadVersion(self, n):
+        
+    #     l, r, = 1, n
+    #     m = (l + r) // 2
+    #     v = 0
+    #     while l <= r:
+    #         if isBadVersion(m):
+    #             v = m
+    #             r = m - 1
+    #             m = (l + r) // 2
+    #         else:
+    #             l = m + 1
+    #             m = (l + r) // 2
+    #     return v
+
+
+#   ==================== 1290 ======================
+
+#     # My solution
+# def getDecimalValue(self, head: ListNode) -> int:
+#     binStr = ""
+#     while head:
+#         binStr += str(head.val)
+#         head = head.next
+#     return int(binStr, 2)
+
+#     # This demonstrates how to use math to convert from binary to decimal (found in discussion)
+# def getDecimalValue(self, head: ListNode) -> int:
+#     dec = 0
+#     while head:
+#         dec = dec * 2 + head.val
+#         head = head.next
+#     return dec
+
+
+#   ==================== 263 ======================
+
+# def isUgly(num: int) -> bool:
+#     if num < 1:
+#         return False
+#     for n in [2, 3, 5]:
+#         while num % n == 0:
+#             num /= n
+#     return num == 1
+
+# print(isUgly(14))
+
+
+#   ==================== 258 ======================
+
+# def addDigits(num: int) -> int:
+#     while num > 9:
+#         temp = 0
+#         while num != 0:
+#             temp += (num % 10)
+#             num //= 10
+#         num = temp
+#     return num
+
+# print(addDigits(38))
+
+
+#   ==================== 1450 ======================
+
+# def busyStudent(startTime, endTime, queryTime: int) -> int:
+#     return sum(queryTime >= i[0] and queryTime <= i[1] for i in zip(startTime, endTime))
+
+# print(busyStudent(startTime = [4], endTime = [4], queryTime = 5))
+
+
+#   ====================  ======================
+
+# def canBeEqual(target, arr) -> bool:
+#     for i in range(len(target)-1):
+#         for j in range(i, len(arr)):
+#             if target[i] == arr[j]:
+#                 arr = arr[:i] + arr[i:j+1][::-1] + arr[j+1:]
+#                 print(arr)
+#                 break
+#     return target == arr
+
+# print(canBeEqual(target = [1,2,3,4], arr = [2,4,1,3]))
+
+
+#   ====================  ======================
+
+# def binaryTreePaths(self, root: TreeNode) -> List[str]:
+    
+#     def find_paths(node, st):
+#         if not node:
+#             return None
+#         if node.left == node.right:
+#             return [st + str(node.val)]
+        
+#         st += str(node.val)+"->"
+#         left = find_paths(node.left, st)
+#         right = find_paths(node.right, st)
+        
+#         if left and right:
+#             return left + right
+#         elif left: 
+#             return left
+#         return right
+    
+#     return find_paths(root, "")
+
+
+#   ==================== 938 ======================
+
+# def rangeSumBST(root, L: int, R: int) -> int:
+#     if not root:
+#         return 0
+    
+#     def count_em_up(node):
+#         if not node:
+#             return 0
+#         left = count_em_up(node.left); 
+#         right = count_em_up(node.right)
+#         if node.val >= L and node.val <= R:
+#             return node.val + left + right
+#         return left + right
+    
+#     return count_em_up(root)
+
+#     # Using nonlocal
+# def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
+#     if not root:
+#         return 0
+#     count = 0
+
+#     def count_em_up(node):
+#         nonlocal count
+#         if not node:
+#             return
+#         if node.val >= L and node.val <= R:
+#             count += node.val
+#         count_em_up(node.left); count_em_up(node.right)
+
+#     count_em_up(root)
+
+#     return count
+
+
+#   ==================== 235 ======================
+
+# def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+
+    # def find_ancestors(node, pointer):
+    #     if not node:
+    #         return [False, pointer]
+    #     if pointer and node.val == p.val or pointer and node.val == q.val:
+    #         return [True, pointer]
+    #     elif node.val == p.val or node.val == q.val:
+    #         pointer = node
+    #     left = find_ancestors(node.left, pointer)
+    #     right = find_ancestors(node.right, pointer)
+    #     if left[0] == True:
+    #         return left
+    #     if right[0] == True:
+    #         return right
+    #     if left[1] and right[1] and left[1].val != right[1].val:
+    #         return [True, node]
+    #     if left[1]:
+    #         return left
+    #     return right
+
+    # return find_ancestors(root, None)[1]
+
+
+
+# def maxProduct(nums) -> int:
+#     if len(nums) < 2:
+#         return (nums[0]-1) * (nums[1]-1)
+#     max1, max2 = nums[0], nums[1]
+#     if nums[0] < nums[1]:
+#         max1, max2 = nums[1], nums[0]
+#     for i in range(2,len(nums)):
+#         if nums[i] > max1:
+#             max2, max1 = max1, nums[i]
+#         elif nums[i] > max2:
+#             max2 = nums[i]
+#     return (max1-1) * (max2-1)
+
+# print(maxProduct([3,4,5,2]))
+
+
+# def createTargetArray(nums, index):
+    # target = []
+    # for i, num in enumerate(nums):
+    #     target.insert(index[i], num)
+    # return target
+
+# print(createTargetArray(nums = [0,1,2,3,4], index = [0,1,2,2,1]))
+
+
+# def isIsomorphic(s: str, t: str) -> bool:
+#     dic, se = {}, set()
+#     for i, char in enumerate(s):
+#         if char not in dic and t[i] in se:
+#             return False
+#         elif char not in dic:
+#             dic[char] = t[i]
+#             se.add(t[i])
+#         elif dic[char] != t[i]:
+#             return False
+#     return True
+
+# print(isIsomorphic(s = "abb", t = "acd"))
 
 
 #   ==================== 1313 ======================
