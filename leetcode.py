@@ -1,38 +1,111 @@
-def removeOuterParentheses(S: str) -> str:
-    if not S or S[0] != '(':
-        return ""
-    temp = []
-    count = 1
-    for i in range(1, len(S)):
-        if S[i] == '(':
-            count += 1
-            temp += ['(']
-        else:
-            count -= 1
-            if count == 0:
-                temp.pop()
+#   ==================== 414 ======================
 
-        
-    return
+    def thirdMax(self, nums: List[int]) -> int:
+        m1 = m2 = m3 = -2**32
+        se = set()
+        for i in range(len(nums)):
+            if nums[i] not in se:
+                if nums[i] > m1:
+                    m3, m2, m1 = m2, m1, nums[i]
+                elif nums[i] > m2:
+                    m3, m2 = m2, nums[i]
+                elif nums[i] > m3:
+                    m3 = nums[i]
+            se.add(nums[i])
+        if len(se) < 3:
+            return max(se)
+        return m3
 
-print(removeOuterParentheses())
+
+#   ==================== 409 ======================
+
+def checkRecord(s: str) -> bool:
+    if "A" in s and "LLL" in s:
+        return False
+    return True
+
+print(checkRecord("PPALLL"))
 
 
-def toHex(num: int) -> str:
-    if num == 0: 
-        return '0'
-    if num < 0: 
-        num = num + 2**32
-    a = ord('a')
-    hexVals = {i:f'{i}' if i < 10 else chr(a+(i-10)) for i in range(16)}
+#   ==================== 409 ======================
 
-    hexNum = ""
-    while num != 0:
-        hexNum += hexVals[num % 16]
-        num //= 16
-    return hexNum[::-1]
+# def longestPalindrome(s: str) -> int:
+#     dic = {}
+#     tot = 0
+#     for c in s:
+#         dic[c] = 1 if c not in dic else dic[c] + 1
+#     odd = True
+#     for val in dic.values():
+#         if val & 1 == 0:
+#             tot += val
+#         elif val & 1 == 1:
+#             maxOdd = val
+#             tot += val-1
+#     tot += 1 if odd else 0
+#     return tot
 
-print(toHex(-1))
+# print(longestPalindrome("aababajds"))
+
+
+#   ==================== 1323 ======================
+
+# def maximum69Number (num: int) -> int:
+#     lenNum = 0
+#     idx = -1
+#     temp = num
+#     while temp != 0:
+#         if temp % 10 == 6:
+#             idx = lenNum
+#         temp //= 10
+#         lenNum += 1
+#     if idx > -1:
+#         num += 3*(10**idx)
+#     return num
+
+    # Converting to String
+# def maximum69Number (num: int) -> int:
+#     st = str(num)
+#     for i in range(len(st)):
+#         if st[i] == '6':
+#             st = st[:i] + '9' + st[i+1:]
+#             break
+#     return st
+
+# print(maximum69Number(6996))
+
+
+# def removeOuterParentheses(S: str) -> str:
+#     if not S:
+#         return ""
+#     temp, count = [], 0
+#     for i in range(len(S)):
+#         if S[i] == '(':
+#             count += 1
+#             temp += S[i] if count > 1 else ""
+#         else:
+#             count -= 1
+#             temp += S[i] if count > 0 else ""
+#     S = ''.join(temp)
+#     return S
+
+# print(removeOuterParentheses("(()())(())(()(()))"))
+
+
+# def toHex(num: int) -> str:
+#     if num == 0: 
+#         return '0'
+#     if num < 0: 
+#         num = num + 2**32
+#     a = ord('a')
+#     hexVals = {i:f'{i}' if i < 10 else chr(a+(i-10)) for i in range(16)}
+
+#     hexNum = ""
+#     while num != 0:
+#         hexNum += hexVals[num % 16]
+#         num //= 16
+#     return hexNum[::-1]
+
+# print(toHex(-1))
 
 
 #   ==================== 1436 ======================
