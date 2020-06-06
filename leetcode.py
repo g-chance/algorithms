@@ -1,8 +1,168 @@
-#   ====================  ======================
+def removeOuterParentheses(S: str) -> str:
+    if not S or S[0] != '(':
+        return ""
+    temp = []
+    count = 1
+    for i in range(1, len(S)):
+        if S[i] == '(':
+            count += 1
+            temp += ['(']
+        else:
+            count -= 1
+            if count == 0:
+                temp.pop()
 
-num = 4
-num <<= 4
-print(num)
+        
+    return
+
+print(removeOuterParentheses())
+
+
+def toHex(num: int) -> str:
+    if num == 0: 
+        return '0'
+    if num < 0: 
+        num = num + 2**32
+    a = ord('a')
+    hexVals = {i:f'{i}' if i < 10 else chr(a+(i-10)) for i in range(16)}
+
+    hexNum = ""
+    while num != 0:
+        hexNum += hexVals[num % 16]
+        num //= 16
+    return hexNum[::-1]
+
+print(toHex(-1))
+
+
+#   ==================== 1436 ======================
+
+# def destCity(paths) -> str:
+
+#     dic = {a:b for a,b in paths}
+#     for val in dic.values():
+#         if val not in dic:
+#             return val
+
+# print(destCity([["B","C"],["D","B"],["C","A"]]))
+
+
+#   ==================== 709 ======================
+
+# def toLowerCase(self, str: str) -> str:
+#     return
+
+# print(toLowerCase())
+
+
+# def readBinaryWatch(num: int):
+
+#     poss = [[h,m] for h in range(12) for m in range(60)]
+#     ans = []
+#     for pair in poss:
+#         if (bin(pair[0])+bin(pair[1])).count('1') == num:
+#             ans += [f"{int(pair[0])}:{int(pair[1]):02}"]
+#     return ans
+
+# print(readBinaryWatch(3))
+
+
+# def isSubsequence(s: str, t: str) -> bool:#     i = 0
+#     for char in s:
+#         while i < len(t):
+#             if char == t[i]:
+#                 i += 1
+#                 break
+#             i += 1
+#         else:
+#             return False
+#     return True
+
+# print(isSubsequence(s = "acb", t = "ahbgdc"))
+
+
+#   ==================== 383 ======================
+
+# def canConstruct(ransomNote: str, magazine: str) -> bool:
+#     mag = {}
+#     for c in magazine:
+#         if c not in mag:
+#             mag[c] = 1
+#         else:
+#             mag[c] += 1
+#     for c in ransomNote:
+#         if c not in mag or mag[c] - 1 < 0:
+#             return False
+#         mag[c] -= 1
+#     return True
+
+# print(canConstruct('aabb', 'aaababa'))
+
+
+# def guessNumber(n: int) -> int:
+#     l, r = 0, n
+#     m = (l+r) // 2
+#     while l <= r:
+#         if guess(m) == 0:
+#             return m
+#         elif guess(m) == -1:
+#             m = r-1
+#         elif guess(m) == 1:
+#             m = l+1
+#         m = (l+r) // 2
+#     return False
+
+# print(guessNumber(10))
+
+
+#   ==================== 168 ======================
+
+# def convertToTitle(n: int) -> str:
+#     uni = ord('A')
+#     vals = {i-uni:chr(i) for i in range(uni, uni+26)}
+#     col = ""
+#     while n != 0:
+#         col += vals[(n-1) % 26]
+#         n = (n-1) // 26
+#     return col[::-1]
+
+# print(convertToTitle(28))
+
+
+#   ==================== 1266 ======================
+
+# def minTimeToVisitAllPoints(points) -> int:
+#     start = points[0]
+#     seconds = 0
+#     for point in points:
+#         if start != point:
+#             diff1 = abs(point[0] - start[0])
+#             diff2 = abs(point[1] - start[1])
+#             seconds += diff1
+#             if diff2 > diff1:
+#                 seconds = (seconds - diff1) + diff2
+#         start = point
+#     return seconds
+
+
+# def minTimeToVisitAllPoints(points) -> int:
+#     start = points[0]
+#     seconds = 0
+#     for point in points:
+#         while start != point:
+#             if point[0] > start[0]:
+#                 start[0] += 1
+#             elif point[0] < start[0]:
+#                 start[0] -= 1
+#             if point[1] > start[1]:
+#                 start[1] += 1
+#             elif point[1] < start[1]:
+#                 start[1] -= 1
+#             seconds += 1
+#     return seconds
+
+# print(minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
+
 
 #   ==================== 292 ======================
 
