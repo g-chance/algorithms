@@ -1,30 +1,479 @@
+#   ==================== 1379 ======================
+
+    # Should work if values are repeated
+# def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+    
+#     if target == original or original.left == original.right:
+#         return cloned
+    
+#     def dive(o, c):
+#         if not o:
+#             return None
+#         if o == target:
+#             return c
+        
+#         return dive(o.left, c.left) or dive(o.right, c.right)
+        
+#     return dive(original.left, cloned.left) or dive(original.right, cloned.right)
+
+#     # Would not work if values are repeated
+#     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        
+#         if target == original or original.left == original.right:
+#             return cloned
+        
+#         def dive(node):
+#             if not node:
+#                 return None
+#             if node.val == target.val:
+#                 return node
+            
+#             return dive(node.left) or dive(node.right)
+            
+#         return dive(cloned.left) or dive(cloned.right)
+
+
+#   ==================== 1315 ======================
+
+# def sumEvenGrandparent(self, root: TreeNode) -> int:
+    
+#     su = [0]
+    
+#     def ihopethisworks(gp, left, right):
+    
+#         if left == right:
+#             return
+        
+#         if left:
+#             if gp & 1 == 0:
+#                 if left.left:
+#                     su[0] += left.left.val
+#                 if left.right:
+#                     su[0] += left.right.val
+#             ihopethisworks(left.val, left.left, left.right)
+            
+#         if right:
+#             if gp & 1 == 0:
+#                 if right.left:
+#                     su[0] += right.left.val
+#                 if right.right:
+#                     su[0] += right.right.val
+#             ihopethisworks(right.val, right.left, right.right)
+    
+#     ihopethisworks(root.val, root.left, root.right)
+    
+#     return su[0]
+
+# def sumEvenGrandparent(self, root: TreeNode) -> int:
+    
+#     su = [0]
+#     def ihopethisworks(root):
+#         if not root or root.left == root.right:
+#             return
+#         if root.val & 1 == 0:
+#             if root.left:
+#                 if root.left.left:
+#                     su[0] += root.left.left.val
+#                 if root.left.right:
+#                     su[0] += root.left.right.val
+#             if root.right:
+#                 if root.right.left:
+#                     su[0] += root.right.left.val
+#                     print(su)
+#                 if root.right.right:
+#                     su[0] += root.right.right.val
+#                     print(su)
+#         ihopethisworks(root.left)
+#         ihopethisworks(root.right)
+
+#     ihopethisworks(root)
+
+#     return su[0]
+
+
+#   ==================== 1304 ======================
+
+    # First solution (my second (below) was much faster)
+# def findContentChildren(g, s):
+#     g.sort(), s.sort()
+#     count = i = 0
+#     for ch in g:
+#         while i < len(s):
+#             if ch <= s[i]:
+#                 count, i = count+1, i+1
+#                 break
+#             i += 1
+#     return count
+
+    # Much faster
+# def findContentChildren(g, s):
+#     g.sort(), s.sort(reverse=True)
+#     count = 0
+#     for ch in g:
+#         if not s:
+#             return count
+#         while ch > s[-1]:
+#             s.pop()
+#             if not s:
+#                 return count
+#         count += 1
+#         s.pop()
+#     return count
+
+# print(findContentChildren([1,2], [1,2,3]))
+
+
+#   ==================== 1304 ======================
+
+#     # My first solution
+# def sumZero(n: int):
+#     if n & 1 == 1:
+#         lis = [i for i in range(0 - (n // 2), (n // 2) + 1)]
+#     else:
+#         lis = [i for i in range(0 - (n // 2), 0)] + [i for i in range(1, (n // 2) + 1)]
+#     return lis
+
+#     # After looking at discussion -- much quicker
+# def sumZero(n: int):
+#     if n & 1 == 1:
+#         return list(range(0 - (n // 2), (n // 2) + 1))
+#     else:
+#         return list(range(0-n+1, n, 2))
+
+# print(sumZero(8))
+
+
+#   ==================== 453 ======================
+
+#     # My initial solution
+# def minMoves(nums) -> int:
+#     if len(nums) < 2:
+#         return 0
+#     nums.sort()
+#     i, max, count = len(nums)-2, nums[-1], 0
+#     while nums[0] < max:
+#         count += (max - nums[0])
+#         nums[0] += (max-nums[0]); nums[i] += count
+#         if nums[i] > max:
+#             max = nums[i]
+#         i -= 1
+#     return count
+
+#     # After looking at discussion - a trick that makes it much easier
+# def minMoves(nums) -> int:
+#     mi, count = min(nums), 0
+#     for num in nums:
+#         count += (num-mi)
+#     return count
+
+# print(minMoves([1,2,3,4,5]))
+
+
+#   ====================  ======================
+
+# def replaceElements(arr):
+#     if not arr:
+#         return arr
+#     idx = 0
+#     m = max(arr[idx+1:])
+#     for i in range(1, len(arr)):
+#         if arr[i] == m:
+#             arr[idx:i] = [arr[i]]*(i-idx)
+#             idx = i
+#             if i < len(arr)-1:
+#                 m = max(arr[idx+1:])
+#     arr[-1] = -1
+#     return arr
+
+# def replaceElements(arr):
+#     if not arr:
+#         return []
+#     idx = 0
+#     for i, num in enumerate(arr):
+#         if idx < len(arr)-1:
+#             m = max(arr[idx+1:])
+#             if num == m:
+#                 arr[idx:i] = [num]*(i-idx)
+#                 idx = i
+#     arr[-1] = -1
+#     return arr
+
+# print(replaceElements(arr = [17,18,5,4,6,1]))
+
+
+#   ================== REVIEW =====================
+#   ==================== 447 ======================
+#   =================== REVIEW ====================
+
+#     # My original solution (doesn't pass due to time limit exceeded -- see next solution)
+# def numberOfBoomerangs(points) -> int:
+#     diff = []
+#     for i in range(len(points)):
+#         temp = []
+#         for j in range(len(points)):
+#             if i != j:
+#                 a = abs(points[i][0]-points[j][0])
+#                 b = abs(points[i][1]-points[j][1])
+#                 temp += [(a*a)+(b*b)]
+#         diff += [temp]
+#     count = 0
+#     for l in diff:
+#         for ln in set(l):
+#             if l.count(ln) > 1:
+#                 count += l.count(ln)*(l.count(ln)-1)
+#     return count
+
+#     # After looking at discussion
+# def numberOfBoomerangs(points) -> int:
+#     count = 0
+#     for a in points:
+#         lens = {}
+#         for b in points:
+#             if a != b:
+#                 x = a[0]-b[0]
+#                 y = a[1]-b[1]
+#                 lens[x*x + y*y] = 1 if (x*x + y*y) not in lens else lens[x*x + y*y] + 1
+#         for ln in lens.values():
+#             count += (ln*(ln-1))
+#     return count
+
+# print(numberOfBoomerangs([[0,0],[1,0],[-1,0],[0,1],[0,-1]]))
+
+
+#   ====================  ======================
+
+# def uniqueMorseRepresentations(words) -> int:
+#     morse = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+#     se = set()
+#     for word in words:
+#         st = ""
+#         for c in word:
+#             st += morse[ord(c)-ord('a')]
+#         se.add(st)
+#     return len(se)
+
+# print(uniqueMorseRepresentations(words = ["gin", "zen", "gig", "msg"]))
+
+
+#   ====================  ======================
+
+# def shuffle(nums, n: int):
+#     lis = []
+#     for i, j in zip(nums[:n], nums[n:]):
+#         lis += [i, j]
+#     return lis
+
+# print(shuffle(nums = [2,5,1,3,4,7], n = 3))
+
+
+#   ==================== 443 ======================
+
+    # My solution
+# def compress(chars) -> int:
+#     i, idx, count = 0, 0, 0
+#     while i < len(chars):
+#         count += 1
+#         if count > 1:
+#             if count == 2:
+#                 idx = i
+#             chars.pop(i)
+#             i -= 1
+#         if i == len(chars)-1 or chars[i] != chars[i+1]:
+#             if count > 1:
+#                 while count:
+#                     chars.insert(idx, str(count % 10))
+#                     count //= 10
+#                     i += 1
+#             count = 0
+#         i += 1
+#     return chars
+
+    # From discussion -- study this
+# def compress(chars):
+#     left = i = 0
+#     while i < len(chars):
+#         char, length = chars[i], 1
+#         while (i + 1) < len(chars) and char == chars[i + 1]:
+#             length, i = length + 1, i + 1
+#         chars[left] = char
+#         print(chars[left], left, chars)
+#         if length > 1:
+#             len_str = str(length)
+#             chars[left + 1:left + 1 + len(len_str)] = len_str
+#             left += len(len_str)
+#         left, i = left + 1, i + 1
+#         print(chars, left)
+#     return left
+
+# print(compress(["a","b","b","b","b","b","b","b","b","b","b","b","b","c","c","c"]))
+
+
+#   ==================== 441 ======================
+
+# def arrangeCoins(n: int) -> int:
+#     if n == 0:
+#         return 0
+#     i, count = 1, 0
+#     while i <= n:
+#         count += 1
+#         i += i + 1
+#     return count
+
+# print(arrangeCoins(8))
+
+
+#   ====================  ======================
+
+# def freqAlphabets(s: str) -> str:
+#     a = ord('a')
+#     dic = {f'{i}' if i < 10 else f'{i}#': chr(a+i-1) for i in range(1, 27)}
+#     i = 0
+#     decrypt = ""
+#     while i < len(s):
+#         if i < len(s)-2 and s[i+2] == '#':
+#             decrypt += dic[s[i]+s[i+1]+s[i+2]]
+#             i += 3
+#         else:
+#             decrypt += dic[s[i]]
+#             i += 1
+#     return decrypt
+
+# def freqAlphabets(s: str) -> str:
+#     a = ord('a') - 1
+#     for i in range(26, 0, -1):
+#         s = s.replace(str(i)+'#' if i > 9 else str(i), chr(a+i))
+#     return s
+
+# print(freqAlphabets(s = "1326#"))
+
+
+#   ==================== 437 ======================
+
+#     # Adding on the way back
+# def pathSum(self, root: TreeNode, s: int) -> int:
+    
+#     def newRoot(root):
+    
+#         if not root:
+#             return 0
+
+#         def find(node, tot, c):
+#             if not node:
+#                 return c
+#             tot += node.val
+#             if tot == s:
+#                 c += 1
+#             if node.left == node.right:
+#                 return c
+
+#             return find(node.left, tot, c) + find(node.right, tot, 0)
+        
+#         tott = newRoot(root.left) + newRoot(root.right)
+        
+#         return find(root, 0, 0) + tott
+    
+#     return newRoot(root)    
+    
+#         # Adding on the way down
+# def pathSum(self, root: TreeNode, s: int) -> int:
+    
+#     c = [0]
+    
+#     def newRoot(node):
+    
+#         if not node:
+#             return
+        
+#         newRoot(node.left); newRoot(node.right)
+
+#         def find(node, tot):
+#             if not node:
+#                 return
+#             tot += node.val
+#             if tot == s:
+#                 c[0] += 1
+#             if node.left == node.right:
+#                 return c
+
+#             find(node.left, tot); find(node.right, tot)
+        
+#         find(node, 0)
+        
+#     newRoot(root)
+    
+#     return c[0]
+
+
+#   ==================== 434 ======================
+
+# def countSegments(s: str) -> int:
+#     strp = s.strip()
+#     if not strp:
+#         return 0
+#     count = 0
+#     for i, c in enumerate(strp):
+#         if c == ' ' and strp[i-1] != ' ':
+#             count += 1
+#     return count + 1
+
+# print(countSegments(", , , ,        a, eaefa"))
+
+
+#   ==================== 1351 ======================
+
+# def countNegatives(grid) -> int:
+    # count = 0
+    # for i in range(len(grid)):
+    #     for j in range(len(grid[i])-1, -1, -1):
+    #         # count += 1 if grid[i][j] == 0 else break
+    #         if grid[i][j] < 0:
+    #             count += 1
+    #         else:
+    #             break
+    # return count
+
+# def countNegatives(grid) -> int:
+#     i = len(grid)-1
+#     j = 0
+#     count = 0
+#     while i > -1 and j < len(grid[0]):
+#         if grid[i][j] < 0:
+#             count += len(grid[i])-j
+#             i -= 1
+#         else:
+#             j += 1
+#     return count
+
+# print(countNegatives(grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
+
+
 #   ==================== 414 ======================
 
-    def thirdMax(self, nums: List[int]) -> int:
-        m1 = m2 = m3 = -2**32
-        se = set()
-        for i in range(len(nums)):
-            if nums[i] not in se:
-                if nums[i] > m1:
-                    m3, m2, m1 = m2, m1, nums[i]
-                elif nums[i] > m2:
-                    m3, m2 = m2, nums[i]
-                elif nums[i] > m3:
-                    m3 = nums[i]
-            se.add(nums[i])
-        if len(se) < 3:
-            return max(se)
-        return m3
+    # def thirdMax(self, nums: List[int]) -> int:
+    #     m1 = m2 = m3 = -2**32
+    #     se = set()
+    #     for i in range(len(nums)):
+    #         if nums[i] not in se:
+    #             if nums[i] > m1:
+    #                 m3, m2, m1 = m2, m1, nums[i]
+    #             elif nums[i] > m2:
+    #                 m3, m2 = m2, nums[i]
+    #             elif nums[i] > m3:
+    #                 m3 = nums[i]
+    #         se.add(nums[i])
+    #     if len(se) < 3:
+    #         return max(se)
+    #     return m3
 
 
 #   ==================== 409 ======================
 
-def checkRecord(s: str) -> bool:
-    if "A" in s and "LLL" in s:
-        return False
-    return True
+# def checkRecord(s: str) -> bool:
+#     if "A" in s and "LLL" in s:
+#         return False
+#     return True
 
-print(checkRecord("PPALLL"))
+# print(checkRecord("PPALLL"))
 
 
 #   ==================== 409 ======================
