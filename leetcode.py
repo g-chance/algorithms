@@ -1,6 +1,27 @@
+#   ================== REVIEW =====================
+#   ==================== 46 ======================
+#   =================== REVIEW ====================
+
+def permute(nums):
+    perms = []
+
+    def idfk(lis, n):
+        if not lis:
+            perms.append(n)
+        for i, num in enumerate(lis):
+            idfk(lis[:i] + lis[i+1:], n+[num])
+
+    for i, num in enumerate(nums):
+        idfk(nums[:i] + nums[i+1:], [num])
+
+    return perms
+
+print(permute([1,2,3,4]))
+
+
 #   ==================== 1379 ======================
 
-    # Should work if values are repeated
+#     # Should work if values are repeated
 # def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
     
 #     if target == original or original.left == original.right:
