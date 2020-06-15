@@ -1,22 +1,457 @@
+#   ====================  ====================
+
+# def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+#     vals = []
+    
+#     def findVals(node):
+#         if not node:
+#             return
+        
+#         vals.append(node.val)
+        
+#         findVals(node.left); findVals(node.right)
+    
+#     findVals(root1); findVals(root2)
+    
+#     return sorted(vals)
+
+# def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+    
+#     vals = []
+    
+#     def findVals(node):
+#         if not node:
+#             return
+        
+#         vals.append(node.val)
+        
+#         findVals(node.left); findVals(node.right)
+    
+#     findVals(root1); findVals(root2)
+    
+#     return sorted(vals)
+
+
+#   ==================== 1329 ====================
+
+# def diagonalSort(mat):
+#     lis, ans, p = [], [], len(mat[0])
+#     for row in mat:
+#         lis += row
+#     for i in range(-len(mat[0]), len(mat[0])):
+#         if i < 0:
+#             step = (p+1)*-1
+#             cut = lis[i:(i - (p+i)*abs(step))-1:step]
+#             cut = sorted(cut, reverse = True)
+#             lis[i:(i - (p+i)*abs(step))-1:step] = cut
+#         else:
+#             step = p+1
+#             cut = lis[i:(i + (p-i)*step):step]
+#             cut = sorted(cut)
+#             lis[i:(i + (p-i)*step):step] = cut
+#     for i in range(len(mat)):
+#         ans += [lis[i*p:(i*p)+p]]
+#     return ans
+
+    # After looking at discussion -- using dictionary
+# def diagonalSort(mat):
+#     r, c, dic = len(mat), len(mat[0]), {}
+#     for i in range(r):
+#         for j in range(c):
+#             dic[i-j] = [mat[i][j]] if i-j not in dic else dic[i-j] + [mat[i][j]]
+#     for key, val in dic.items():
+#         dic[key] = sorted(val, reverse= True)
+#     for i in range(r):
+#         for j in range(c):
+#             mat[i][j] = dic[i-j].pop()
+
+
+# print(diagonalSort([
+#     [11,25,66,1,69,7],
+#     [23,55,17,45,15,52],
+#     [75,31,36,44,58,8],
+#     [22,27,33,25,68,4],
+#     [84,28,14,11,5,50]
+#     ]))
+
+
+#   ================== REVIEW ====================
+#   ==================== 1008 ====================
+#   ==================== REVIEW ==================
+
+#     # My solution (terrible time complexity)
+# def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+    
+#     self.root = TreeNode(preorder[0])
+    
+#     def add_node(val):
+#         cur = self.root
+#         while True:
+#             if val < cur.val:
+#                 if not cur.left:
+#                     cur.left = TreeNode(val)
+#                     return
+#                 cur = cur.left
+#             elif val > cur.val:
+#                 if not cur.right:
+#                     cur.right = TreeNode(val)
+#                     return
+#                 cur = cur.right
+    
+#     for i in range(1, len(preorder)):
+#         add_node(preorder[i])
+    
+#     return self.root
+
+#     # After looking at discussion -- with stack
+# def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+#     self.root = TreeNode(preorder[0])
+#     s = [self.root]
+    
+#     for i in range(1, len(preorder)):
+#         if preorder[i] < s[-1].val:
+#             s[-1].left = TreeNode(preorder[i])
+#             s.append(s[-1].left)
+#         else:
+#             while s and preorder[i] > s[-1].val:
+#                 last = s.pop()
+#             last.right = TreeNode(preorder[i])
+#             s.append(last.right)
+    
+#     return self.root
+
+#     # # After looking at discussion -- with recursion
+# def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+#     if not preorder:
+#         return None
+    
+#     root = TreeNode(preorder[0])
+    
+#     i = 1
+#     while i < len(preorder) and preorder[i] < root.val:
+#         i += 1
+    
+#     root.left = self.bstFromPreorder(preorder[1:i])
+#     root.right = self.bstFromPreorder(preorder[i:])
+    
+#     return root
+
+
+#   ================== REVIEW ====================
+#   ==================== 48 ======================
+#   =================== REVIEW ===================
+
+#     # Learned after looking at discussion that the bitwise NOT operator is a really \
+#       # good way to get the inverse of an index (ie. ~0 == -1, ~1 == -2 etc..)
+# def rotate(matrix) -> None:
+
+#     for i in range(len(matrix) // 2):
+#         for j in range(i, len(matrix[0])-i-1):
+
+#             temp = matrix[i][j]
+#             matrix[i][j] = matrix[~j][i]
+#             matrix[~j][i] = matrix[~i][~j]
+#             matrix[~i][~j] = matrix[j][~i]
+#             matrix[j][~i] = temp
+
+#     return matrix
+
+# print(rotate([
+#     [1,2,3,4],
+#     [5,6,7,8],
+#     [9,10,11,12],
+#     [13,14,15,16]
+# ]))
+
+
+#   ==================== 49 ======================
+
+#     # I realized the lamba function that I provided in the sorted() method here is \
+#       # unnessesary, but it made me feel smrt
+# def groupAnagrams(strs):
+#     dic = {}
+#     for st in strs:
+#         unsc = ''.join(sorted(st, key = lambda x: ord(x)))
+#         dic[unsc] = [st] if unsc not in dic else dic[unsc] + [st]
+#     return list(dic.values())
+
+# print(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+
+
+#   ====================  ======================
+
+    # ma = max(nums)
+    # idx = nums.index(ma)
+    # root = TreeNode(val = ma)
+    # s = [(nums[:idx], root, 'l'), (nums[idx+1:], root, 'r')]
+    
+    # while s:
+    #     sub, node, side = s.pop()
+    #     if sub:
+    #         ma = max(sub)
+    #         idx = sub.index(ma)
+    #         if side == 'l':
+    #             node.left = TreeNode(val = ma)
+    #             node = node.left
+    #         else:
+    #             node.right = TreeNode(val = ma)
+    #             node = node.right
+    #         s += [(sub[:idx], node, 'l'), (sub[idx+1:], node, 'r')]
+    # return root
+
+
+#   ====================  ======================
+
+# import random
+
+# a = ord('a')
+# alph = [f'{i}' if i < 10 else chr(a+(i-10)) for i in range(36)]
+
+# def encode(longUrl: str) -> str:
+#     rand_str = ''.join(random.sample(alph, 6))
+#     dic = {rand_str: longUrl}
+#     shortUrl = f'http://tinyurl.com/{rand_str}'
+#     return (shortUrl, dic)
+
+# def decode(shortUrl: str, dic) -> str:
+#     return dic[shortUrl[shortUrl.rfind("/")+1:]]
+
+# enc = encode('askdjhsjbdfbhih')
+# dec = decode(*enc)
+# print(dec)
+
+
+#   ====================  ======================
+
+# def productExceptSelf(nums):
+
+#     if len(nums) < 2:
+#         return 0
+#     skip = 1
+#     prod = []
+#     for num in nums:
+#         prod.append(skip)
+#         skip *= num
+#     skip = 1
+#     for i in range(len(nums)-1,-1,-1):
+#         prod[i] *= skip
+#         skip *= nums[i]
+#     return prod
+
+# print(productExceptSelf([1,2,3,4]))
+
+
+#   ==================== 1395 ======================
+
+# def numTeams(rating) -> int:
+#     count = 0
+#     for i in range(len(rating)-2):
+#         for j in range(i+1, len(rating)):
+#             if rating[j] > rating[i]:
+#                 for k in range(j, len(rating)):
+#                     if rating[k] > rating[j]:
+#                         count += 1
+#             if rating[j] < rating[i]:
+#                 for k in range(j, len(rating)):
+#                     if rating[k] < rating[j]:
+#                         count += 1
+#     return count
+
+# print(numTeams(rating = [1,2,3,4]))
+
+
+#   ==================== 1409 ======================
+
+    # First attemp with recursion -- time limit exceeded
+# def subsets(nums):
+    
+    # subs = [[num] for num in nums] + [[]]
+    # if len(nums) < 2:
+    #     return subs
+    
+    # subs += [nums]
+    
+    # def goDeeper(nums):
+    #     if len(nums) == 1:
+    #         return
+    #     print("s",subs, "n",nums)
+    #     subs.append(nums) if nums not in subs else None
+    #     for i, num in enumerate(nums):
+    #         goDeeper(nums[:i] + nums[i+1:])
+    
+    # for i, num in enumerate(nums):
+    #     goDeeper(nums[:i] + nums[i+1:])
+
+    # return subs
+
+    # My second solution with stack (passed!)
+# def subsets(nums):
+#     if not nums:
+#         return [nums]
+#     s1, ans = [nums], []
+#     while s1:
+#         lis = s1.pop()
+#         ans += [lis]
+#         if len(lis) > 1:
+#             for i in range(len(lis)):
+#                 cut = lis[:i] + lis[i+1:]
+#                 if cut not in ans:
+#                     s1.append(cut)
+#     return ans + [[]]
+
+    # After looking at discussion.. genius
+# def subsets(nums):
+#     perms = [[]]
+#     for num in nums:
+#         perms += [perm+[num] for perm in perms]
+#     return perms
+
+# print(subsets(nums = [1,2,3,4]))
+
+
+#   ==================== 1409 ======================
+
+# from collections import deque
+
+# def processQueries(queries, m):
+#     deck, ans = deque(), []
+#     for i in range(1, m+1):
+#         deck.append(i)
+#     for num in queries:
+#         idx = deck.index(num)
+#         ans += [idx]
+#         deck.remove(num)
+#         deck.appendleft(num)
+#     return ans
+
+# print(processQueries(queries = [3,1,2,1], m = 5))
+
+
+#   ==================== 347 ======================
+
+# def topKFrequent(nums, k: int):
+#     if len(nums) < 3:
+#         return set(nums)
+#     se, reps = set(nums),[]
+#     for i, num in enumerate(se):
+#         reps.append([nums.count(num), num])
+#     reps, ans = sorted(reps), []
+#     for i in range(k):
+#         ans += [reps[-1-i][1]]
+#     return ans
+
+# def topKFrequent(nums, k: int):
+#     if len(nums) < 3:
+#         return set(nums)
+#     reps = {}
+#     for num in nums:
+#         reps[num] = 1 if num not in reps else reps[num] + 1
+#     ans, i = [], 0
+#     for key, val in reversed(sorted(reps.items(), key = lambda x: x[1])):
+#         ans += [key]
+#         i += 1
+#         if i >= k:
+#             break
+#     return ans
+
+# print(topKFrequent(nums = [1,1,1,2,2,3], k = 2))
+
+
+#   ================ IM A GENIUS ==================
+#   ================== REVIEW =====================
+#   ==================== 1302 ======================
+#   =================== REVIEW ===================
+
+# import math
+
+# def deepestLeavesSum(root) -> int:
+#     if not root:
+#         return 0
+#     vals = {}
+#     vals[0] = root.val
+    
+#     def goDiggin(node, lv):
+#         if not node:
+#             return
+        
+#         vals[lv] = node.val if lv not in vals else vals[lv] + node.val
+        
+#         goDiggin(node.left, lv+1)
+#         goDiggin(node.right, lv+1)
+    
+#     goDiggin(root.left, 1)
+#     goDiggin(root.right, 1)
+    
+#     gen = reversed(vals.values())
+#     return next(gen)
+
+
+#   ================ IM A GENIUS ==================
+#   ================== REVIEW =====================
+#   ====================  ======================
+#   =================== REVIEW ===================
+
+# def generateParenthesis(n: int):
+#     perms = []
+#     def generate(path, count, ref):
+#         if count == n:
+#             if len(path) < n*2:
+#                 path += ')'*((n*2)-len(path))
+#             perms.append(path)
+#             return
+#         if ref > 0:
+#             generate(path + ')', count, ref-1)
+#         generate(path + '(', count+1, ref+1)
+
+#     generate('(', 1, 1)
+#     return perms
+
+# print(generateParenthesis(4))
+
+
+#   ==================== 1282 ======================
+
+#     # My solution
+# def groupThePeople(groupSizes):
+#     dic, ans = {}, []
+#     for i, p in enumerate(groupSizes):
+#         dic[p] = [i] if p not in dic else dic[p] + [i]
+#         if len(dic[p]) == p:
+#             ans += [dic[p]]
+#             del dic[p]
+#     return ans
+
+#     # From discussion -- I did not and probably could not reproduce this, but this is good to see for reference
+# import collections
+# def groupThePeople(groupSizes):
+#     count = collections.defaultdict(list)
+#     for i, size in enumerate(groupSizes):
+#         count[size].append(i)
+#     print(count)
+#     return [l[i:i + s]for s, l in count.items() for i in range(0, len(l), s)]
+
+# print(groupThePeople(groupSizes = [3,3,3,3,3,1,3]))
+
+
 #   ================== REVIEW =====================
 #   ==================== 46 ======================
 #   =================== REVIEW ====================
 
-def permute(nums):
-    perms = []
+# def permute(nums):
+#     perms = []
 
-    def idfk(lis, n):
-        if not lis:
-            perms.append(n)
-        for i, num in enumerate(lis):
-            idfk(lis[:i] + lis[i+1:], n+[num])
+#     def idfk(lis, n):
+#         if not lis:
+#             perms.append(n)
+#         for i, num in enumerate(lis):
+#             idfk(lis[:i] + lis[i+1:], n+[num])
 
-    for i, num in enumerate(nums):
-        idfk(nums[:i] + nums[i+1:], [num])
+#     for i, num in enumerate(nums):
+#         idfk(nums[:i] + nums[i+1:], [num])
 
-    return perms
+#     return perms
 
-print(permute([1,2,3,4]))
+# print(permute([1,2,3,4]))
 
 
 #   ==================== 1379 ======================
