@@ -1,3 +1,219 @@
+# #   ==================== 1471 ====================
+
+def filterRestaurants(restaurants: List[List[int]], veganFriendly: int, maxPrice: int, maxDistance: int) -> List[int]:
+    
+    return
+
+print(filterRestaurants(restaurants = [[1,4,1,40,10],[2,8,0,50,5],[3,8,1,30,4],[4,10,0,10,3],[5,1,1,15,1]],
+    veganFriendly = 1, maxPrice = 50, maxDistance = 10))
+
+
+# #   ==================== 1471 ====================
+
+#     # My first solution
+# def getStrongest(arr, k: int):
+#     if len(arr) == 1:
+#         return arr
+    
+#     arr.sort()
+#     median = arr[(len(arr)-1) // 2]
+#     strongestList = sorted(arr, key = lambda x: abs(x-median))
+    
+#     return strongestList[len(strongestList)-k:]
+
+#     # Without sorted() -- though I don't see a good reason not to use sorted
+# def getStrongest(arr, k: int):
+#     if len(arr) == 1:
+#         return arr
+    
+#     arr.sort()
+#     median = arr[(len(arr)-1) // 2]
+#     i, j = 0, len(arr)-1
+
+#     while i + (len(arr) - 1 - j) < k:
+#         if abs(arr[i] - median) > abs(arr[j] - median):
+#             i += 1
+#         else:
+#             j -= 1
+    
+#     return arr[:i] + arr[j + 1:]
+
+# print(getStrongest(arr = [1,2,3,4,5], k = 2))
+
+# #   ==================== 969 ====================
+
+# def pancakeSort(A):
+#     idx, flips = len(A), []
+#     while idx > 1:
+#         mi = A.index(max(A[:idx]))
+#         # print(mi, idx, A)
+#         if mi == 0:
+#             A[:idx] = [num for num in reversed(A[:idx])]
+#             mi = idx-1
+#             flips.append(idx)
+#         elif mi < idx-1:
+#             rev = A[:mi+1]
+#             A[:mi+1] = [num for num in reversed(rev)]
+#             flips.append(mi+1)
+#         if mi == idx-1:
+#             idx -= 1
+#     # print(A)
+#     return flips
+
+# print(pancakeSort([1,2,3]))
+
+
+# #   ==================== 215 ====================
+# import random
+
+# def findKthLargest(self, nums: List[int], k: int) -> int:
+
+#     def partition(lis, left, piv):
+#         low, right = left, len(lis)-1
+#         lis[right], lis[piv] = lis[piv], lis[right]
+#         while left < right:
+#             if lis[left] < lis[piv]:
+#                 lis[left], lis[low] = lis[low], lis[left]
+#                 low += 1
+#             left += 1
+#         lis[low], lis[piv] = lis[piv], lis[low]
+#         return low
+
+#     def quickSelect(lis, k):
+        
+#         piv = random.randint(0, len(lis)-1)
+#         part_idx = partition(lis, 0, piv)
+        
+#         if part_idx == k:
+#             return lis[part_idx]
+#         elif part_idx > k:
+#             return quickSelect(lis[:part_idx], k)
+#         elif part_idx < k:
+#             return quickSelect(lis[part_idx+1:], k-part_idx-1)
+                    
+#     return quickSelect(nums, len(nums)-k)
+    
+#     def mergeSort(lis):
+#         if len(lis) == 1:
+#             return lis
+        
+#         left = lis[:len(lis) // 2]
+#         right = lis[len(lis) // 2:]
+        
+#         def merge(left, right):
+#             li, ri, m = 0, 0, []
+#             while li < len(left) and ri < len(right):
+#                 if left[li] < right[ri]:
+#                     m.append(left[li])
+#                     li += 1
+#                 else:
+#                     m.append(right[ri])
+#                     ri += 1
+#             m += right[ri:] if li == len(left) else left[li:]
+#             return m
+        
+#         return merge(mergeSort(left), mergeSort(right))
+
+#     new_lis = mergeSort(nums)
+#     return new_lis[-k]
+
+# def findKthLargest(nums, k):
+#     for i in range(len(nums), len(nums)-k, -1):
+#         tmp = 0
+#         for j in range(i):
+#             if nums[j] > nums[tmp]:
+#                 tmp = j
+#         nums[tmp], nums[i-1] = nums[i-1], nums[tmp]
+#     return nums[len(nums)-k]
+
+# print(findKthLargest([1,2,3,4,5], k = 2))
+
+
+# #   ==================== 1347 ====================
+
+    # My first attempt.. decent runtime
+# def minSteps(s: str, t: str) -> int:
+#     s_dic, count = {}, 0
+#     for c in s:
+#         s_dic[c] = 1 if c not in s_dic else s_dic[c] + 1
+#     for c in t:
+#         if c in s_dic:
+#             s_dic[c] -= 1
+#             if s_dic[c] == 0:
+#                 del s_dic[c]
+#         else:
+#             count += 1
+#     return count
+
+#     # Really cool solution I saw in discussion -- replaces 1 instance of each leter in s with 1 instance of the \
+#      # same letter in t (if it doesn't exist in t it does nothing). Whatever is left in t is how many letters \
+#       # need to be replaced
+# def minSteps(s: str, t: str) -> int:
+#     for c in s:
+#         t = t.replace(c, '', 1)
+
+# print(minSteps(s = "anagram", t = "mangaar"))
+
+
+# #   ==================== 328 ====================
+
+# def oddEvenList(self, head: ListNode) -> ListNode:
+    
+#     if not head or not head.next:
+#         return head
+    
+#     r1, r2, temp = head, head.next, head.next
+    
+#     while r1.next and r2.next:
+#         r1.next = r1.next.next
+#         r2.next = r2.next.next
+#         r1, r2 = r1.next, r2.next
+    
+#     r1.next = temp
+    
+#     return head
+
+
+# #   ====================  ====================
+
+# def partitionLabels(S):
+#     cur, rt, checked, ans = 0, 0, set(), []
+#     for i, c in enumerate(S):
+#         if c not in checked:
+#             rep = S.rfind(c)
+#             if rep != i and rep > rt:
+#                 rt = rep
+#         if i == rt:
+#             ans += [S[cur:rt+1]]
+#             cur = rt = rt+1
+#         checked.add(c)
+
+#     return [len(a) for a in ans]
+
+# print(partitionLabels(S = "ababcbacadefegdehijhklij"))
+
+
+# #   ====================  ====================
+
+# def numTilePossibilities(tiles: str) -> int:
+#     perms = set()
+
+#     def findPerms(lis, perm):
+#         if perm not in perms:
+#             perms.add(perm)
+#         for i in range(len(lis)):
+#             findPerms(lis[:i] + lis[i+1:], perm + lis[i])
+        
+#     for i in range(len(tiles)):
+#         perm = tiles[i]
+#         lis = tiles[:i] + tiles[i+1:]
+#         findPerms(lis, perm)
+
+#     return len(perms)
+
+# print(numTilePossibilities("AAB"))
+
+
 #   ====================  ====================
 
 # def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
