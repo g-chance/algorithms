@@ -1,11 +1,24 @@
-# #   ==================== 1471 ====================
 
-def filterRestaurants(restaurants: List[List[int]], veganFriendly: int, maxPrice: int, maxDistance: int) -> List[int]:
-    
-    return
 
-print(filterRestaurants(restaurants = [[1,4,1,40,10],[2,8,0,50,5],[3,8,1,30,4],[4,10,0,10,3],[5,1,1,15,1]],
-    veganFriendly = 1, maxPrice = 50, maxDistance = 10))
+# #   ====================  ====================
+
+
+# #   ====================  ====================
+
+# def filterRestaurants(restaurants, veganFriendly: int, maxPrice: int, maxDistance: int):
+#     filtered = []
+#     for r in restaurants:
+#         if r[3] <= maxPrice:
+#             if r[4] <= maxDistance:
+#                 if veganFriendly == 0:
+#                     filtered.append(r)
+#                 elif r[2] == veganFriendly:
+#                     filtered.append(r)
+#     sortedRes = sorted(filtered, key = lambda x: (x[1], x[0]), reverse = True)
+#     return [r[0] for r in sortedRes]
+
+# print(filterRestaurants(restaurants = [[33433,15456,1,99741,58916],[61899,85406,1,27520,12303],[63945,3716,1,56724,79619]],
+#     veganFriendly = 0, maxPrice = 91205, maxDistance = 58378))
 
 
 # #   ==================== 1471 ====================
