@@ -1,6 +1,62 @@
+# #   ==================== 841 ====================
+
+def canVisitAllRooms(rooms) -> bool:
+    keys = set(rooms[0])
+    visited = {0}
+    while keys:
+        visit = keys.pop()
+        visited.add(visit)
+        for key in rooms[visit]:
+            if key not in visited:
+                keys.add(key)
+    return len(visited) == len(rooms)
+
+print(canVisitAllRooms([[1,3],[3,0,1],[2],[0]]))
+
+
+# #   ==================== 1161 ====================
+
+# def maxLevelSum(self, root: TreeNode) -> int:
+    
+#     levelSums = {}
+    
+#     def addEmUp(node, level):
+#         if not node:
+#             return
+        
+#         levelSums[level] = node.val if level not in levelSums else levelSums[level] + node.val
+    
+#         addEmUp(node.left, level + 1)
+#         addEmUp(node.right, level + 1)
+        
+#     addEmUp(root, 1)
+#     maximal = max(levelSums.values())
+#     for key in levelSums:
+#         if levelSums[key] == maximal:
+#             return key
 
 
 # #   ====================  ====================
+
+# def gardenNoAdj(N: int, paths):
+#     gardens = [0] + [[i, (i % 4) if (i % 4) > 0 else 4] for i in range(1, N + 1)]
+#     adj, ans = {}, [1] * N
+#     for x, y in paths:
+#         if x not in adj:
+#             adj[x] = []
+#         if y not in adj:
+#             adj[y] = []
+#         adj[x].append(y)
+#         adj[y].append(x)
+#     for g in adj:
+#         flowers = {1,2,3,4}
+#         for connection in adj[g]:
+#             flowers -= {gardens[connection][1]}
+#         newFlower = flowers.pop()
+#         ans[g-1], gardens[g] = newFlower, [g, newFlower]
+#     return ans
+
+# print(gardenNoAdj(N = 5, paths = [[2,3],[3,4],[4,1],[1,3],[2,4],[5,1]]))
 
 
 # #   ====================  ====================
