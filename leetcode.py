@@ -1,17 +1,32 @@
+# #   ==================== 1306 ====================
+
+def canReach(arr, start: int,) -> bool:
+
+    def splitUp(idx, count):
+        if count >= len(arr) or idx >= len(arr) or idx < 0:
+            return False
+        if arr[idx] == 0:
+            return True
+        return splitUp(idx + arr[idx], count + 1) or splitUp(idx - arr[idx], count + 1)
+    return splitUp(start, 1)
+
+print(canReach(arr = [4,2,3,0,3,1,2], start = 0))
+
+
 # #   ==================== 841 ====================
 
-def canVisitAllRooms(rooms) -> bool:
-    keys = set(rooms[0])
-    visited = {0}
-    while keys:
-        visit = keys.pop()
-        visited.add(visit)
-        for key in rooms[visit]:
-            if key not in visited:
-                keys.add(key)
-    return len(visited) == len(rooms)
+# def canVisitAllRooms(rooms) -> bool:
+#     keys = set(rooms[0])
+#     visited = {0}
+#     while keys:
+#         visit = keys.pop()
+#         visited.add(visit)
+#         for key in rooms[visit]:
+#             if key not in visited:
+#                 keys.add(key)
+#     return len(visited) == len(rooms)
 
-print(canVisitAllRooms([[1,3],[3,0,1],[2],[0]]))
+# print(canVisitAllRooms([[1,3],[3,0,1],[2],[0]]))
 
 
 # #   ==================== 1161 ====================
