@@ -1,16 +1,31 @@
+# #   ==================== 3 ====================
+
+def lengthOfLongestSubstring(s: str) -> int:
+    seen, se, lss, i = {}, set(), 0, 0
+    for j, c in enumerate(s):
+        if c in se:
+            se -= set(s[i:seen[c] + 1])
+            i = seen[c] + 1
+        seen[c], lss = j, max(j+1 - i, lss)
+        se.add(c)
+    return lss
+
+print(lengthOfLongestSubstring("abba"))
+
+
 # #   ==================== 1306 ====================
 
-def canReach(arr, start: int,) -> bool:
+# def canReach(arr, start: int,) -> bool:
 
-    def splitUp(idx, count):
-        if count >= len(arr) or idx >= len(arr) or idx < 0:
-            return False
-        if arr[idx] == 0:
-            return True
-        return splitUp(idx + arr[idx], count + 1) or splitUp(idx - arr[idx], count + 1)
-    return splitUp(start, 1)
+#     def splitUp(idx, count):
+#         if count >= len(arr) or idx >= len(arr) or idx < 0:
+#             return False
+#         if arr[idx] == 0:
+#             return True
+#         return splitUp(idx + arr[idx], count + 1) or splitUp(idx - arr[idx], count + 1)
+#     return splitUp(start, 1)
 
-print(canReach(arr = [4,2,3,0,3,1,2], start = 0))
+# print(canReach(arr = [4,2,3,0,3,1,2], start = 0))
 
 
 # #   ==================== 841 ====================
