@@ -1,16 +1,109 @@
+# #   ==================== 994 ====================
+
+def threeSum(nums):
+    ans = set()
+    for i in range(len(nums)-2):
+        for j in range(i+1, len(nums)-1):
+            for k in range(j+1, len(nums)):
+                if nums[i]+nums[j]+nums[k] == 0:
+                    ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
+    return [list(x) for x in ans]
+
+print(threeSum([3,0,-2,-1,1,2]))
+
+
+# #   ==================== 994 ====================
+
+# from collections import deque
+
+#     # My solution after refactoring
+# def orangesRotting(grid) -> int:
+#     row, col, freshOranges = len(grid), len(grid[0]), 0
+#     queue, ans = deque(), 0
+#     for i in range(row):
+#         for j in range(col):
+#             if grid[i][j] == 2:
+#                 queue.append([i, j, 0])
+#             elif grid[i][j] == 1:
+#                 freshOranges += 1
+
+#     def turnToRot(n, m, cnt):
+#         nonlocal freshOranges
+#         if 0 <= n < row and 0 <= m < col:
+#             if grid[n][m] == 1:
+#                 grid[n][m], cnt = 2, cnt+1
+#                 freshOranges -= 1
+#                 queue.append([n, m, cnt])
+
+#     while queue:
+#         x, y, ans = queue.popleft()
+#         if grid[x][y] == 2:
+#             turnToRot(x-1, y, ans); turnToRot(x+1, y, ans)
+#             turnToRot(x, y-1, ans); turnToRot(x, y+1, ans)
+#     if freshOranges > 0:
+#         return -1
+#     return ans
+
+#     # My first solution
+# def orangesRotting(self, grid: List[List[int]]) -> int:
+#     queue = deque()
+#     row, col, freshOranges, ans = len(grid), len(grid[0]), 0, 0
+#     for i in range(row):
+#         for j in range(col):
+#             if grid[i][j] == 2:
+#                 queue.append([i, j, 0])
+#             elif grid[i][j] == 1:
+#                 freshOranges += 1
+#     while queue:
+#         x, y, mn = queue.popleft()
+#         ans = max(ans, mn)
+#         if grid[x][y] == 2:
+#             if x > 0:
+#                 temp = mn
+#                 if grid[x-1][y] == 1:
+#                     grid[x-1][y], temp = 2, temp+1
+#                     freshOranges -= 1
+#                     queue.append([x-1, y, temp])
+#             if x < (row - 1):
+#                 temp = mn
+#                 if grid[x+1][y] == 1:
+#                     grid[x+1][y], temp = 2, temp+1
+#                     freshOranges -= 1
+#                     queue.append([x+1, y, temp])
+#             if y > 0:
+#                 temp = mn
+#                 if grid[x][y-1] == 1:
+#                     grid[x][y-1], temp = 2, temp+1
+#                     freshOranges -= 1
+#                     queue.append([x, y-1, temp])
+#             if y < (col - 1):
+#                 temp = mn
+#                 if grid[x][y+1] == 1:
+#                     grid[x][y+1], temp = 2, temp+1
+#                     freshOranges -= 1
+#                     queue.append([x, y+1, temp])
+#     if freshOranges > 0:
+#         return -1
+#     return ans
+
+# print(orangesRotting([
+#     [0],[1]
+# ]))
+
+
 # #   ==================== 3 ====================
 
-def lengthOfLongestSubstring(s: str) -> int:
-    seen, se, lss, i = {}, set(), 0, 0
-    for j, c in enumerate(s):
-        if c in se:
-            se -= set(s[i:seen[c] + 1])
-            i = seen[c] + 1
-        seen[c], lss = j, max(j+1 - i, lss)
-        se.add(c)
-    return lss
+# def lengthOfLongestSubstring(s: str) -> int:
+#     seen, se, lss, i = {}, set(), 0, 0
+#     for j, c in enumerate(s):
+#         if c in se:
+#             se -= set(s[i:seen[c] + 1])
+#             i = seen[c] + 1
+#         seen[c], lss = j, max(j+1 - i, lss)
+#         se.add(c)
+#     return lss
 
-print(lengthOfLongestSubstring("abba"))
+# print(lengthOfLongestSubstring("abba"))
 
 
 # #   ==================== 1306 ====================
