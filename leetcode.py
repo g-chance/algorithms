@@ -1,15 +1,119 @@
-# #   ==================== 994 ====================
+# #   ==================== 811 ====================
 
-def threeSum(nums):
-    ans = set()
-    for i in range(len(nums)-2):
-        for j in range(i+1, len(nums)-1):
-            for k in range(j+1, len(nums)):
-                if nums[i]+nums[j]+nums[k] == 0:
-                    ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
-    return [list(x) for x in ans]
+def subdomainVisits(cpdomains):
+    return
 
-print(threeSum([3,0,-2,-1,1,2]))
+print(subdomainVisits(["9001 discuss.leetcode.com"]))
+
+
+# #   ==================== 953 ====================
+
+# def isAlienSorted(words, order) -> bool:
+#     alienDic = {c: i for i, c in enumerate(order, 1)}
+#     for i in range(len(words)-1):
+#         for j in range(len(words[i])):
+#             try:
+#                 if alienDic[words[i][j]] > alienDic[words[i+1][j]]:
+#                     return False
+#                 elif alienDic[words[i][j]] < alienDic[words[i+1][j]]:
+#                     break
+#             except:
+#                 return False
+#     return True
+
+# print(isAlienSorted(words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"))
+
+
+# #   ====================  ====================
+
+# def reorderLogFiles(logs):
+#     letterLogs, digitLogs = [], []
+#     for log in logs:
+#         deli = log.find(' ')
+#         if log[deli+1].isalpha():
+#             letterLogs.append(log)
+#         else:
+#             digitLogs.append(log)
+#     letterLogs.sort()
+#     return sorted(letterLogs, key = lambda x: x[x.find(' ')+1:]) + digitLogs
+
+# print(reorderLogFiles(logs = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo","a2 act car"]))
+
+
+# #   ====================  ====================
+
+#     # Passes (~25%)
+# def threeSum(nums):
+#     iSet, ans = set(), set()
+#     for i in range(len(nums)-2):
+#         if not nums[i] in iSet:
+#             comp = {}
+#             for j in range(i+1, len(nums)-1):
+#                 key = 0 - nums[i] - nums[j]
+#                 comp[key] = [i, j]
+#                 if nums[j+1] in comp:
+#                     x, y = comp.pop(nums[j+1])
+#                     ans.add(tuple(sorted([nums[x], nums[y], nums[j+1]])))
+#         iSet.add(nums[i])
+#     return ans
+
+#     # Similar to above but with sort instead
+# def threeSum(nums):
+#     nums.sort()
+#     ans = set()
+#     if not nums or nums[0] > 0 or nums[len(nums)-1] < 0:
+#         return ans
+#     for i in range(len(nums)-2):
+#         if i == 0 or i > 0 and not nums[i] == nums[i-1]:
+#             comp = {}
+#             for j in range(i+1, len(nums)-1):
+#                 key = 0 - nums[i] - nums[j]
+#                 comp[key] = [i, j]
+#                 if nums[j+1] in comp:
+#                     x, y = comp.pop(nums[j+1])
+#                     ans.add((nums[x], nums[y], nums[j+1]))
+#     return ans
+
+#     # Too slow
+# def threeSum(nums):
+#     nums.sort()
+#     ans = set()
+
+#     def findTriplets(nums, se):
+#         print(nums)
+#         if len(nums) < 3 or nums[0] > 0 or nums[len(nums)-1] < 0:
+#             return
+#         if not nums[0] in se or not nums[len(nums)-1] in se:
+#             temp = 0 - nums[0] - nums[len(nums)-1]
+#             if temp <= 0:
+#                 for k in range(1, len(nums)-1):
+#                     if nums[k] > 0:
+#                         break
+#                     if nums[k] == temp:
+#                         ans.add((nums[0], nums[k], nums[len(nums)-1]))
+#             elif temp > 0:
+#                 for k in range(len(nums)-2, 0, -1):
+#                     if nums[k] < 0:
+#                         break
+#                     if nums[k] == temp:
+#                         ans.add((nums[0], nums[k], nums[len(nums)-1]))
+#         findTriplets(nums[1:], se | {nums[0]})
+#         findTriplets(nums[:-1], se | {nums[len(nums)-1]})
+
+#     findTriplets(nums, set())
+#     return ans
+
+#     # Too slow
+# def threeSum(nums):
+#     ans = set()
+#     for i in range(len(nums)-2):
+#         for j in range(i+1, len(nums)-1):
+#             for k in range(j+1, len(nums)):
+#                 if nums[i]+nums[j]+nums[k] == 0:
+#                     ans.add(tuple(sorted([nums[i],nums[j],nums[k]])))
+#     return [list(x) for x in ans]
+
+# print(threeSum([-1, 0, 1, 2, -1, -4]))
 
 
 # #   ==================== 994 ====================
