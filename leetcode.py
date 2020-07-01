@@ -1,9 +1,110 @@
+#   ==================== 366 ====================
+
+#     I did this with BFS but it also works with a stack and DFS
+
+# from collections import deque
+
+# def __init__(self):
+#     self.queue = deque()
+#     self.ans = []
+
+# def findLeaves(self, root: TreeNode) -> List[List[int]]:
+    
+#     def removeLeaves(root, path):
+#         self.queue.append([root, None])
+#         while self.queue:
+#             node, parent = self.queue.popleft()
+#             if not node:
+#                 continue
+#             if node.left == node.right:
+#                 path.append(node.val)
+#                 if node == parent.left:
+#                     parent.left = None
+#                 else:
+#                     parent.right = None
+#             else:
+#                 self.queue.append([node.left, node]); self.queue.append([node.right, node])
+#         self.ans.append(path)
+    
+#     if root:
+#         while root.left != root.right:
+#             removeLeaves(root, [])
+#         return self.ans + [[root.val]]
+#     return root
+
+
+#   ====================  ====================
+
+# def findAndReplacePattern(words, pattern: str):
+#     ans = []
+#     for word in words:
+#         mp, seen = {}, set()
+#         for i, c in enumerate(word):
+#             if c not in mp:
+#                 if pattern[i] in seen:
+#                     break
+#                 mp[c] = pattern[i]
+#             if c in mp and mp[c] != pattern[i]:
+#                 break
+#             seen.add(pattern[i])
+#         else:
+#             ans.append(word)
+#     return ans
+
+# print(findAndReplacePattern(words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"))
+
+
+#   ==================== 543 ====================
+
+# def minAddToMakeValid(S: str) -> int:
+#     count, add = 0, 0
+#     for p in S:
+#         count = count -1 if p == ')' else count + 1
+#         if count < 0:
+#             add, count = add + 1, count + 1
+#     if count > 0:
+#         add += count
+#     return add
+
+# print(minAddToMakeValid("()))(("))
+
+
+#   ================== REVIEW ====================
+#   ==================== 543 ====================
+#   ==================== REVIEW ==================
+
+# def __init__(self):
+#     self.ans = 0
+
+# def diameterOfBinaryTree(root) -> int:
+    
+#     def findDepth(node):
+#         if not node:
+#             return 0
+#         left, right = findDepth(node.left), findDepth(node.right)
+#         self.ans = max(self.ans, left+right)
+#         return max(left, right) + 1
+    
+#     findDepth(root)
+#     return self.ans
+
+
 # #   ==================== 811 ====================
 
-def subdomainVisits(cpdomains):
-    return
+# def subdomainVisits(cpdomains):
+#     counts = {}
+#     for domain in cpdomains:
+#         domain = domain.split()
+#         count, urls = int(domain[0]), [domain[1]]
+#         while urls:
+#             sub = urls.pop()
+#             counts[sub] = count if sub not in counts else counts[sub] + count
+#             nextSub = sub.find('.')
+#             if nextSub > -1:
+#                 urls.append(sub[nextSub+1:])
+#     return [f'{val} {key}' for key, val in counts.items()]
 
-print(subdomainVisits(["9001 discuss.leetcode.com"]))
+# print(subdomainVisits(["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"]))
 
 
 # #   ==================== 953 ====================
