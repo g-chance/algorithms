@@ -1,3 +1,45 @@
+#   ==================== 986 ====================
+
+def intervalIntersection(A, B):
+    i, j, ans = 0, 0, []
+    while i < len(A) and j < len(B):
+        ci, k, l1, l2 = [], 0, A[i], B[j]
+        aRange, bRange = range(l1[0], l1[1]+1), range(l2[0], l2[1]+1)
+        while k < 2:
+            if l1[k] in bRange:
+                ci.append(l1[k])
+            elif l2[k] in aRange:
+                ci.append(l2[k])
+            else:
+                break
+            k += 1
+        else:
+            ans.append(ci)
+        if i < len(A)-1 and l1[1] < l2[1] or j == len(B)-1:
+            i += 1
+        else:
+            j += 1
+    return ans
+
+print(intervalIntersection([[11,15],[18,19]], [[0,5],[12,14],[15,18]]))
+
+
+#   ==================== 1086 ====================
+# from collections import deque
+
+# def highFive(items):
+#     items.sort()
+#     di = {}
+#     for item in items:
+#         id, score = item
+#         di[id] = deque([score]) if id not in di else di[id] + deque([score])
+#         if len(di[id]) > 5:
+#             di[id].popleft()
+#     return [[key, sum(val) // 5] for key, val in di.items()]
+
+# print(highFive([[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,65],[1,87],[1,100],[2,100],[2,76]]))
+
+
 #   ==================== 366 ====================
 
 #     I did this with BFS but it also works with a stack and DFS
