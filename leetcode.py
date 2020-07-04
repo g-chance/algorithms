@@ -1,27 +1,184 @@
+from collections import deque
+
+queue = deque([1,2])
+
+a = queue.popleft()
+print(a)
+
+def customSortString(S: str, T: str) -> str:
+    ans = []
+    for c in S:
+        if c in T:
+            ans = ans + [c]*T.count(c)
+    for c in T:
+        if c not in S:
+            ans += [c]
+    return ''.join(ans)
+
+print(customSortString(S = "cba", T = "abcd"))
+
+
+# def floodFill(image, sr: int, sc: int, newColor: int):
+#     st = [[sr, sc]]
+#     orig = image[sr][sc]
+#     if orig == newColor:
+#         return image
+#     image[sr][sc] = newColor
+#     while st:
+#         i, j = st.pop()
+#         directions = [[i, j+1], [i, j-1], [i-1, j], [i+1, j]]
+#         for i, j in directions:
+#             if 0 <= i < len(image) and 0 <= j < len(image[0]):
+#                 if image[i][j] == orig:
+#                     image[i][j] = newColor
+#                     st += [[i, j]]
+#     return image
+
+# print(floodFill(image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, newColor = 2))
+
+
+#   ====================  ====================
+# from collections import defaultdict
+
+#     # This did NOT pass when I tried to create my own dictionary as opposed to using defaultdict
+# # Manhattan(p1, p2) = |p1.x - p2.x| + |p1.y - p2.y|
+# def assignBikes(workers, bikes):
+#     ans = [-1]*len(workers)
+#     choices = defaultdict(list)
+#     for i, worker in enumerate(workers):
+#         for j, bike in enumerate(bikes):
+#             dist = (abs(worker[0] - bike[0]) + abs(worker[1] - bike[1]))
+#             choices[dist].append([i, j])
+#     for dist in sorted(choices):
+#         for choice in choices[dist]:
+#             w, b = choice
+#             if ans[w] == -1 and bikes[b] != 0:
+#                 ans[w], bikes[b] = b, 0
+#     return ans
+
+# print(assignBikes(workers = [[0,0],[1,1],[2,0]], bikes = [[1,0],[2,2],[2,1]]))
+
+
+#   ================== REVIEW ====================
+#   ==================== 406 ====================
+#   ==================== REVIEW ==================
+
+# import heapq as hp
+
+#     # My solution which took me forever and runs super slow (5%) even though it's the same time complexity
+#      # as the solution below this one
+# def reconstructQueue(people):
+#     hp.heapify(people)
+#     rq = [0]*len(people)
+#     while people:
+#         i = count = 0
+#         p = hp.heappop(people)
+#         while i < len(rq):
+#             if rq[i] == 0 or rq[i][0] >= p[0]:
+#                 count += 1
+#             if count > p[1] and rq[i] == 0:
+#                 rq[i] = p
+#                 break
+#             i += 1
+#     return rq
+
+#     # After looking at solution (O(N^2))
+# def reconstructQueue(people):
+#     people.sort(key = lambda x: (-x[0], x[1]))
+#     ans = []
+#     for p in people:
+#         ans.insert(p[1], p)
+#     return ans
+
+# print(reconstructQueue([[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]))
+
+
+#   ====================  ====================
+
+# def shortestDistance(words, word1: str, word2: str) -> int:
+#     i1 = i2 = -1
+#     mi = 2**8
+#     for i, word in enumerate(words):
+#         if word == word1:
+#             i1 = i
+#         elif word == word2:
+#             i2 = i
+#         if i1 > -1 and i2 > -1:
+#             mi = min(mi, abs(i1-i2))
+#     return mi
+
+# print(shortestDistance(["a","c","b","a"], "a", "b"))
+
+
+#   ====================  ====================
+
+# def findPairs(nums, k: int) -> int:
+#     nums.sort()
+#     se, ans = set(), 0
+#     i, j = 0, 1
+#     while i < len(nums) and j < len(nums):
+#         diff = abs(nums[i]-nums[j])
+#         if nums[i] not in se and diff == k and i != j:
+#             ans += 1
+#             se.add(nums[i])
+#         if i == j or diff < k:
+#             j += 1
+#         elif diff > k:
+#             i += 1
+#     return ans
+
+# def findPairs(nums, k: int) -> int:
+#     seen, ans = set(), set()
+#     for i in range(len(nums)):
+#         if nums[i] + k in seen:
+#             ans.add(tuple(sorted((nums[i], nums[i] + k))))
+#         if nums[i] - k in seen:
+#             ans.add(tuple(sorted((nums[i], nums[i] - k))))
+#         seen.add(nums[i])
+#         print(ans)
+#     return len(ans)
+
+# print(findPairs([6,3,5,7,2,3,3,8,2,4], 2))
+
+
 #   ==================== 986 ====================
 
-def intervalIntersection(A, B):
-    i, j, ans = 0, 0, []
-    while i < len(A) and j < len(B):
-        ci, k, l1, l2 = [], 0, A[i], B[j]
-        aRange, bRange = range(l1[0], l1[1]+1), range(l2[0], l2[1]+1)
-        while k < 2:
-            if l1[k] in bRange:
-                ci.append(l1[k])
-            elif l2[k] in aRange:
-                ci.append(l2[k])
-            else:
-                break
-            k += 1
-        else:
-            ans.append(ci)
-        if i < len(A)-1 and l1[1] < l2[1] or j == len(B)-1:
-            i += 1
-        else:
-            j += 1
-    return ans
+#     # Refactored after looking at discussion -- about the same time complexity but much cleaner
+# def intervalIntersection(A, B):
+#     i, j, ans = 0, 0, []
+#     while i < len(A) and j < len(B):
+#         l1, l2 = A[i], B[j]
+#         if l1[0] <= l2[1] and l2[0] <= l1[1]:
+#             ans.append([max(l1[0], l2[0]), max(l1[1], l2[1])])
+#         if i < len(A)-1 and l1[1] < l2[1] or j == len(B)-1:
+#             i += 1
+#         else:
+#             j += 1
+#     return ans
 
-print(intervalIntersection([[11,15],[18,19]], [[0,5],[12,14],[15,18]]))
+#     # My first solution
+# def intervalIntersection(A, B):
+#     i, j, ans = 0, 0, []
+#     while i < len(A) and j < len(B):
+#         ci, k, l1, l2 = [], 0, A[i], B[j]
+#         aRange, bRange = range(l1[0], l1[1]+1), range(l2[0], l2[1]+1)
+#         while k < 2:
+#             if l1[k] in bRange:
+#                 ci.append(l1[k])
+#             elif l2[k] in aRange:
+#                 ci.append(l2[k])
+#             else:
+#                 break
+#             k += 1
+#         else:
+#             ans.append(ci)
+#         if i < len(A)-1 and l1[1] < l2[1] or j == len(B)-1:
+#             i += 1
+#         else:
+#             j += 1
+#     return ans
+
+# print(intervalIntersection([[0,5],[12,14],[15,18]], [[11,15],[18,19]]))
 
 
 #   ==================== 1086 ====================
