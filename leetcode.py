@@ -1,9 +1,24 @@
 #   ====================  ====================
 
-def backspaceCompare(self, S: str, T: str) -> bool:
-    return
+def backspaceCompare(S: str, T: str) -> bool:
 
-print(backspaceCompare())
+    def modStr(orig, mod, i, count):
+        while i >= 0:
+            if orig[i] == '#':
+                count, i = count+1, i-1
+            elif count == 0:
+                mod.append(orig[i])
+                i -= 1
+            else:
+                count, i = count-1, i-1
+        return mod
+
+    modS = modStr(S, [], len(S)-1, 0)
+    modT = modStr(T, [], len(T)-1, 0)
+
+    return ''.join(modS) == ''.join(modT)
+
+print(backspaceCompare(S = "a#c", T = "b"))
 
 
 #   ====================  ====================
