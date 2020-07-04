@@ -1,22 +1,50 @@
+#   ====================  ====================
+
+def backspaceCompare(self, S: str, T: str) -> bool:
+    return
+
+print(backspaceCompare())
+
+
+#   ====================  ====================
 from collections import deque
 
-queue = deque([1,2])
+def sortedSquares(A):
+    ans = deque()
+    i, j = 0, len(A)-1
+    while i <= j:
+        if abs(A[i]) > abs(A[j]):
+            ans.appendleft(A[i]**2)
+            i += 1
+        else:
+            ans.appendleft(A[j]**2)
+            j -= 1
+    return ans
 
-a = queue.popleft()
-print(a)
+# def sortedSquares(A):
+#     squares = [num*num for num in A]
+#     squares.sort()
+#     return squares
 
-def customSortString(S: str, T: str) -> str:
-    ans = []
-    for c in S:
-        if c in T:
-            ans = ans + [c]*T.count(c)
-    for c in T:
-        if c not in S:
-            ans += [c]
-    return ''.join(ans)
+print(sortedSquares([2, -1, 1]))
 
-print(customSortString(S = "cba", T = "abcd"))
 
+#   ====================  ====================
+
+# def customSortString(S: str, T: str) -> str:
+#     ans = []
+#     for c in S:
+#         if c in T:
+#             ans = ans + [c]*T.count(c)
+#     for c in T:
+#         if c not in S:
+#             ans += [c]
+#     return ''.join(ans)
+
+# print(customSortString(S = "cba", T = "abcd"))
+
+
+#   ====================  ====================
 
 # def floodFill(image, sr: int, sc: int, newColor: int):
 #     st = [[sr, sc]]
