@@ -1,47 +1,66 @@
-#   ====================  ====================
-
-def backspaceCompare(S: str, T: str) -> bool:
-
-    def modStr(orig, mod, i, count):
-        while i >= 0:
-            if orig[i] == '#':
-                count, i = count+1, i-1
-            elif count == 0:
-                mod.append(orig[i])
-                i -= 1
-            else:
-                count, i = count-1, i-1
-        return mod
-
-    modS = modStr(S, [], len(S)-1, 0)
-    modT = modStr(T, [], len(T)-1, 0)
-
-    return ''.join(modS) == ''.join(modT)
-
-print(backspaceCompare(S = "a#c", T = "b"))
-
-
-#   ====================  ====================
-from collections import deque
-
-def sortedSquares(A):
-    ans = deque()
-    i, j = 0, len(A)-1
-    while i <= j:
-        if abs(A[i]) > abs(A[j]):
-            ans.appendleft(A[i]**2)
+def minCost(costs) -> int:
+    path = {}
+    # print(costs)
+    for k in range(2):
+        i = 0; prev = len(costs)
+        path[k] = 0
+        while i < len(costs):
+            m = min(costs[i][:prev] + costs[i][prev+1:])
+            path[k] += m
+            prev = costs[i].index(m)
+            # print(m, path[k], prev)
+            costs[i][prev] = 2**16
             i += 1
-        else:
-            ans.appendleft(A[j]**2)
-            j -= 1
-    return ans
+        print(costs, path)
+    return min(path[0], path[1])
+
+print(minCost([[3,5,3],[6,17,6],[7,13,18],[9,10,18]]))
+
+
+#   ====================  ====================
+
+# def backspaceCompare(S: str, T: str) -> bool:
+
+#     def modStr(orig, mod, i, count):
+#         while i >= 0:
+#             if orig[i] == '#':
+#                 count, i = count+1, i-1
+#             elif count == 0:
+#                 mod.append(orig[i])
+#                 i -= 1
+#             else:
+#                 count, i = count-1, i-1
+#         return mod
+
+#     modS = modStr(S, [], len(S)-1, 0)
+#     modT = modStr(T, [], len(T)-1, 0)
+
+#     return ''.join(modS) == ''.join(modT)
+
+# print(backspaceCompare(S = "a#c", T = "b"))
+
+
+#   ====================  ====================
+# from collections import deque
 
 # def sortedSquares(A):
-#     squares = [num*num for num in A]
-#     squares.sort()
-#     return squares
+#     ans = deque()
+#     i, j = 0, len(A)-1
+#     while i <= j:
+#         if abs(A[i]) > abs(A[j]):
+#             ans.appendleft(A[i]**2)
+#             i += 1
+#         else:
+#             ans.appendleft(A[j]**2)
+#             j -= 1
+#     return ans
 
-print(sortedSquares([2, -1, 1]))
+# # def sortedSquares(A):
+# #     squares = [num*num for num in A]
+# #     squares.sort()
+# #     return squares
+
+# print(sortedSquares([2, -1, 1]))
 
 
 #   ====================  ====================
