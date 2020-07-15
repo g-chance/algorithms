@@ -1,20 +1,64 @@
-def minCost(costs) -> int:
-    path = {}
-    # print(costs)
-    for k in range(2):
-        i = 0; prev = len(costs)
-        path[k] = 0
-        while i < len(costs):
-            m = min(costs[i][:prev] + costs[i][prev+1:])
-            path[k] += m
-            prev = costs[i].index(m)
-            # print(m, path[k], prev)
-            costs[i][prev] = 2**16
-            i += 1
-        print(costs, path)
-    return min(path[0], path[1])
+#   ====================  ====================
 
-print(minCost([[3,5,3],[6,17,6],[7,13,18],[9,10,18]]))
+# def xorOperation(n: int, start: int) -> int:
+#     nums = [start + 2 * i for i in range(n)]
+#     xor = nums[0]
+#     for i in range(1, len(nums)):
+#         xor ^= nums[i]
+#     return xor
+
+# print(xorOperation(n = 5, start = 0))
+
+
+#   ====================  ====================
+
+# def removeVowels(S: str) -> str:
+#     # ans = [c for c in S if c not in 'aeiou']
+#     # return ''.join(ans)
+#     return ''.join([c for c in S if c not in 'aeiou'])
+
+# print(removeVowels("leetcodeisacommunityforcoders"))
+
+
+#   ====================  ====================
+
+# def numIdenticalPairs(nums) -> int:
+#     ans = [[i, j] for i in range(len(nums) - 1) for j in range(i+1, len(nums)) if nums[i] == nums[j]]
+#     return len(ans)
+
+# print(numIdenticalPairs(nums = [1,2,3]))
+
+
+#   ====================  ====================
+
+# def runningSum(nums):
+#     sum = 0
+#     for i in range(len(nums)):
+#         nums[i] = nums[i] + sum
+#         sum = nums[i]
+#     return nums
+# print(runningSum(nums = [1,2,3,4]))
+
+
+#   ====================  ====================
+
+# def minCost(costs) -> int:
+#     path = {}
+#     # print(costs)
+#     for k in range(2):
+#         i = 0; prev = len(costs)
+#         path[k] = 0
+#         while i < len(costs):
+#             m = min(costs[i][:prev] + costs[i][prev+1:])
+#             path[k] += m
+#             prev = costs[i].index(m)
+#             # print(m, path[k], prev)
+#             costs[i][prev] = 2**16
+#             i += 1
+#         print(costs, path)
+#     return min(path[0], path[1])
+
+# print(minCost([[3,5,3],[6,17,6],[7,13,18],[9,10,18]]))
 
 
 #   ====================  ====================
