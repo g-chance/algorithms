@@ -1,5 +1,15 @@
 #   ====================  ====================
 
+def anagramMappings(A, B):
+    bMap = {num: i for i, num in enumerate(B)}
+    return [bMap[num] for num in A]
+
+print(anagramMappings(A = [12, 28, 46, 32, 50],
+                        B = [50, 12, 32, 46, 28]))
+
+
+#   ====================  ====================
+
 def calculateTime(keyboard: str, word: str) -> int:
     dic = {c: i for i, c in enumerate(keyboard)}
     curIdx = ans = 0
