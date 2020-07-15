@@ -1,5 +1,18 @@
 #   ====================  ====================
 
+def calculateTime(keyboard: str, word: str) -> int:
+    dic = {c: i for i, c in enumerate(keyboard)}
+    curIdx = ans = 0
+    for c in word:
+        ans += abs(curIdx - dic[c])
+        curIdx = dic[c]
+    return ans
+
+print(calculateTime(keyboard = "abcdefghijklmnopqrstuvwxyz", word = "cba"))
+
+
+#   ====================  ====================
+
 # def xorOperation(n: int, start: int) -> int:
 #     nums = [start + 2 * i for i in range(n)]
 #     xor = nums[0]
