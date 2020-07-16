@@ -1,24 +1,127 @@
 #   ====================  ====================
 
-def anagramMappings(A, B):
-    bMap = {num: i for i, num in enumerate(B)}
-    return [bMap[num] for num in A]
 
-print(anagramMappings(A = [12, 28, 46, 32, 50],
-                        B = [50, 12, 32, 46, 28]))
+#     # My first solutionm, which is actually the better one
+# def maximumProduct(nums) -> int:
+#     nums.sort()
+#     j = len(nums) - 1
+#     ans = 0
+    
+#     if nums[len(nums) - 1] <= 0:
+#         return nums[-1]*nums[-2]*nums[-3]
+#     elif nums[0]*nums[1] > nums[j-1]*nums[j-2]:
+#         ans = nums[0]*nums[1]
+#     else:
+#         ans = nums[j-1]*nums[j-2]
+
+#     return ans * nums[j]
+
+#     # My second attempt at 0(n) -- but ends up being slower? Probably because of the numerous conditionals
+# def maximumProduct(nums) -> int:
+#     negA = negB = 0
+#     a = b = c = -(2 ** 32)
+#     for i in range(len(nums)):
+#         temp = nums[i]
+#         if temp < 0:
+#             if abs(temp) > negA:
+#                 negA, negB = abs(temp), negA
+#             elif abs(temp) > negB:
+#                 negB = abs(temp)
+#         if temp > a:
+#             a, b, c = temp, a, b
+#         elif temp > b:
+#             b, c = temp, b
+#         elif temp > c:
+#             c = temp
+#     return max(negA*negB, b*c)*a
+
+# print(maximumProduct([7,3,1,0,0,6]))
 
 
 #   ====================  ====================
 
-def calculateTime(keyboard: str, word: str) -> int:
-    dic = {c: i for i, c in enumerate(keyboard)}
-    curIdx = ans = 0
-    for c in word:
-        ans += abs(curIdx - dic[c])
-        curIdx = dic[c]
-    return ans
+#     # First attempt with merge sort(this was bad - heap is better -- see next solution)
+# class KthLargest:
+#     def __init__(self, k: int, nums):
+#         def merge(left, right):
+#             s = []
+#             i = j = 0
+#             while i < len(left) and j < len(right):
+#                 if left[i] < right[j]:
+#                     s.append(left[i])
+#                     i += 1
+#                 else:
+#                     s.append(right[j])
+#                     j += 1
+#             s += left[i:] if i < len(left) else right[j:]
+#             return s
+#         def mergeSort(nums):
+#             if len(nums) <= 1:
+#                 return nums
+            
+#             ln = len(nums) // 2
+            
+#             left = mergeSort(nums[:ln])
+#             right = mergeSort(nums[ln:])
+            
+#             return merge(left, right)
+#         self.nums = mergeSort(nums)
+#         self.k = k
+        
+#     def add(self, val: int) -> int:
+#         if len(self.nums) < self.k:
+#             for i in range(len(self.nums)):
+#                 if val <= self.nums[i]:
+#                     self.nums.insert(i, val)
+#                     break
+#             else:
+#                 self.nums.append(val)
+#         elif val > self.nums[-self.k]:
+#             for i in range(len(self.nums) - (self.k), len(self.nums)):
+#                 if val <= self.nums[i]:
+#                     self.nums.insert(i, val)
+#                     break
+#             else:
+#                 self.nums.append(val)
+#         return self.nums[-self.k]
 
-print(calculateTime(keyboard = "abcdefghijklmnopqrstuvwxyz", word = "cba"))
+#     # Much better
+# import heapq
+
+# class KthLargest:
+#     def __init__(self, k: int, nums):
+#         self.k = k
+#         heapq.heapify(nums)
+#         self.nums = nums
+    
+#     def add(self, val: int) -> int:
+#         heapq.heappush(self.nums, val)
+#         while len(self.nums) > self.k:
+#             heapq.heappop(self.nums)
+#         return self.nums[0]
+
+
+#   ====================  ====================
+
+# def anagramMappings(A, B):
+#     bMap = {num: i for i, num in enumerate(B)}
+#     return [bMap[num] for num in A]
+
+# print(anagramMappings(A = [12, 28, 46, 32, 50],
+#                         B = [50, 12, 32, 46, 28]))
+
+
+#   ====================  ====================
+
+# def calculateTime(keyboard: str, word: str) -> int:
+#     dic = {c: i for i, c in enumerate(keyboard)}
+#     curIdx = ans = 0
+#     for c in word:
+#         ans += abs(curIdx - dic[c])
+#         curIdx = dic[c]
+#     return ans
+
+# print(calculateTime(keyboard = "abcdefghijklmnopqrstuvwxyz", word = "cba"))
 
 
 #   ====================  ====================
