@@ -1,22 +1,175 @@
+#   ==================== 581 ====================
+
+# def canPlaceFlowers(flowerbed, n: int) -> bool:
+#     for i in range(len(flowerbed)):
+#         if not n:
+#             return True
+#         if not flowerbed[i]:
+#             if i == 0 or (i - 1 > 0 and not flowerbed[i - 1]):
+#                 if i + 1 == len(flowerbed) or (i + 1 < len(flowerbed) and not flowerbed[i + 1]):
+#                     flowerbed[i] = 1
+#                     n -= 1
+#     return n == 0
+
+# print(canPlaceFlowers(flowerbed = [0,1,0,0,0], n = 2))
+
+
+#   ================== REVIEW ====================
+#   ==================== 581 ====================
+#   ==================== REVIEW ==================
+
+# def findUnsortedSubarray(nums) -> int:
+#     i, j = 0, len(nums)
+#     so = sorted(nums)
+#     for i in range(len(nums)):
+#         if nums[i] != so[i]:
+#             break
+#     else:
+#         return 0
+#     for j in range(len(nums)-1,-1,-1):
+#         if nums[j] != so[j]:
+#             break
+#     return (j - i) + 1
+
+            # NONE OF THESE WORKED
+        # def findUnsortedSubarray(nums) -> int:
+            # i, j = 0, len(nums) - 1
+
+            # while i < j:
+            #     if nums[i] > nums[j]:
+            #         return (j - i) + 1
+            #     if nums[i] > nums[j-1]:
+            #         return (j - i)
+            #     if nums[i+1] > nums[j]:
+            #         return (j - i)
+            #     if nums[i] > nums[i+1]:
+            #         while nums[j] > nums[j-1]:
+            #             j -= 1
+            #         return (j - i) + 1
+            #     if nums[j] < nums[j-1]:
+            #         while nums[i] < nums[i+1]:
+            #             i += 1
+            #         return (j - i) + 1
+            #     i, j = i+1, j-1
+            # return 0
+
+
+            # while i < len(nums)-1:
+            #     if nums[i] > nums[j]:
+            #         return (j - i) + 1
+            #     if nums[i] > nums[i+1]:
+            #         while i - 1 > 0 and nums[i-1] == nums[i]:
+            #             i -= 1
+            #         break
+            #     i += 1
+            # else:
+            #     return 0
+            # while j > 0:
+            #     if nums[i] > nums[j]:
+            #         return (j - i) + 1
+            #     if nums[j] < nums[j-1]:
+            #         while j + 1 < len(nums) and nums[j+1] == nums[j]:
+            #             j += 1
+            #         break
+            #     j -= 1
+            # return (j - i) + 1
+
+            # for i in range(len(nums)):
+            #     for j in range(len(nums)-1,i,-1):
+            #         if nums[i] > nums[j]:
+            #             return (j - i) + 1
+            # return 0
+
+# print(findUnsortedSubarray([2, 6, 4, 8, 10, 9, 15]))
+
+
 #   ====================  ====================
 
-def gcdOfStrings(str1: str, str2: str) -> str:
-    def checker(s1, s2):
-        for i in range(len(s1)-1,-1,-1):
-            slc = s1[:i+1]
-            if slc*(len(s2) // (i+1)) == s2 and slc*(len(s1) // (i+1)) == s1:
-                return slc
-        return ""
+# def pivotIndex(nums) -> int:
+#     su = sum(nums)
+#     runningSum = 0
+#     for i in range(len(nums)):
+#         su -= nums[i]
+#         runningSum += nums[i-1] if i > 0 else 0
+#         if su == runningSum:
+#             return i
+#     return -1
 
-    if str1 in str2:
-        return checker(str1, str2)
-    elif str2 in str1:
-        return checker(str2, str1)
-    else:
-        return ""
+# print(pivotIndex(nums = [1,7,3,6,5,6]))
 
-print(gcdOfStrings("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"))
+
+#   ====================  ====================
+
+# def twoCitySchedCost(costs) -> int:
+#     costs.sort(key = lambda x: abs(x[0] - x[1]), reverse=True)
+#     ans = 0
+#     a = b = len(costs) // 2
+#     for i in range(len(costs)):
+#         if a and b:
+#             mi = min(costs[i])
+#             ans, idx = ans + mi, costs[i].index(mi)
+#             if idx == 0:
+#                 a -= 1
+#             else:
+#                 b -= 1
+#         elif a:
+#             ans += costs[i][0]
+#         else:
+#             ans += costs[i][1]
+#     return ans
+
+# print(twoCitySchedCost([[10,20],[30,200],[400,50],[30,20]]))
+
+
+#   ====================  ====================
+
+#     # Better than below
+# def nextGreaterElement(nums1, nums2):
+#     dic = {nums2[i]: nums2[i+1:] for i in range(len(nums2))}
+#     ans = []
+#     for num in nums1:
+#         for x in dic[num]:
+#             if x > num:
+#                 ans.append(x)
+#                 break
+#         else:
+#             ans.append(-1)
+#     return ans
+
+#     # Slower than above
+# def nextGreaterElement(nums1, nums2):
+#     ans = []
+#     for num in nums1:
+#         for x in range(nums2.index(num)+1,len(nums2)):
+#             if nums2[x] > num:
+#                 ans.append(nums2[x])
+#                 break
+#         else:
+#             ans.append(-1)
+#     return ans
+
+# print(nextGreaterElement(nums1 = [4,1,2], nums2 = [1,3,4,2]))
+
+
+#   ====================  ====================
+
+# def gcdOfStrings(str1: str, str2: str) -> str:
+#     def checker(s1, s2):
+#         for i in range(len(s1)-1,-1,-1):
+#             slc = s1[:i+1]
+#             if slc*(len(s2) // (i+1)) == s2 and slc*(len(s1) // (i+1)) == s1:
+#                 return slc
+#         return ""
+
+#     if str1 in str2:
+#         return checker(str1, str2)
+#     elif str2 in str1:
+#         return checker(str2, str1)
+#     else:
+#         return ""
+
+# print(gcdOfStrings("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+# "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"))
 
 
 #   ====================  ====================
