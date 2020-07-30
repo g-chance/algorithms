@@ -1,33 +1,52 @@
 #   ====================  ====================
 
+from collections import Counter
+
 def sortString(s: str) -> str:
-    se, counts = set(), {}
-    for c in s:
-        if c not in se:
-            se.add(c)
-            counts[c] = s.count(c)
-    print(counts)
-    return
+    s = sorted(list(s))
+    counts, tracker = Counter(s), [0]
+    ans = []
+    
+    def iterate(key):
+        if counts[key]:
+            ans.append(key)
+            counts[key] -= 1
+            if not counts[key]:
+                tracker[0] += 1
+
+    def forward():
+        for key in counts:
+            iterate(key)
+
+    def backward():
+        for key in reversed(counts.keys()):
+            iterate(key)
+
+    while len(counts) != tracker[0]:
+        forward()
+        backward()
+
+    return ''.join(ans)
 
 print(sortString(s = "aaaabbbbcccc"))
 
 
 #   ====================  ====================
 
-def flipAndInvertImage(A):
-    ans = []
-    for lis in A:
-        temp = []
-        for num in reversed(lis):
-            temp.append(0 if num == 1 else 1)
-        ans.append(temp)
-    return ans
+# def flipAndInvertImage(A):
+#     ans = []
+#     for lis in A:
+#         temp = []
+#         for num in reversed(lis):
+#             temp.append(0 if num == 1 else 1)
+#         ans.append(temp)
+#     return ans
 
-print(flipAndInvertImage([
-    [1,1,0],
-    [1,0,1],
-    [0,0,0]
-]))
+# print(flipAndInvertImage([
+#     [1,1,0],
+#     [1,0,1],
+#     [0,0,0]
+# ]))
 
 
 #   ====================  ====================
