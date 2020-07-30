@@ -1,23 +1,55 @@
 #   ====================  ====================
 
-def tictactoe(moves) -> str:
-    grid = [[0 for i in range(3)] for i in range(3)]
-    for i, move in enumerate(moves):
-        x, y = move
-        grid[x][y] = 'A' if i % 2 == 0 else 'B'
-    print(grid)
-    for i in range(3):
-        if grid[0][i] and grid[0][i] == grid[1][i] == grid[2][i]:
-            return grid[0][i]
-        if grid[i][0] and grid[i][0] == grid[i][1] == grid[i][2]:
-            return grid[i][0]
-        if i == 0 and grid[1][1] and grid[0][0] == grid[1][1] == grid[2][2]:
-            return grid [1][1]
-        if i == 2 and grid[1][1] and grid[2][0] == grid[1][1] == grid[0][2]:
-            return grid[1][1]
-    return 'Draw' if len(moves) == 9 else 'Pending'
+def sortString(s: str) -> str:
+    se, counts = set(), {}
+    for c in s:
+        if c not in se:
+            se.add(c)
+            counts[c] = s.count(c)
+    print(counts)
+    return
 
-print(tictactoe(moves = [[0,0],[1,1]]))
+print(sortString(s = "aaaabbbbcccc"))
+
+
+#   ====================  ====================
+
+def flipAndInvertImage(A):
+    ans = []
+    for lis in A:
+        temp = []
+        for num in reversed(lis):
+            temp.append(0 if num == 1 else 1)
+        ans.append(temp)
+    return ans
+
+print(flipAndInvertImage([
+    [1,1,0],
+    [1,0,1],
+    [0,0,0]
+]))
+
+
+#   ====================  ====================
+
+# def tictactoe(moves) -> str:
+#     grid = [[0 for i in range(3)] for i in range(3)]
+#     for i, move in enumerate(moves):
+#         x, y = move
+#         grid[x][y] = 'A' if i % 2 == 0 else 'B'
+#     print(grid)
+#     for i in range(3):
+#         if grid[0][i] and grid[0][i] == grid[1][i] == grid[2][i]:
+#             return grid[0][i]
+#         if grid[i][0] and grid[i][0] == grid[i][1] == grid[i][2]:
+#             return grid[i][0]
+#         if i == 0 and grid[1][1] and grid[0][0] == grid[1][1] == grid[2][2]:
+#             return grid [1][1]
+#         if i == 2 and grid[1][1] and grid[2][0] == grid[1][1] == grid[0][2]:
+#             return grid[1][1]
+#     return 'Draw' if len(moves) == 9 else 'Pending'
+
+# print(tictactoe(moves = [[0,0],[1,1]]))
 
 
 #   ====================  ====================
