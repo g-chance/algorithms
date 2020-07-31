@@ -4,15 +4,16 @@ from collections import Counter
 
 def sortString(s: str) -> str:
     s = sorted(list(s))
-    counts, tracker = Counter(s), [0]
+    counts, tracker = Counter(s), 0
     ans = []
     
     def iterate(key):
+        nonlocal tracker
         if counts[key]:
             ans.append(key)
             counts[key] -= 1
             if not counts[key]:
-                tracker[0] += 1
+                tracker += 1
 
     def forward():
         for key in counts:
@@ -22,7 +23,7 @@ def sortString(s: str) -> str:
         for key in reversed(counts.keys()):
             iterate(key)
 
-    while len(counts) != tracker[0]:
+    while len(counts) != tracker:
         forward()
         backward()
 
