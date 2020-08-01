@@ -1,3 +1,29 @@
+#   =========== REVIEW STACK SOLUTION ===========
+#   =================== 1475 ===================
+#   =========== REVIEW STACK SOLUTION ===========
+
+# def finalPrices(prices):
+#     ans = []
+#     for i in range(len(prices) - 1):
+#         for j in range(i + 1, len(prices)):
+#             if prices[j] <= prices[i]:
+#                 ans.append(prices[i] - prices[j])
+#                 break
+#         else:
+#             ans.append(prices[i])
+#     return ans + [prices[-1]]
+
+# def finalPrices(prices):
+#     stack = []
+#     for i in range(len(prices)):
+#         while stack and prices[stack[-1]] >= prices[i]:
+#             prices[stack.pop()] -= prices[i]
+#         stack.append(i)
+#     return prices
+
+# print(finalPrices(prices = [8,7,4,2,8,1,7,7,10,1]))
+
+
 #   ====================  ====================
 
 # from collections import Counter
