@@ -1,35 +1,35 @@
 #   ====================  ====================
 
-from collections import Counter
+# from collections import Counter
 
-def sortString(s: str) -> str:
-    s = sorted(list(s))
-    counts, tracker = Counter(s), 0
-    ans = []
+# def sortString(s: str) -> str:
+#     s = sorted(list(s))
+#     counts, tracker = Counter(s), 0
+#     ans = []
     
-    def iterate(key):
-        nonlocal tracker
-        if counts[key]:
-            ans.append(key)
-            counts[key] -= 1
-            if not counts[key]:
-                tracker += 1
+#     def iterate(key):
+#         nonlocal tracker
+#         if counts[key]:
+#             ans.append(key)
+#             counts[key] -= 1
+#             if not counts[key]:
+#                 tracker += 1
 
-    def forward():
-        for key in counts:
-            iterate(key)
+#     def forward():
+#         for key in counts:
+#             iterate(key)
 
-    def backward():
-        for key in reversed(counts.keys()):
-            iterate(key)
+#     def backward():
+#         for key in reversed(counts.keys()):
+#             iterate(key)
 
-    while len(counts) != tracker:
-        forward()
-        backward()
+#     while len(counts) != tracker:
+#         forward()
+#         backward()
 
-    return ''.join(ans)
+#     return ''.join(ans)
 
-print(sortString(s = "aaaabbbbcccc"))
+# print(sortString(s = "aaaabbbbcccc"))
 
 
 #   ====================  ====================
