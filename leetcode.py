@@ -1,3 +1,26 @@
+#   =================== 114 ===================
+
+# def flatten(self, root: TreeNode) -> None:
+#         if not root:
+#             return root
+        
+#         stack = [root]
+        
+#         while stack:
+#             node = stack.pop()
+#             if node.right:
+#                 stack.append(node.right)
+#             if node.left:
+#                 stack.append(node.left)
+#                 node.right = node.left
+#                 node.left = None
+#             elif stack:
+#                 node.right = stack.pop()
+#                 stack.append(node.right)
+        
+#         return root
+
+
 #   =========== REVIEW STACK SOLUTION ===========
 #   =================== 1475 ===================
 #   =========== REVIEW STACK SOLUTION ===========
