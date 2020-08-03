@@ -1,3 +1,96 @@
+#   ===================  ===================
+
+def merge(intervals):
+    if len(intervals) < 2:
+        return intervals
+    intervals = sorted(intervals)
+    # print(intervals)
+    ans = []
+    low, i = 0, 0
+    while i < len(intervals) - 1:
+        if intervals[low][1] >= intervals[i+1][0]:
+            intervals[low][1] = max(intervals[low][1], intervals[i+1][1])
+            i += 1
+        else:
+            ans.append([intervals[low][0], max(intervals[low][1], intervals[i][1])])
+            low = i = i + 1
+        if i == len(intervals) - 1:
+            ans.append([intervals[low][0], max(intervals[low][1], intervals[i][1])])
+    return ans
+
+print(merge([[0,1],[1,1],[1,2]]))
+
+
+#   =================== 114 ===================
+
+#     # ITERATIVE
+# def longestPalindrome(s: str) -> str:
+#     def testString(s: str) -> str:
+#         i = j = len(s) // 2
+#         if len(s) % 2 == 0:
+#             i -= 1
+        
+#         while True:
+#             try:
+#                 if s[i] == s[j]:
+#                     i, j = i-1, j+1
+#                 else:
+#                     break
+#             except:
+#                 break
+        
+#         return s[i+1:j]
+
+#     ans = ''
+#     for i in range(len(s)):
+#         s1 = testString(s[i:])
+#         s2 = testString(s[:-i])
+#         ma = s1 if len(s1) > len(s2) else s2
+#         if len(ma) > len(ans):
+#             ans = ma
+
+#     return ans
+
+#     # RECURSION + MEMOIZATION
+def longestPalindrome(s: str) -> str:
+
+    dp = {}
+
+    def testString(s: str) -> str:
+        if not s:
+            return ''
+        if s in dp:
+            return dp[s]
+
+        i = j = len(s) // 2
+        if len(s) % 2 == 0:
+            i -= 1
+        
+        while True:
+            try:
+                if s[i] == s[j]:
+                    i, j = i-1, j+1
+                else:
+                    break
+            except:
+                break
+
+        ans = s[i+1:j]
+        s1 = testString(s[1:])
+        s2 = testString(s[:-1])
+        temp = s1 if len(s1) > len(s2) else s2
+
+        if len(temp) > len(ans):
+            dp[s] = temp
+            return temp
+        dp[s] = ans
+        return ans
+
+    return testString(s)
+
+print(longestPalindrome("babaddtattarrattatddetartrateedredividerb"))
+
+
 #   =================== 114 ===================
 
 # def flatten(self, root: TreeNode) -> None:
