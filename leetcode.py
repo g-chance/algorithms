@@ -1,5 +1,51 @@
 #   ===================  ===================
 
+def subarraySum(nums, k: int) -> int:
+    
+    return
+
+print(subarraySum(nums = [1,1,1], k = 2))
+
+
+#   ===================  ===================
+
+# def minRemoveToMakeValid(s: str) -> str:
+#     s = list(s)
+#     parenSt, idxSt = [], []
+#     for i, c in enumerate(s):
+#         if c == '(':
+#             parenSt.append('(')
+#         elif c == ')' and not parenSt:
+#             idxSt.append(i)
+#         elif c == ')':
+#             parenSt.pop()
+#     for num in idxSt:
+#         s[num] = ''
+#     if parenSt:
+#         for i in range(len(s) - 1, -1, -1):
+#             if s[i] == '(':
+#                 s[i] = ''
+#                 parenSt.pop()
+#                 if not parenSt:
+#                     break
+#     return ''.join(s)
+
+# print(minRemoveToMakeValid(s = "lee()t(c)o)de)"))
+
+
+#   ===================  ===================
+
+# def repeatedSubstringPattern(s: str) -> bool:
+#     for i in range((len(s) // 2) - 1, -1, -1):
+#         if s[:i+1] * (len(s) // (i + 1)) == s:
+#             return True
+#     return False
+
+# print(repeatedSubstringPattern("babbabbabbabbab"))
+
+
+#   ===================  ===================
+
     #     # Okay
 # def judgeCircle(moves: str) -> bool:
     
