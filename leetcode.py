@@ -1,10 +1,33 @@
-#   ===================  ===================
+#   ================== REVIEW ====================
+#   ==================== 560 ====================
+#   ==================== REVIEW ==================
 
 def subarraySum(nums, k: int) -> int:
-    
-    return
+    ans = 0
+    runningSum = 0
+    all_sums = {}
+    for i in range(len(nums)):
+        runningSum += nums[i]
+        if runningSum == k:
+            ans += 1
+        if runningSum - k in all_sums:
+            ans += all_sums[runningSum - k]
+        all_sums[runningSum] = 1 if runningSum not in all_sums else all_sums[runningSum] + 1
+    return ans
 
-print(subarraySum(nums = [1,1,1], k = 2))
+# def subarraySum(nums, k: int) -> int:
+#     ans = 0
+#     for i in range(len(nums)):
+#         runningSum = nums[i]
+#         if runningSum == k:
+#             ans += 1
+#         for j in range(i + 1, len(nums)):
+#             runningSum += nums[j]
+#             if runningSum == k:
+#                 ans += 1
+#     return ans
+
+print(subarraySum([0,0,0,0,0,0,0,0,0,0], 0))
 
 
 #   ===================  ===================
