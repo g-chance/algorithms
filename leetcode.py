@@ -1,19 +1,160 @@
+#   ====================  ====================
+
+
+#   ====================  ====================
+
+# from collections import Counter
+# import heapq
+
+# def topKFrequent(words, k: int):
+    # words = Counter(words)
+    # ans = []
+    # for word in sorted(words.items(), key = lambda x: (-x[1], x[0])):
+    #     ans.append(word[0])
+    #     k -= 1
+    #     if not k:
+    #         break
+    # return ans
+
+#     words = Counter(words)
+#     heap = []
+#     ans = []
+#     for word in words:
+#         heapq.heappush(heap, [-words[word], word])
+#     while k:
+#         ans.append(heapq.heappop(heap)[1])
+#         k -= 1
+#     return ans
+
+# print(topKFrequent(["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], k = 4))
+
+
+#   ====================  ====================
+
+# import heapq
+
+# def kClosest(points, K: int):
+#     distances = []
+#     ans = []
+#     for x, y in points:
+#         heapq.heappush(distances, [x**2 + y**2,[x, y]])
+#     while K:
+#         temp = heapq.heappop(distances)
+#         ans.append(temp[1])
+#         K -= 1
+#     return ans
+
+# def kClosest(points, K: int):
+#     distances = sorted(points, key = lambda n: n[0]*n[0] + n[1]*n[1])
+#     ans = []
+#     for i in range(K):
+#         ans.append(distances[i])
+#     return ans
+
+# print(kClosest(points = [[1,3],[-2,2]], K = 1))
+
+
+#   ====================  ====================
+
+# from collections import Counter
+
+#     # Faster with Array
+# def numPairsDivisibleBy60(time) -> int:
+    # ans = 0
+    # comps = [0]*60
+    # for song in time:
+    #     mod = song % 60
+    #     adj = (60 - mod) if mod else 0
+    #     ans += comps[mod]
+    #     comps[adj] += 1 
+    # return ans
+
+#     # With hash table
+# def numPairsDivisibleBy60(time) -> int:
+    # ans = 0
+    # comps = Counter()
+    # for song in time:
+    #     mod = song % 60
+    #     adj = 60 - mod if mod else 0
+    #     if mod in comps:
+    #         ans += comps[mod]
+    #     comps[adj] += 1
+    # return ans
+
+# print(numPairsDivisibleBy60([418,204,77,278,239,457,284,263,372,279,476,416,360,18]))
+
+
+#   ====================  ====================
+
+# def minMeetingRooms(intervals) -> int:
+    
+#     if not intervals:
+#         return 0
+    
+#     intervals.sort()
+#     rooms_reserved = [intervals[0]]
+    
+#     for i in range(1, len(intervals)):
+#         end, start = rooms_reserved[-1][1], intervals[i][0]
+#         if end > start:
+#             for j in range(len(rooms_reserved) - 1):
+#                 end = rooms_reserved[j][1]
+#                 if end <= start:
+#                     rooms_reserved[j] = intervals[i]
+#                     break
+#             else:
+#                 rooms_reserved.append(intervals[i])
+#         else:
+#             rooms_reserved[-1] = intervals[i]
+    
+#     print(rooms_reserved)
+#     return len(rooms_reserved)
+
+# print(minMeetingRooms([]))
+
+
+#   ====================  ====================
+
+# def canAttendMeetings(intervals) -> bool:
+#     intervals.sort()
+#     for i in range(len(intervals) - 1):
+#         end, start = intervals[i][1], intervals[i+1][0]
+#         if end > start:
+#             return False
+#     return True
+
+#     # Did it without sort but it's actually a lot slower and doesn't pass =( )
+# def canAttendMeetings(intervals) -> bool:
+#     se = set()
+#     for i in range(len(intervals)):
+#         s, e = intervals[i]
+#         temp = set(range(s, e))
+#         ln = len(se) + len(temp)
+#         se = se.union(temp)
+#         if ln != len(se):
+#             return False
+#     return True
+
+# print(canAttendMeetings([[7,10],[9,11]]))
+
+
 #   ================== REVIEW ====================
 #   ==================== 560 ====================
 #   ==================== REVIEW ==================
 
-def subarraySum(nums, k: int) -> int:
-    ans = 0
-    runningSum = 0
-    all_sums = {}
-    for i in range(len(nums)):
-        runningSum += nums[i]
-        if runningSum == k:
-            ans += 1
-        if runningSum - k in all_sums:
-            ans += all_sums[runningSum - k]
-        all_sums[runningSum] = 1 if runningSum not in all_sums else all_sums[runningSum] + 1
-    return ans
+# def subarraySum(nums, k: int) -> int:
+#     ans = 0
+#     runningSum = 0
+#     all_sums = {}
+#     for i in range(len(nums)):
+#         runningSum += nums[i]
+#         diff = runningSum - k
+#         if runningSum == k:
+#             ans += 1
+#         if diff in all_sums:
+#             ans += all_sums[diff]
+#         all_sums[runningSum] = 1 if runningSum not in all_sums else all_sums[runningSum] + 1
+#     return ans
 
 # def subarraySum(nums, k: int) -> int:
 #     ans = 0
@@ -27,7 +168,7 @@ def subarraySum(nums, k: int) -> int:
 #                 ans += 1
 #     return ans
 
-print(subarraySum([0,0,0,0,0,0,0,0,0,0], 0))
+# print(subarraySum([0,0,0,0,0,0,0,0,0,0], 0))
 
 
 #   ===================  ===================
