@@ -1,43 +1,120 @@
 #   ====================  ====================
 
-def isMonotonic(A) -> bool:
-    direction = 0
-    for i in range(len(A) - 1):
-        if A[i] > A[i+1]:
-            if direction == -1:
-                return False
-            direction = 1
-        elif A[i] < A[i+1]:
-            if direction == 1:
-                return False
-            direction = -1
-    return True
+def spiralOrder(matrix):
 
-print(isMonotonic([3,2,3,1]))
+    change_di = {'R':'D', 'D':'L', 'L':'U', 'U':'R'}
+    seen = set()
+    ans = []
+
+    r, c, di = 0, 0, 'R'
+    while True:
+
+        def findValidCoords(x ,y, d):
+            t1, t2 = x, y
+            try:
+                if d == 'R':
+                    x, y = x, y+1
+                elif d == 'L':
+                    x, y = x, y-1
+                elif d == 'D':
+                    x, y = x+1, y
+                elif d == 'U':
+                    x, y = x-1, y
+                if (x, y) in seen or not 0 <= x < len(matrix) or not 0 <= y < len(matrix[0]):
+                    raise IndexError
+                return [x, y, d]
+            except IndexError:
+                d = change_di[d]
+                return findValidCoords(t1, t2, d)
+        
+        seen.add((r, c))
+        ans.append(matrix[r][c])
+        if len(seen) == len(matrix[0]*len(matrix)):
+            return ans
+
+        r, c, di = findValidCoords(r, c, di)
+
+print(spiralOrder([
+    [ 1, 2, 3 ],
+    [ 4, 5, 6 ],
+    [ 7, 8, 9 ]
+]))
 
 
 #   ====================  ====================
 
-from collections import defaultdict
-
-def findShortestSubArray(nums) -> int:
-
-    counts, dist, check = defaultdict(int), {}, []
-    ma = 0
-    for i, num in enumerate(nums):
-        counts[num] += 1
-        dist[num] = [i,i] if num not in dist else [dist[num][0], i]
-        if counts[num] > ma:
-            ma, check = counts[num], [num]
-        elif counts[num] == ma:
-            check.append(num)
-    mi = 2**32
-    for num in check:
-        if dist[num][1] - dist[num][0] < mi:
-            mi = dist[num][1] - dist[num][0]
-    return mi + 1
+    # YOU CAN USE BOOLEANS TO REPRESENT ACTUAL INTEGERS AND DO MATH WITH THEM!! WHAAAA?!!
+def maxArea(height) -> int:
     
-print(findShortestSubArray([47,47,72,47,72,47,79,47,12,92,13,47,47,83,33,15,18,47,47,47,47,64,47,65,47,47,47,47,70,47,47,55,47,15,60,47,47,47,47,47,46,30,58,59,47,47,47,47,47,90,64,37,20,47,100,84,47,47,47,47,47,89,47,36,47,60,47,18,47,34,47,47,47,47,47,22,47,54,30,11,47,47,86,47,55,40,49,34,19,67,16,47,36,47,41,19,80,47,47,27]))
+    ma = 0
+    l, r = 0, len(height) - 1
+    while l < r:
+        h = min(height[l], height[r])
+        area = h * (r - l)
+        ma = max(ma, area)
+        # if height[l] < height[r]:
+            # l += 1
+        l += height[l] == h
+        # elif height[l] > height[r]:
+            # r -= 1
+        r -= height[r] == h
+        # else:
+        #     l, r = l+1, r-1
+    return ma
+
+    # # Brute Force
+# def maxArea(height) -> int:
+    # ma = 0
+    # for i in range(len(height) - 1):
+    #     for j in range(i+1, len(height)):
+    #         area = min(height[i], height[j]) * (j - i)
+    #         if area > ma:
+    #             ma = area
+    # return ma
+
+print(maxArea([1,8,6,2,5,4,8,3,7]))
+
+
+#   ====================  ====================
+
+# def isMonotonic(A) -> bool:
+#     direction = 0
+#     for i in range(len(A) - 1):
+#         if A[i] > A[i+1]:
+#             if direction == -1:
+#                 return False
+#             direction = 1
+#         elif A[i] < A[i+1]:
+#             if direction == 1:
+#                 return False
+#             direction = -1
+#     return True
+
+# print(isMonotonic([3,2,3,1]))
+
+
+#   ====================  ====================
+
+# from collections import defaultdict
+
+# def findShortestSubArray(nums) -> int:
+
+#     counts, dist, check = defaultdict(int), {}, []
+#     ma = 0
+#     for i, num in enumerate(nums):
+#         counts[num] += 1
+#         dist[num] = [i,i] if num not in dist else [dist[num][0], i]
+#         if counts[num] > ma:
+#             ma, check = counts[num], [num]
+#         elif counts[num] == ma:
+#             check.append(num)
+#     mi = 2**32
+#     for num in check:
+#         if dist[num][1] - dist[num][0] < mi:
+#             mi = dist[num][1] - dist[num][0]
+#     return mi + 1
+    
+# print(findShortestSubArray([1,1]))
 
 
 #   ====================  ====================
