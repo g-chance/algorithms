@@ -1,5 +1,106 @@
 #   ====================  ====================
 
+def isMonotonic(A) -> bool:
+    direction = 0
+    for i in range(len(A) - 1):
+        if A[i] > A[i+1]:
+            if direction == -1:
+                return False
+            direction = 1
+        elif A[i] < A[i+1]:
+            if direction == 1:
+                return False
+            direction = -1
+    return True
+
+print(isMonotonic([3,2,3,1]))
+
+
+#   ====================  ====================
+
+from collections import defaultdict
+
+def findShortestSubArray(nums) -> int:
+
+    counts, dist, check = defaultdict(int), {}, []
+    ma = 0
+    for i, num in enumerate(nums):
+        counts[num] += 1
+        dist[num] = [i,i] if num not in dist else [dist[num][0], i]
+        if counts[num] > ma:
+            ma, check = counts[num], [num]
+        elif counts[num] == ma:
+            check.append(num)
+    mi = 2**32
+    for num in check:
+        if dist[num][1] - dist[num][0] < mi:
+            mi = dist[num][1] - dist[num][0]
+    return mi + 1
+    
+print(findShortestSubArray([47,47,72,47,72,47,79,47,12,92,13,47,47,83,33,15,18,47,47,47,47,64,47,65,47,47,47,47,70,47,47,55,47,15,60,47,47,47,47,47,46,30,58,59,47,47,47,47,47,90,64,37,20,47,100,84,47,47,47,47,47,89,47,36,47,60,47,18,47,34,47,47,47,47,47,22,47,54,30,11,47,47,86,47,55,40,49,34,19,67,16,47,36,47,41,19,80,47,47,27]))
+
+
+#   ====================  ====================
+
+# def isStrobogrammatic(num: str) -> bool:
+#     strobVals = {'0':'0', '1':'1', '8':'8', '6':'9', '9':'6'}
+#     for i in range((len(num) // 2) + 1):
+#         if num[i] not in strobVals or strobVals[num[i]] != num[-1-i]:
+#             return False
+#     return True
+
+# print(isStrobogrammatic(num = "61619"))
+
+
+#   ====================  ====================
+
+# def nextPermutation(nums) -> None:
+
+#     if len(nums) < 2:
+#         return nums
+#     for i in range(len(nums) - 2, -1, -1):
+#         found = 0
+#         for j in range(i + 1, len(nums)):
+#             if nums[j] > nums[i]:
+#                 found = j
+#         if found:
+#             break
+#     if not found:
+#         nums.sort()
+#     else:
+#         nums[i], nums[found] = nums[found], nums[i]
+#         temp = sorted(nums[i+1:])
+#         nums[i+1:] = temp
+#     print(nums)
+
+# print(nextPermutation([2,3,1]))
+
+#     # Works but too slow and also violates constraints
+# def nextPermutation(nums) -> None:
+    
+#     dummy = nums[:]
+#     nums.sort()
+#     perms = []
+
+#     def permute(nums, perm = []):
+
+#         if not nums:
+#             perms.append(perm)
+#             if perm > dummy:
+#                 print('d', dummy, 'p', perm)
+#                 return perm
+#         for i in range(len(nums)):
+#             # perm += [nums[i]]
+#             ans = permute(nums[:i] + nums[i+1:], perm + [nums[i]])
+#             if ans:
+#                 return ans
+
+#     print(permute(nums))
+
+#     return perms
+
+# print(nextPermutation([3,2,1]))
+
 
 #   ====================  ====================
 
