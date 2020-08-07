@@ -1,68 +1,89 @@
 #   ====================  ====================
 
-def spiralOrder(matrix):
+#     # My solution which is very, VERY good -- see next solution for another way to think about
+#         # soliving this
+# def spiralOrder(matrix):
 
-    change_di = {'R':'D', 'D':'L', 'L':'U', 'U':'R'}
-    seen = set()
-    ans = []
+#     change_di = {'R':'D', 'D':'L', 'L':'U', 'U':'R'}
+#     seen = set()
+#     ans = []
 
-    r, c, di = 0, 0, 'R'
-    while True:
+#     r, c, di = 0, 0, 'R'
+#     while True:
 
-        def findValidCoords(x ,y, d):
-            t1, t2 = x, y
-            try:
-                if d == 'R':
-                    x, y = x, y+1
-                elif d == 'L':
-                    x, y = x, y-1
-                elif d == 'D':
-                    x, y = x+1, y
-                elif d == 'U':
-                    x, y = x-1, y
-                if (x, y) in seen or not 0 <= x < len(matrix) or not 0 <= y < len(matrix[0]):
-                    raise IndexError
-                return [x, y, d]
-            except IndexError:
-                d = change_di[d]
-                return findValidCoords(t1, t2, d)
+#         def findValidCoords(x ,y, d):
+#             t1, t2 = x, y
+#             try:
+#                 if d == 'R':
+#                     x, y = x, y+1
+#                 elif d == 'L':
+#                     x, y = x, y-1
+#                 elif d == 'D':
+#                     x, y = x+1, y
+#                 elif d == 'U':
+#                     x, y = x-1, y
+#                 if (x, y) in seen or not 0 <= x < len(matrix) or not 0 <= y < len(matrix[0]):
+#                     raise IndexError
+#                 return [x, y, d]
+#             except IndexError:
+#                 d = change_di[d]
+#                 return findValidCoords(t1, t2, d)
         
-        seen.add((r, c))
-        ans.append(matrix[r][c])
-        if len(seen) == len(matrix[0]*len(matrix)):
-            return ans
+#         seen.add((r, c))
+#         ans.append(matrix[r][c])
+#         if len(seen) == len(matrix[0]*len(matrix)):
+#             return ans
 
-        r, c, di = findValidCoords(r, c, di)
+#         r, c, di = findValidCoords(r, c, di)
 
-print(spiralOrder([
-    [ 1, 2, 3 ],
-    [ 4, 5, 6 ],
-    [ 7, 8, 9 ]
-]))
+#     # A genius solution I copied from leetcode to review as an alternative approach to this problem
+# def spiralOrder(self, matrix):
+#     if not matrix or not matrix[0]:
+#         return []
+#     ans = []
+#     m, n = len(matrix), len(matrix[0])
+#     u, d, l, r = 0, m - 1, 0, n - 1
+#     while l < r and u < d:
+#         ans.extend([matrix[u][j] for j in range(l, r)])
+#         ans.extend([matrix[i][r] for i in range(u, d)])
+#         ans.extend([matrix[d][j] for j in range(r, l, -1)])
+#         ans.extend([matrix[i][l] for i in range(d, u, -1)])
+#         u, d, l, r = u + 1, d - 1, l + 1, r - 1
+#     if l == r:
+#         ans.extend([matrix[i][r] for i in range(u, d + 1)])
+#     elif u == d:
+#         ans.extend([matrix[u][j] for j in range(l, r + 1)])
+#     return ans
+
+# print(spiralOrder([
+#     [ 1, 2, 3 ],
+#     [ 4, 5, 6 ],
+#     [ 7, 8, 9 ]
+# ]))
 
 
 #   ====================  ====================
 
-    # YOU CAN USE BOOLEANS TO REPRESENT ACTUAL INTEGERS AND DO MATH WITH THEM!! WHAAAA?!!
-def maxArea(height) -> int:
+#     # YOU CAN USE BOOLEANS TO REPRESENT ACTUAL INTEGERS AND DO MATH WITH THEM!! WHAAAA?!!
+# def maxArea(height) -> int:
     
-    ma = 0
-    l, r = 0, len(height) - 1
-    while l < r:
-        h = min(height[l], height[r])
-        area = h * (r - l)
-        ma = max(ma, area)
-        # if height[l] < height[r]:
-            # l += 1
-        l += height[l] == h
-        # elif height[l] > height[r]:
-            # r -= 1
-        r -= height[r] == h
-        # else:
-        #     l, r = l+1, r-1
-    return ma
+#     ma = 0
+#     l, r = 0, len(height) - 1
+#     while l < r:
+#         h = min(height[l], height[r])
+#         area = h * (r - l)
+#         ma = max(ma, area)
+#         # if height[l] < height[r]:
+#             # l += 1
+#         l += height[l] == h
+#         # elif height[l] > height[r]:
+#             # r -= 1
+#         r -= height[r] == h
+#         # else:
+#         #     l, r = l+1, r-1
+#     return ma
 
-    # # Brute Force
+#     # Brute Force
 # def maxArea(height) -> int:
     # ma = 0
     # for i in range(len(height) - 1):
@@ -72,7 +93,7 @@ def maxArea(height) -> int:
     #             ma = area
     # return ma
 
-print(maxArea([1,8,6,2,5,4,8,3,7]))
+# print(maxArea([1,8,6,2,5,4,8,3,7]))
 
 
 #   ====================  ====================
