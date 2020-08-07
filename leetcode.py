@@ -1,5 +1,39 @@
 #   ====================  ====================
 
+#     # I overcomplicated this... below solution is from comments and is much simpler...
+# def isToeplitzMatrix(matrix) -> bool:
+#     r, c = len(matrix), len(matrix[0])
+#     for i in range(r):
+#         for j in range(c):
+#             if matrix[i][j] == -1:
+#                 break
+#             x, y = i, j
+#             while 0 <= x+1 < r and 0 <= y+1 < c:
+#                 if matrix[x][y] != matrix[x+1][y+1]:
+#                     return False
+#                 matrix[x][y] = -1
+#                 x, y = x+1, y+1
+#             matrix[x][y] = -1
+#     return True
+
+#     # Much simpler solution found in leetcode comments...
+# def isToeplitzMatrix(m) -> bool:
+#     for i in range(len(m) - 1):
+#         for j in range(len(m[0]) - 1):
+#             print(i, j)
+#             if m[i][j] != m[i + 1][j + 1]:
+#                 return False
+#     return True
+
+# print(isToeplitzMatrix([
+#     [1,2,3,4],
+#     [5,1,2,3],
+#     [9,5,1,2]
+# ]))
+
+
+#   ====================  ====================
+
 #     # My solution which is very, VERY good -- see next solution for another way to think about
 #         # soliving this
 # def spiralOrder(matrix):
