@@ -1,6 +1,25 @@
+print('catscatscats'.replace('cats', '', 1))
+
 #   ====================  ====================
 
-#     # I overcomplicated this... below solution is from comments and is much simpler...
+def repeatedStringMatch(A: str, B: str) -> int:
+
+    repeat = A
+    max_len = len(B) + len(A)
+    i = 1
+    while B not in repeat:
+        if len(repeat) > max_len:
+            return -1
+        repeat += A
+        i += 1
+    return i
+
+print(repeatedStringMatch(A = "bbc", B = "bbcbbcbbcb"))
+
+
+#   ====================  ====================
+
+#     # I overcomplicated this... second solution below is from comments and is much simpler...
 # def isToeplitzMatrix(matrix) -> bool:
 #     r, c = len(matrix), len(matrix[0])
 #     for i in range(r):
