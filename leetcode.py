@@ -1,5 +1,78 @@
 #   ====================  ====================
 
+#     # I tried so hard.. and failed
+# def decodeString(s: str) -> str:
+
+#     def getStr(st):
+#         nonlocal i
+#         for t in range(len(st)):
+#             if not st[t].isdigit():
+#                 break
+#         temp = ''
+#         j = t + 1
+#         while st[j].isalpha() and st[j] not in {'[', ']'}:
+#             temp += st[j]
+#             j += 1
+#         i += j + 1
+#         if st[j] == ']':
+#             return temp * int(st[:t])
+#         else:
+#             return (temp + getStr(st[j:])) * int(st[:t])
+
+#     ans = ''
+
+#     i = 0
+#     while i < len(s):
+#         if s[i].isalpha() and s[i] not in {'[', ']'}:
+#             ans += s[i]
+#             i += 1
+#         elif s[i].isdigit():
+#             ans += getStr(s[i:])
+
+#     return ans
+
+def decodeString(s: str) -> str:
+    
+    ans = ''
+    st, alSt = [], []
+
+    i = 0
+    while i < len(s):
+        if s[i].isalpha() and s[i] not in {'[', ']'}:
+            ans += s[i]
+            i += 1
+        elif s[i].isdigit():
+            point = i
+            while s[i].isdigit():
+                i += 1
+            st.append(s[point:i])
+            i += 1
+            temp = ''
+            while st:
+                while i < len(s) and s[i].isalpha() and s[i] not in {'[', ']'}:
+                    temp += s[i]
+                    i += 1
+                if s[i].isdigit():
+                    point = i
+                    while s[i].isdigit():
+                        i += 1
+                    st.append(s[point:i])
+                    alSt.append(temp)
+                    temp = ''
+                elif s[i] == ']':
+                    temp *= int(st.pop())
+                    if alSt:
+                        temp = alSt.pop() + temp
+                i += 1
+            ans += temp
+    return ans
+
+
+print(decodeString("100[leetcode]"))
+
+
+#   ====================  ====================
+
 #     # One of my least favorite algos ever.. the second solution below (found in leetcode comments) is a much cleaner
 #         # solution than the first that I came up with below..
 # def search(nums, target: int) -> int:
