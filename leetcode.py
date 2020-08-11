@@ -1,20 +1,90 @@
-print('catscatscats'.replace('cats', '', 1))
+#   ====================  ====================
+
+#     # One of my least favorite algos ever.. the second solution below (found in leetcode comments) is a much cleaner
+#         # solution than the first that I came up with below..
+# def search(nums, target: int) -> int:
+    
+#     if len(nums) < 1:
+#         return -1
+#     if len(nums) == 1:
+#         return 0 if nums[0] == target else - 1
+    
+#     l, r = 0, len(nums) - 1
+    
+#     while True:
+#         m = (l + r) // 2
+#         if nums[m] > nums[0]:
+#             check = m + 1 if m < len(nums) - 1 else 0
+#             if nums[m] > nums[check]:
+#                 pivot = check
+#                 break
+#             l = m + 1
+#         elif nums[m] < nums[0]:
+#             if nums[m] < nums[m-1]:
+#                 pivot = m
+#                 break
+#             r = m - 1
+#         elif m == 0:
+#             pivot = 0 if nums[m] < nums[m+1] else 1
+#             break
+    
+#     if nums[pivot] <= target <= nums[-1]:
+#         l, r = pivot, len(nums) - 1
+#     else:
+#         l, r = 0, pivot - 1
+    
+#     while l <= r:
+#         m = (l + r) // 2
+#         if nums[m] == target:
+#             return m
+#         if nums[m] > target:
+#             r = m - 1
+#         if nums[m] < target:
+#             l = m + 1
+    
+#     return m if nums[m] == target else -1
+
+# def search(nums, target):
+#     if not nums:
+#         return -1
+
+#     low, high = 0, len(nums) - 1
+
+#     while low <= high:
+#         mid = (low + high) / 2
+#         if target == nums[mid]:
+#             return mid
+
+#         if nums[low] <= nums[mid]:
+#             if nums[low] <= target <= nums[mid]:
+#                 high = mid - 1
+#             else:
+#                 low = mid + 1
+#         else:
+#             if nums[mid] <= target <= nums[high]:
+#                 low = mid + 1
+#             else:
+#                 high = mid - 1
+
+#     return -1
+
+# print(search([1,2,3,4], 1))
 
 #   ====================  ====================
 
-def repeatedStringMatch(A: str, B: str) -> int:
+# def repeatedStringMatch(A: str, B: str) -> int:
 
-    repeat = A
-    max_len = len(B) + len(A)
-    i = 1
-    while B not in repeat:
-        if len(repeat) > max_len:
-            return -1
-        repeat += A
-        i += 1
-    return i
+#     repeat = A
+#     max_len = len(B) + len(A)
+#     i = 1
+#     while B not in repeat:
+#         if len(repeat) > max_len:
+#             return -1
+#         repeat += A
+#         i += 1
+#     return i
 
-print(repeatedStringMatch(A = "bbc", B = "bbcbbcbbcb"))
+# print(repeatedStringMatch(A = "bbc", B = "bbcbbcbbcb"))
 
 
 #   ====================  ====================
