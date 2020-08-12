@@ -1,6 +1,66 @@
-#   ====================  ====================
 
-#     # I tried so hard.. and failed
+
+#   ================== REVIEW ====================
+#   ==================== 394 ====================
+#   ==================== REVIEW ==================
+
+#     # My working attempt -- fast but not very readable. Second solution below from leetcode comments
+#         # is much, much better
+# def decodeString(s: str) -> str:
+    
+#     ans = ''
+#     st, alSt = [], []
+
+#     i = 0
+#     while i < len(s):
+#         if s[i].isalpha() and s[i] not in {'[', ']'}:
+#             ans += s[i]; i += 1
+#         elif s[i].isdigit():
+#             point = i
+#             while s[i].isdigit():
+#                 i += 1
+#             st.append(s[point:i])
+#             i += 1; temp = ''
+#             while st:
+#                 while i < len(s) and s[i].isalpha() and s[i] not in {'[', ']'}:
+#                     temp += s[i]; i += 1
+#                 if s[i].isdigit():
+#                     point = i
+#                     while s[i].isdigit():
+#                         i += 1
+#                     st.append(s[point:i])
+#                     alSt.append(temp)
+#                     temp = ''
+#                 elif s[i] == ']':
+#                     temp *= int(st.pop())
+#                     if alSt:
+#                         temp = alSt.pop() + temp
+#                 i += 1
+#             ans += temp
+#     return ans
+
+#     # Amazing solution found in leetcode comments
+# def decodeString(s: str) -> str:
+#     stack = []; curNum = 0; curString = ''
+#     for c in s:
+#         if c == '[':
+#             stack.append(curString)
+#             stack.append(curNum)
+#             curString = ''
+#             curNum = 0
+#         elif c == ']':
+#             num = stack.pop()
+#             prevString = stack.pop()
+#             curString = prevString + num*curString
+#         elif c.isdigit():
+#             curNum = curNum*10 + int(c)
+#         else:
+#             curString += c
+#     return curString
+
+# print(decodeString("100[leetcode]"))
+
+#     # First attempt.. I tried so hard.. and failed
 # def decodeString(s: str) -> str:
 
 #     def getStr(st):
@@ -30,45 +90,6 @@
 #             ans += getStr(s[i:])
 
 #     return ans
-
-def decodeString(s: str) -> str:
-    
-    ans = ''
-    st, alSt = [], []
-
-    i = 0
-    while i < len(s):
-        if s[i].isalpha() and s[i] not in {'[', ']'}:
-            ans += s[i]
-            i += 1
-        elif s[i].isdigit():
-            point = i
-            while s[i].isdigit():
-                i += 1
-            st.append(s[point:i])
-            i += 1
-            temp = ''
-            while st:
-                while i < len(s) and s[i].isalpha() and s[i] not in {'[', ']'}:
-                    temp += s[i]
-                    i += 1
-                if s[i].isdigit():
-                    point = i
-                    while s[i].isdigit():
-                        i += 1
-                    st.append(s[point:i])
-                    alSt.append(temp)
-                    temp = ''
-                elif s[i] == ']':
-                    temp *= int(st.pop())
-                    if alSt:
-                        temp = alSt.pop() + temp
-                i += 1
-            ans += temp
-    return ans
-
-
-print(decodeString("100[leetcode]"))
 
 
 #   ====================  ====================
