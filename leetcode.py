@@ -1,20 +1,96 @@
+#   ==================== 1382 ====================
+
+#     # My second solution after refactoring which is very good!
+# def balanceBST(self, root: TreeNode) -> TreeNode:
+    
+#     vals = []
+
+#     def traverse(node):
+#         if not node:
+#             return
+#         traverse(node.left)
+#         vals.append(node.val)
+#         traverse(node.right)
+#     traverse(root)
+
+#     i = len(vals) // 2
+#     balTree = TreeNode(vals[i])
+    
+#     def bal(node, lis):
+#         if not lis:
+#             return
+#         i = len(lis) // 2
+#         val = lis[i]
+
+#         if val < node.val:
+#             node.left = TreeNode(val)
+#             bal(node.left, lis[:i]); bal(node.left, lis[i+1:])
+#         else:
+#             node.right = TreeNode(val)
+#             bal(node.right, lis[:i]); bal(node.right, lis[i+1:])
+#     bal(balTree, vals[:i]); bal(balTree, vals[i+1:])
+
+#     return balTree
+
+#     # My first solution which works but is very slow
+# def balanceBST(self, root: TreeNode) -> TreeNode:
+    
+#     vals = []
+#     balTree = None
+    
+#     def traverse(node):
+#         if not node:
+#             return
+#         traverse(node.left)
+#         vals.append(node.val)
+#         traverse(node.right)
+#     traverse(root)
+
+#     def buildTree(node, val):
+#         if not node:
+#             nonlocal balancedTree
+#             balancedTree = TreeNode(val)
+#         elif val < node.val:
+#             if not node.left:
+#                 node.left = TreeNode(val)
+#             else:
+#                 buildTree(node.left, val)
+#         else:
+#             if not node.right:
+#                 node.right = TreeNode(val)
+#             else:
+#                 buildTree(node.right, val)
+
+#     def getVals(lis):
+#         if not lis:
+#             return
+#         i = len(lis) // 2
+#         val = lis[i]
+#         buildTree(balancedTree, val)
+
+#         getVals(lis[:i]); getVals(lis[i+1:])
+#     getVals(nodeVals)
+
+# return balancedTree
+
+
 #   ====================  ====================
 
-def findContestMatch(n: int) -> str:
+# def findContestMatch(n: int) -> str:
 
-    matches = list(range(1,n+1))
-    
-    i, j, temp = 0, len(matches) - 1, []
-    while len(matches) > 1:
-        temp.append((matches[i],matches[j]))
-        i, j = i + 1, j - 1
-        if i > j:
-            matches, temp = temp, []
-            i, j = 0, len(matches) - 1
+#     matches = list(range(1,n+1))
 
-    return str(matches[0]).replace(' ','')
+#     i, j, temp = 0, len(matches) - 1, []
+#     while len(matches) > 1:
+#         temp.append((matches[i],matches[j]))
+#         i, j = i + 1, j - 1
+#         if i > j:
+#             matches, temp = temp, []
+#             i, j = 0, len(matches) - 1
 
-print(findContestMatch(8))
+#     return str(matches[0]).replace(' ','')
+
+# print(findContestMatch(8))
 
 
 #   ====================  ====================
