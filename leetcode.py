@@ -1,3 +1,58 @@
+#   ====================  ====================
+
+def findContestMatch(n: int) -> str:
+
+    matches = list(range(1,n+1))
+    
+    i, j, temp = 0, len(matches) - 1, []
+    while len(matches) > 1:
+        temp.append((matches[i],matches[j]))
+        i, j = i + 1, j - 1
+        if i > j:
+            matches, temp = temp, []
+            i, j = 0, len(matches) - 1
+
+    return str(matches[0]).replace(' ','')
+
+print(findContestMatch(8))
+
+
+#   ====================  ====================
+
+# def arrayPairSum(nums) -> int:
+#     nums.sort()
+#     out = 0
+#     for i in range(0, len(nums), 2):
+#         out += nums[i]
+#     return out
+
+# print(arrayPairSum([-1,5,-7,2]))
+
+
+#   ====================  ====================
+
+# def validWordAbbreviation(word: str, abbr: str) -> bool:
+
+#     wIdx = aIdx = 0
+#     while aIdx < len(abbr):
+#         if wIdx >= len(word):
+#             return False
+#         if abbr[aIdx] == word[wIdx]:
+#             wIdx += 1
+#             aIdx += 1
+#         elif abbr[aIdx].isdigit():
+#             if abbr[aIdx] == '0':
+#                 return False
+#             temp = aIdx
+#             while aIdx < len(abbr) and abbr[aIdx].isdigit():
+#                 aIdx += 1
+#             wIdx += int(abbr[temp:aIdx])
+#         else:
+#             return False
+
+#     return wIdx == len(word) and aIdx == len(abbr)
+
+# print(validWordAbbreviation(word = "a", abbr = "10"))
 
 
 #   ================== REVIEW ====================
