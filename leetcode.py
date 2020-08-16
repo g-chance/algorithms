@@ -1,3 +1,73 @@
+
+
+#   ====================  ====================
+
+def letterCombinations(digits: str):
+    
+    phone = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+    ans = []
+
+    def doTheThing(d, comb=[]):
+        if not d:
+            ans.append(''.join(comb))
+            return
+        for c in phone[d[0]]:
+            doTheThing(d[1:], comb+[c])
+    doTheThing(digits)
+
+    return ans
+
+print(letterCombinations(""))
+
+
+#   ====================  ====================
+
+#     # Turns out there were no constraints...
+# def peakIndexInMountainArray(A) -> int:
+#     for i in range(1, len(A) - 1):
+#         if A[i] > A[i+1]:
+#             return i
+
+#     # My first solution assuming there were constraints (like maybe it wasn't actually a mountain)
+# def peakIndexInMountainArray(A) -> int:
+#     if len(A) < 3 or A[0] >= A[1]:
+#         return False
+#     change = 0
+#     peak = 0
+#     for i in range(1, len(A) - 1):
+#         if not change and A[i] > A[i+1]:
+#             change += 1
+#             peak = i
+#         if change and A[i] < A[i+1]:
+#             return False
+#         if A[i] == A[i + 1]:
+#             return False
+#     return peak
+
+# print(peakIndexInMountainArray([0,1,2,1,0,-1]))
+
+
+#   ====================  ====================
+
+# def checkPossibility(nums) -> bool:
+#     mod = 0
+#     for i in range(1, len(nums)):
+#         if nums[i] < nums[i-1]:
+#             mod += 1
+#             if i > 1:
+#                 if nums[i-2] <= nums[i]:
+#                     nums[i-1] = nums[i-2]
+#                 elif nums[i-2] > nums[i]:
+#                     nums[i] = nums[i-1]
+#             else:
+#                 nums[i-1] = nums[i]
+#         if mod > 1:
+#             return False
+#     return True
+
+# print(checkPossibility(nums = [-1,4,2,3]))
+
+
 #   ==================== 1382 ====================
 
 #     # My second solution after refactoring which is very good!
