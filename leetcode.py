@@ -1,23 +1,91 @@
+#   ================== REVIEW ====================
+#   ==================== 1013 ====================
+#   ==================== REVIEW ==================
+
+#     # From leetcode comments -- MUCH better than my first solution
+# def canThreePartsEqualSum(A) -> bool:
+#     average, remainder, part, cnt = sum(A) // 3, sum(A) % 3, 0, 0
+#     for i, a in enumerate(A):
+#         part += a
+#         if part == average:
+#             cnt += 1
+#             part = 0
+#         if cnt == 2 and i < len(A) - 1 and not remainder:
+#             return True
+#     # return not remainder and cnt >= 3
+#     return False
+
+#     # My first attemp (BARELY passes -- 5%)
+# def canThreePartsEqualSum(A) -> bool:
+#     sumsOne = {}
+#     runningSum = 0
+#     for i in range(len(A)):
+#         runningSum += A[i]
+#         if runningSum not in sumsOne:
+#             sumsOne[runningSum] = i
+#     runningSum = 0
+#     se = set()
+#     for i in range(len(A)-1,-1,-1):
+#         runningSum += A[i]
+#         if runningSum not in se and runningSum in sumsOne:
+#             idx = sumsOne[runningSum]
+#             if idx < i:
+#                 test = A[idx+1:i]
+#                 if len(test) > 0 and sum(test) == runningSum:
+#                     return True
+#         se.add(runningSum)
+#     return False
+
+# print(canThreePartsEqualSum([10,-10,10,-10,10,-10,10,-10]))
 
 
 #   ====================  ====================
 
-def letterCombinations(digits: str):
+# def sortArrayByParity(A):
+#     evens, odds = [], []
+#     for num in A:
+#         if num & 1 == 1:
+#             odds.append(num)
+#         else:
+#             evens.append(num)
+#     return evens + odds
+
+# print(sortArrayByParity([3,1,2,4]))
+
+
+#   ====================  ====================
+
+# def countGoodTriplets(arr, a: int, b: int, c: int) -> int:
+#     ans = 0
+#     for i in range(len(arr)-2):
+#         for j in range(i+1, len(arr)-1):
+#             if abs(arr[i] - arr[j]) <= a:
+#                 for k in range(j+1, len(arr)):
+#                     if abs(arr[j] - arr[k]) <= b and abs(arr[i] - arr[k]) <= c:
+#                         ans += 1
+#     return ans
+
+# print(countGoodTriplets(arr = [3,0,1,1,9,7], a = 7, b = 2, c = 3))
+
+
+#   ====================  ====================
+
+# def letterCombinations(digits: str):
     
-    phone = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
-    ans = []
+#     phone = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+#     ans = []
 
-    def doTheThing(d, comb=[]):
-        if not d:
-            ans.append(''.join(comb))
-            return
-        for c in phone[d[0]]:
-            doTheThing(d[1:], comb+[c])
-    doTheThing(digits)
+#     def doTheThing(d, comb=[]):
+#         if not d:
+#             ans.append(''.join(comb))
+#             return
+#         for c in phone[d[0]]:
+#             doTheThing(d[1:], comb+[c])
+#     doTheThing(digits)
 
-    return ans
+#     return ans
 
-print(letterCombinations(""))
+# print(letterCombinations(""))
 
 
 #   ====================  ====================
