@@ -1,3 +1,42 @@
+
+
+#   ====================  ====================
+
+# def toHexspeak(num: str) -> str:
+#     se = {
+#         "a": "A", 
+#         "b": "B", 
+#         "c": "C", 
+#         "d": "D", 
+#         "e": "E", 
+#         "f": "F", 
+#         '1': "I", 
+#         '0': "O"}
+#     toHex = hex(int(num))
+#     print(toHex)
+#     ans = []
+#     for c in toHex.replace('0x', ''):
+#         if c not in se:
+#             return 'ERROR'
+#         ans.append(se[c])
+#     return ''.join(ans)
+
+# print(toHexspeak(num = "747823223228"))
+
+
+#   ====================  ====================
+
+# def minStartValue(nums) -> int:
+#     mn = runningSum = 0
+#     for num in nums:
+#         runningSum += num
+#         if runningSum < mn:
+#             mn = runningSum
+#     return 1 - mn
+
+# print(minStartValue(nums = [8,2,5,8,-3,4,2]))
+
+
 #   ================== REVIEW ====================
 #   ==================== 1013 ====================
 #   ==================== REVIEW ==================
