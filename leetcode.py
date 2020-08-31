@@ -1,3 +1,65 @@
+#   ====================  ====================
+
+def coinChange(coins, amount: int) -> int:
+    count = 0
+    for i in range(len(coins)-1,-1,-1):
+        while amount > 0:
+            count += 1
+            amount -= coins[i]
+        if amount:
+            count -= 1
+            amount += coins[i]
+        else:
+            break
+    return count
+
+print(coinChange(coins = [1, 2, 5], amount = 11))
+
+
+#   ================== REVIEW ====================
+#   ==================== 200 ====================
+#   ==================== REVIEW ==================
+
+    # Commented out shows my first instinct -- I was overcomplicating the shit out of it....
+def numIslands(grid) -> int:
+    
+    if not grid:
+        return 0
+
+    # x = y = 0
+    # visited = set()
+    noIslands = 0
+
+    def findIsland(x, y):
+        grid[x][y] = 'X'
+        for i, j in [[x+1,y], [x,y+1], [x-1,y], [x,y-1]]:
+            if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == '1':
+                findIsland(i, j)
+
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == '1':
+                noIslands += 1
+                findIsland(i, j)
+
+    # def dfs(x, y):
+    #     nonlocal noIslands
+    #     visited.add((x,y))
+    #     if grid[x][y] == '1':
+    #         noIslands += 1
+    #         findIsland(x, y)
+    #     for i, j in [[x+1,y], [x,y+1]]:
+    #         if not (i,j) in visited and 0 <= i < len(grid) and 0 <= j < len(grid[0]):
+    #             dfs(i, j)
+
+    # dfs(x, y)
+    return noIslands
+
+print(numIslands(grid = [
+    ["1","1","1"],
+    ["0","1","0"],
+    ["1","1","1"]
+]))
 
 
 #   ====================  ====================
