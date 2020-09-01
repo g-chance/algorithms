@@ -1,65 +1,94 @@
-#   ====================  ====================
+#   ================== REVIEW ====================
+#   ==================== 322 ====================
+#   ==================== REVIEW ==================
 
-def coinChange(coins, amount: int) -> int:
-    count = 0
-    for i in range(len(coins)-1,-1,-1):
-        while amount > 0:
-            count += 1
-            amount -= coins[i]
-        if amount:
-            count -= 1
-            amount += coins[i]
-        else:
-            break
-    return count
+#     # Tabularization
+# def coinChange(coins, amount: int) -> int:
 
-print(coinChange(coins = [1, 2, 5], amount = 11))
+#     coins.sort()
+    
+#     tab = [0] + [-1] * (amount)
+
+#     for i in range(coins[0], len(tab)):
+#         mn = 2 ** 32
+#         for coin in coins:
+#             newIdx = i - coin
+#             if newIdx >= 0 and tab[newIdx] > -1:
+#                 tab[i] = min(mn, tab[newIdx] + 1)
+#                 mn = tab[i]
+
+#     return tab[-1]
+
+    # Memoization
+# def coinChange(coins, amount: int) -> int:
+
+#     memo = {}
+
+#     def findMin(amount):
+#         if amount < 0:
+#             return -1
+#         if amount == 0:
+#             return 0
+#         if amount in memo:
+#             return memo[amount]
+
+#         mn = 2 ** 32
+#         for coin in coins:
+#             x = findMin(amount - coin)
+#             if x >= 0 and x < mn:
+#                 mn = x+1
+#         memo[amount] = -1 if mn == 2 ** 32 else mn
+#         return memo[amount]
+
+#     return findMin(amount)
+
+# print('coinChange()', coinChange([397,417,24,44,235], 3383))
 
 
 #   ================== REVIEW ====================
 #   ==================== 200 ====================
 #   ==================== REVIEW ==================
 
-    # Commented out shows my first instinct -- I was overcomplicating the shit out of it....
-def numIslands(grid) -> int:
+#     # Commented out shows my first instinct -- I was overcomplicating the shit out of it....
+# def numIslands(grid) -> int:
     
-    if not grid:
-        return 0
+#     if not grid:
+#         return 0
 
-    # x = y = 0
-    # visited = set()
-    noIslands = 0
+#     # x = y = 0
+#     # visited = set()
+#     noIslands = 0
 
-    def findIsland(x, y):
-        grid[x][y] = 'X'
-        for i, j in [[x+1,y], [x,y+1], [x-1,y], [x,y-1]]:
-            if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == '1':
-                findIsland(i, j)
+#     def findIsland(x, y):
+#         grid[x][y] = 'X'
+#         for i, j in [[x+1,y], [x,y+1], [x-1,y], [x,y-1]]:
+#             if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == '1':
+#                 findIsland(i, j)
 
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j] == '1':
-                noIslands += 1
-                findIsland(i, j)
+#     for i in range(len(grid)):
+#         for j in range(len(grid[0])):
+#             if grid[i][j] == '1':
+#                 noIslands += 1
+#                 findIsland(i, j)
 
-    # def dfs(x, y):
-    #     nonlocal noIslands
-    #     visited.add((x,y))
-    #     if grid[x][y] == '1':
-    #         noIslands += 1
-    #         findIsland(x, y)
-    #     for i, j in [[x+1,y], [x,y+1]]:
-    #         if not (i,j) in visited and 0 <= i < len(grid) and 0 <= j < len(grid[0]):
-    #             dfs(i, j)
+#     # def dfs(x, y):
+#     #     nonlocal noIslands
+#     #     visited.add((x,y))
+#     #     if grid[x][y] == '1':
+#     #         noIslands += 1
+#     #         findIsland(x, y)
+#     #     for i, j in [[x+1,y], [x,y+1]]:
+#     #         if not (i,j) in visited and 0 <= i < len(grid) and 0 <= j < len(grid[0]):
+#     #             dfs(i, j)
 
-    # dfs(x, y)
-    return noIslands
+#     # dfs(x, y)
+#     return noIslands
 
-print(numIslands(grid = [
-    ["1","1","1"],
-    ["0","1","0"],
-    ["1","1","1"]
-]))
+# print(numIslands(grid = [
+#     ["1","1","1"],
+#     ["0","1","0"],
+#     ["1","1","1"]
+# ]))
 
 
 #   ====================  ====================
