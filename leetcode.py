@@ -1,4 +1,57 @@
 #   ================== REVIEW ====================
+#   ==================== 221 ====================
+#   ==================== REVIEW ==================
+
+#     # My second attempt after looking at a hint -- great runtime! (~70%)
+# def maximalSquare(matrix) -> int:
+#     dp = [[0 for y in range(len(matrix[0]))] for x in range(len(matrix))]
+
+#     maximal = 0
+#     for x in range(len(matrix)):
+#         for y in range(len(matrix[0])):
+#             temp = 0
+#             if matrix[x][y] == '1':
+#                 if 1 <= x and 1 <= y:
+#                     temp = min(dp[x-1][y], dp[x][y-1], dp[x-1][y-1])
+#             dp[x][y] = int(matrix[x][y]) + temp
+#             maximal = max(maximal, dp[x][y])
+#     return maximal * maximal
+
+#     # My first solution without looking up hints, slow but I'm proud of it!
+# from collections import deque
+# def maximalSquare(matrix) -> int:
+
+    # def findSquares(test):
+    #     se = set()
+    #     while test:
+    #         x, y, level = test.popleft()
+    #         for i, j in [[x+1, y], [x, y+1], [x+1, y+1]]:
+    #             if not (i, j) in se:
+    #                 if not 0 <= i < len(matrix) or not 0 <= j < len(matrix[0]) or matrix[i][j] != '1':
+    #                     return level - 1
+    #                 test.append([i, j, level+1])
+    #                 se.add((i, j))
+    #     return level
+
+    # maximal = 0
+    # for i in range(len(matrix)):
+    #     for j in range(len(matrix[0])):
+    #         if matrix[i][j] == '1':
+    #             sq = findSquares(deque([[i, j, 2]]))
+    #             maximal = max(maximal, sq*sq)
+                # if maximal >= (len(matrix) - i) * (len(matrix) -  i):
+                #     return maximal
+    # return maximal
+
+# print(maximalSquare([
+#     ["0","1","1","1","1"],
+#     ["1","1","1","1","1"],
+#     ["1","1","1","1","1"],
+#     ["1","1","1","1","1"],
+# ]))
+
+
+#   ================== REVIEW ====================
 #   ==================== 322 ====================
 #   ==================== REVIEW ==================
 
