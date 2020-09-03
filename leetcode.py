@@ -1,3 +1,30 @@
+#   ====================  ====================
+
+# def exist(board, word: str) -> bool:
+
+#     def checkWord(se, word, i, j):
+#         if not word:
+#             return True
+#         for x, y in [[i+1,j], [i,j+1], [i-1,j], [i,j-1]]:
+#             if (x,y) not in se and 0 <= x < len(board) and 0 <= y < len(board[0]):
+#                 if board[x][y] == word[0]:
+#                     if checkWord(se | {(i,j)}, word[1:], x, y):
+#                         return True
+
+#     for i in range(len(board)):
+#         for j in range(len(board[0])):
+#             if board[i][j] == word[0]:
+#                 if checkWord(set(), word[1:], i, j):
+#                     return True
+#     return False
+
+# print(exist([
+#     ["C","A","A"],
+#     ["A","A","A"],
+#     ["B","C","D"]
+# ], "AAB"))
+
+
 #   ================== REVIEW ====================
 #   ==================== 221 ====================
 #   ==================== REVIEW ==================
