@@ -1,5 +1,134 @@
 #   ====================  ====================
 
+#     # My second (original) solution after looking up some examples, still only ~25% but ms is ~170 so good enough
+# from collections import deque
+# def calculate(s: str) -> int:
+#     num = 0
+#     mem, calc = deque(), []
+
+#     for i in range(len(s)):
+#         if s[i].isdigit():
+#             num = num*10 + int(s[i])
+#         if (i < len(s) - 1 and not s[i+1].isdigit() and calc) or (i == len(s) - 1 and calc):
+#             op = calc.pop(); temp = calc.pop()
+#             num = temp * num if op == '*' else temp // num
+#         if i == len(s) - 1:
+#             mem.append(num)
+#             break
+#         if s[i] in {'+','-'}:
+#             mem.append(num); mem.append(s[i])
+#             num = 0
+#         if s[i] in {'*','/'}:
+#             calc.append(num); calc.append(s[i])
+#             num = 0
+
+#     ans = mem.popleft()
+#     while mem:
+#         op = mem.popleft(); num = mem.popleft()
+#         ans = ans + num if op == '+' else ans - num
+
+#     return ans
+
+#     # My first solution (5%, ~270ms)
+# def calculate(s: str) -> int:
+
+    # def getNum(s, i):
+    #     num = ''
+    #     while i < len(s) and not s[i] in '*/+-':
+    #         num += s[i]
+    #         i += 1
+    #     return (num, i)
+
+    # order = ['*/','+-']
+
+    # s, curCalc = list(s.replace(' ','')), []
+    # i = priority = 0
+    # while True:
+    #     print(curCalc)
+    #     if i >= len(s):
+    #         i, priority = 0, priority + 1
+    #         s, curCalc = curCalc, []
+    #     if priority == 2:
+    #         break
+    #     while i < len(s):
+    #         if s[i] not in order[priority] and s[i] in '*/+-':
+    #             curCalc.append(s[i])
+    #             i += 1
+    #         else:
+    #             if i < len(s) and s[i] in order[priority] or i == len(s):
+    #                 break
+    #             num, i = getNum(s, i)
+    #             curCalc.append(num)
+    #     if i == len(s):
+    #         continue
+    #     num, j = getNum(s, i+1)
+    #     if s[i] == '*':
+    #         res = int(curCalc.pop()) * int(num)
+    #     if s[i] == '/':
+    #         res = int(curCalc.pop()) // int(num)
+    #     if s[i] == '+':
+    #         res = int(curCalc.pop()) + int(num)
+    #     if s[i] == '-':
+    #         res = int(curCalc.pop()) - int(num)
+    #     curCalc.append(str(res))
+    #     i = j
+
+    # return int(''.join(s))
+
+# print(calculate("1*2-3/4+5*6-7*8+9/10"))
+
+
+#   ====================  ====================
+
+#     # Time complexity is better than concatenating strings in each step of the loop as opposed to appending
+#     # to an array and then joining them all at the end before joining the greater array.. I don't know why
+#     # since concatenating strings is supposed to be slower than appening to an array and then doing a join..
+# def convert(s: str, numRows: int) -> str:
+#     if numRows == 1 or numRows >= len(s):
+#         return s
+#     grid = ['' for c in s]
+#     numRows -= 1
+
+#     x, direction = 0, 'D'
+#     for c in s:
+#         grid[x] += c
+#         if direction == 'D':
+#             x += 1
+#         if direction == 'U':
+#             x -= 1
+#         if x == numRows:
+#             direction = 'U'
+#         if x == 0:
+#             direction = 'D'
+
+#     return ''.join(grid)
+
+#     # My first solution.. which is far more interesting but unfortunately slow (5%)
+# def convert(s: str, numRows: int) -> str:
+#     if numRows == 1 or numRows >= len(s):
+#         return s
+
+#     grid = [['' for y in range((len(s)+1) // 2)] for x in range(numRows)]
+#     numRows -= 1
+
+#     x, y, direction = 0, 0, 'D'
+#     for c in s:
+#         grid[x][y] = c
+#         if direction == 'D':
+#             x += 1
+#         if direction == 'U':
+#             x, y = x - 1, y + 1
+#         if x == numRows:
+#             direction = 'U'
+#         if x == 0:
+#             direction = 'D'
+#     return ''.join([''.join(x) for x in grid])
+
+# print(convert(s = "IFEELLIKEADAMNGENIUS", numRows = 8))
+
+
+#   ====================  ====================
+
 # def exist(board, word: str) -> bool:
 
 #     def checkWord(se, word, i, j):
