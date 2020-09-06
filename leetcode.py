@@ -1,5 +1,30 @@
 #   ====================  ====================
 
+#     # IM DOIN IT! ALL BY MASELF! DYNAMIC PROGRAMMING!!
+# def numDecodings(s: str) -> int:
+    
+#     if s[0] == '0':
+#         return 0
+    
+#     tab = [1]*len(s)
+    
+#     for i in range(1, len(s)):
+#         tab[i] = tab[i-1]
+#         if s[i] == '0' and (int(s[i-1]) > 2 or s[i-1] == '0'):
+#             return 0
+#         elif s[i] == '0':
+#             continue
+#         if 9 < int(s[i-1]) * 10 + int(s[i]) <= 26:
+#             if i == len(s) - 1 or s[i+1] != '0':
+#                 tab[i] += tab[i-2]
+
+#     return tab[-1]
+
+# print(numDecodings("20622"))
+
+
+#   ====================  ====================
+
 #     # My second (original) solution after looking up some examples, still only ~25% but ms is ~170 so good enough
 # from collections import deque
 # def calculate(s: str) -> int:
