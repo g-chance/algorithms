@@ -1,4 +1,58 @@
 #   ====================  ====================
+from collections import deque
+
+def ladderLength(beginWord: str, endWord: str, wordList) -> int:
+    if not endWord in wordList:
+        return 0
+    wordList = set(wordList)
+    # dp = {beginWord: 1}
+    st = deque([[beginWord, 1]])
+    charSet = {c for word in wordList for c in word}
+    print(st)
+    
+    while st:
+        word, count = st.popleft()
+        # for word in wordList:
+        for i in range(len(word)):
+            for c in charSet:
+                if word[i] != c:
+                    temp = word[:i] + c + word[i+1:]
+                    if temp == endWord:
+                        return count+1
+                    if temp in wordList:
+                        wordList.remove(temp)
+                        # dp[temp] = dp[word]+1
+                        st.append([temp, count+1])
+    return 0
+
+# def ladderLength(beginWord: str, endWord: str, wordList) -> int:
+#     if not endWord in wordList:
+#         return 0
+
+#     dp = {beginWord: 1}
+#     st = deque([beginWord])
+    
+#     while st:
+#         cur = st.popleft()
+#         for word in wordList:
+#             for i in range(len(word)):
+#                 if word[i] != cur[i]:
+#                     temp = cur[:i] + word[i] + cur[i+1:]
+#                     if temp in wordList and not temp in dp:
+#                         dp[temp] = dp[cur]+1
+#                         st.append(temp)
+#         if endWord in dp:
+#             return dp[endWord]
+#     return 0
+
+print(ladderLength(
+    beginWord = "a",
+    endWord = "c",
+    wordList = ["a","b","c"]
+))
+
+
+#   ====================  ====================
 
 #     # IM DOIN IT! ALL BY MASELF! DYNAMIC PROGRAMMING!!
 # def numDecodings(s: str) -> int:
