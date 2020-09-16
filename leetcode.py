@@ -1,5 +1,29 @@
 #   ====================  ====================
 
+def isRobotBounded(instructions: str) -> bool:
+    start = [0,0]
+    directions = [[0,1], [1,0], [0,-1], [-1,0]]
+    i = move = 0
+    while i < 4:
+        for cmd in instructions:
+            if cmd == 'L':
+                move = move - 1 if move > 0 else 3
+            elif cmd == 'R':
+                move = move + 1 if move < 3 else 0
+            else:
+                x, y = directions[move]
+                start[0] += x
+                start[1] += y
+        if start == [0,0]:
+            return True
+        i += 1
+    return start == [0,0]
+
+print(isRobotBounded("GLGLGGLGL"))
+
+
+#   ====================  ====================
+
 #         # With deque
 # def maxCoins(self, piles: List[int]) -> int:
 #     piles.sort()
