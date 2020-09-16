@@ -1,18 +1,62 @@
 #   ====================  ====================
-from collections import Counter
 
-def relativeSortArray(arr1, arr2):
-    counts = Counter(arr1)
-    ans = []
-    for num in arr2:
-        if num in counts:
-            ans += [num]*counts[num]
-            del counts[num]
-    for num in sorted(counts):
-        ans += [num]*counts[num]
-    return ans
+#         # With deque
+# def maxCoins(self, piles: List[int]) -> int:
+#     piles.sort()
+#     piles = deque(piles)
+    
+#     me = 0
+#     while len(piles) > 2:
+#         piles.pop()
+#         me += piles.pop()
+#         if piles:
+#             piles.popleft()
+#     return me
 
-print(relativeSortArray(arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]))
+#         # With 2 pointers
+# def maxCoins(self, piles: List[int]) -> int:
+#     piles.sort()
+    
+#     me = 0
+#     start, end = 0, len(piles) - 1
+#     while start < end:
+#         if end-1 > 0:
+#             me += piles[end-1]
+#         start, end = start+1, end-2
+#     return me
+
+
+#   ====================  ====================
+# import math
+
+# def numPrimeArrangements(n: int) -> int:
+#     total = 0
+#     primes = [0]*(n+1)
+#     for i in range(2, n+1):
+#         if not primes[i]:
+#             total += 1
+#             for j in range(i, n+1, i):
+#                 primes[j] = 1
+#     return (math.factorial(total) * math.factorial(n-total)) % (10**9 + 7)
+
+# print(numPrimeArrangements(n = 20))
+
+
+#   ====================  ====================
+# from collections import Counter
+
+# def relativeSortArray(arr1, arr2):
+#     counts = Counter(arr1)
+#     ans = []
+#     for num in arr2:
+#         if num in counts:
+#             ans += [num]*counts[num]
+#             del counts[num]
+#     for num in sorted(counts):
+#         ans += [num]*counts[num]
+#     return ans
+
+# print(relativeSortArray(arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]))
 
 
 #   ====================  ====================
