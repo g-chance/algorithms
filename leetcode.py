@@ -1,4 +1,51 @@
 #   ====================  ====================
+from collections import Counter
+
+def relativeSortArray(arr1, arr2):
+    counts = Counter(arr1)
+    ans = []
+    for num in arr2:
+        if num in counts:
+            ans += [num]*counts[num]
+            del counts[num]
+    for num in sorted(counts):
+        ans += [num]*counts[num]
+    return ans
+
+print(relativeSortArray(arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]))
+
+
+#   ====================  ====================
+# from collections import Counter
+
+#     # After looking at comments I discovered Counter() has similar functionality to set()! Using &= takes the..
+#     # minimum element count from each dict, and removes it entirely if it doesn't exist in one of them!
+# def commonChars(A):
+#     counts = Counter(A[0])
+#     for word in A:
+#         counts &= Counter(word)
+#     return list(counts.elements())
+
+    # My first solution -- works and is fast, just not as elegant as the one above
+# def commonChars(A):
+#     common = set(A[0])
+#     for i in range(1, len(A)):
+#         common.intersection_update(A[i])
+#     counts = Counter(A[0])
+#     for word in A:
+#         temp = Counter(word)
+#         for c in temp:
+#             if c in common:
+#                 counts[c] = temp[c] if not c in counts else min(counts[c], temp[c])
+#     ans = []
+#     for key, val in counts.items():
+#         ans += [key]*val
+#     return ans
+
+# print(commonChars(["bella","label","roller"]))
+
+
+#   ====================  ====================
 # from collections import deque
 
 # def ladderLength(beginWord: str, endWord: str, wordList) -> int:
