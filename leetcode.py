@@ -1,25 +1,136 @@
 #   ====================  ====================
 
-def isRobotBounded(instructions: str) -> bool:
-    start = [0,0]
-    directions = [[0,1], [1,0], [0,-1], [-1,0]]
-    i = move = 0
-    while i < 4:
-        for cmd in instructions:
-            if cmd == 'L':
-                move = move - 1 if move > 0 else 3
-            elif cmd == 'R':
-                move = move + 1 if move < 3 else 0
-            else:
-                x, y = directions[move]
-                start[0] += x
-                start[1] += y
-        if start == [0,0]:
-            return True
-        i += 1
-    return start == [0,0]
+def smallestDivisor(nums, threshold: int) -> int:
+    
+    mn, mx = 1, max(nums)
+    div = (mn + mx) // 2
+    ans = 10**6
+    
+    while mn <= mx:
+        sum = 0
+        for num in nums:
+            sum += (num // div) + 1 if num % div else num // div
+        if sum > threshold:
+            mn = div + 1
+            div = (mn + mx) // 2
+        elif sum <= threshold:
+            ans = min(ans, div)
+            mx = div - 1
+            div = (mn + mx) // 2
 
-print(isRobotBounded("GLGLGGLGL"))
+    return ans
+
+print(smallestDivisor(nums = [1,2,5,9], threshold = 6))
+
+
+#   ====================  ====================
+
+# def minPathSum(grid) -> int:
+#     dp = [[2**32 for i in range(len(grid[0]))] for j in range(len(grid))]
+#     dp[0][0] = grid[0][0]
+
+#     for x in range(len(grid)):
+#         for y in range(len(grid[0])):
+#             if 0 <= x-1 < len(grid):
+#                 dp[x][y] = min(dp[x][y], dp[x-1][y] + grid[x][y])
+#             if 0 <= y-1 < len(grid[0]):
+#                 dp[x][y] = min(dp[x][y], dp[x][y-1] + grid[x][y])
+
+#     return dp[-1][-1]
+
+# print(minPathSum([
+#     [7,1,3,5,8,9,9,2,1,9,0,8,3,1,6,6,9,5],
+#     [9,5,9,4,0,4,8,8,9,5,7,3,6,6,6,9,1,6],
+#     [8,2,9,1,3,1,9,7,2,5,3,1,2,4,8,2,8,8],
+#     [6,7,9,8,4,8,3,0,4,0,9,6,6,0,0,5,1,4],
+#     [7,1,3,1,8,8,3,1,2,1,5,0,2,1,9,1,1,4],
+#     [9,5,4,3,5,6,1,3,6,4,9,7,0,8,0,3,9,9],
+#     [1,4,2,5,8,7,7,0,0,7,1,2,1,2,7,7,7,4],
+#     [3,9,7,9,5,8,9,5,6,9,8,8,0,1,4,2,8,2],
+#     [1,5,2,2,2,5,6,3,9,3,1,7,9,6,8,6,8,3],
+#     [5,7,8,3,8,8,3,9,9,8,1,9,2,5,4,7,7,7],
+#     [2,3,2,4,8,5,1,7,2,9,5,2,4,2,9,2,8,7],
+#     [0,1,6,1,1,0,0,6,5,4,3,4,3,7,9,6,1,9]
+# ]))
+
+#   ====================  ====================
+# from collections import Counter
+
+# def reorganizeString(S: str) -> str:
+#     half = (len(S)+1) // 2
+#     counts = Counter(S)
+#     ans = [""]*len(S)
+#     d = []
+#     for key, val in sorted(counts.items(), key=lambda x: -x[1]):
+#         if val > half:
+#             return ""
+#         d.extend([key]*val)
+#     for i in range(0,half):
+#         ans[i*2] = d[i]
+#     for i in range(half, len(d)):
+#         ans[1+((i-half)*2)] = d[i]
+#     return ''.join(ans)
+
+# print(reorganizeString(S = "zrhmhyevkojpsegvwolkpystdnkyhcjrdvqtyhucxdcwm"))
+
+
+#   ====================  ====================
+
+# def calPoints(ops) -> int:
+
+#     score = 0
+#     stk = []
+#     for s in ops:
+#         if s != 'C':
+#             if s.isnumeric() or s[0] == '-':
+#                 stk.append(int(s))
+#             elif s == '+':
+#                 stk.append(stk[-1] + stk[-2])
+#             elif s == 'D':
+#                 stk.append(stk[-1] * 2)
+#             score += stk[-1]
+#         else:
+#             score -= stk.pop()
+#     return score
+
+# print(calPoints(["5","2","C","D","+"]))
+
+
+#   ====================  ====================
+
+# def heightChecker(heights) -> int:
+#     ordered = sorted(heights)
+#     ans = 0
+#     for i, student in enumerate(ordered):
+#         if student != heights[i]:
+#             ans += 1
+#     return ans
+
+# print(heightChecker([1,2,1,2,1,1,1,2,1]))
+
+
+#   ====================  ====================
+
+# def isRobotBounded(instructions: str) -> bool:
+#     start = [0,0]
+#     directions = [[0,1], [1,0], [0,-1], [-1,0]]
+#     i = move = 0
+#     while i < 4:
+#         for cmd in instructions:
+#             if cmd == 'L':
+#                 move = move - 1 if move > 0 else 3
+#             elif cmd == 'R':
+#                 move = move + 1 if move < 3 else 0
+#             else:
+#                 x, y = directions[move]
+#                 start[0] += x
+#                 start[1] += y
+#         if start == [0,0]:
+#             return True
+#         i += 1
+#     return start == [0,0]
+
+# print(isRobotBounded("GLGLGGLGL"))
 
 
 #   ====================  ====================
