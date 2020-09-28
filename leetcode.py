@@ -1,26 +1,64 @@
 #   ====================  ====================
+from collections import deque
 
-def smallestDivisor(nums, threshold: int) -> int:
+# def minSubArrayLen(s: int, nums) -> int:
+#     nums = deque(nums)
+#     ans = 2**32
+
+#     su = count = i = 0
+#     while i < len(nums):
+#         su, count = su + nums[i], count + 1
+#         if su >= s:
+#             while su >= s:
+#                 su, i = su - nums.popleft(), i - 1
+#                 if su >= s:
+#                     count -= 1
+#             ans, count = min(ans, count), count - 1
+#         i += 1
+#     return ans if ans < 2**32 else 0
+
+def minSubArrayLen(s: int, nums) -> int:
+    # nums = deque(nums)
+    ans = 2**32
+
+    su = count = i = j = 0
+    while i < len(nums):
+        su, count = su + nums[i], count + 1
+        if su >= s:
+            while su >= s:
+                su, j = su - nums[j], j + 1
+                if su >= s:
+                    count -= 1
+            ans, count = min(ans, count), count - 1
+        i += 1
+    return ans if ans < 2**32 else 0
+
+print(minSubArrayLen(s = 7, nums = [2,3,1,2,4,3]))
+
+
+#   ====================  ====================
+
+# def smallestDivisor(nums, threshold: int) -> int:
     
-    mn, mx = 1, max(nums)
-    div = (mn + mx) // 2
-    ans = 10**6
+#     mn, mx = 1, max(nums)
+#     div = (mn + mx) // 2
+#     ans = 10**6
     
-    while mn <= mx:
-        sum = 0
-        for num in nums:
-            sum += (num // div) + 1 if num % div else num // div
-        if sum > threshold:
-            mn = div + 1
-            div = (mn + mx) // 2
-        elif sum <= threshold:
-            ans = min(ans, div)
-            mx = div - 1
-            div = (mn + mx) // 2
+#     while mn <= mx:
+#         sum = 0
+#         for num in nums:
+#             sum += (num // div) + 1 if num % div else num // div
+#         if sum > threshold:
+#             mn = div + 1
+#             div = (mn + mx) // 2
+#         elif sum <= threshold:
+#             ans = min(ans, div)
+#             mx = div - 1
+#             div = (mn + mx) // 2
 
-    return ans
+#     return ans
 
-print(smallestDivisor(nums = [1,2,5,9], threshold = 6))
+# print(smallestDivisor(nums = [1,2,5,9], threshold = 6))
 
 
 #   ====================  ====================
