@@ -1,31 +1,60 @@
 #   ====================  ====================
-from collections import defaultdict
+from collections import Counter
+from heapq import heapify, heappop, heappush
 
-def mostVisitedPattern(username, timestamp, website):
-    userVisits = defaultdict(list)
-    for i in range(len(username)):
-        userVisits[username[i]].append((timestamp[i],website[i]))
+def leastInterval(tasks, n: int) -> int:
+
+    # time, tasksHeap = 0, list(map(lambda x: (-x[1], x[0]), Counter(tasks).items()))
+    # heapify(tasksHeap)
+
+    time, tasksHeap = 0, []
+    for x, y in Counter(tasks).items():
+        heappush(tasksHeap, (-y, x))
+
+    idle, queued = n + 1, []
+    while tasksHeap:
+        count, task = (heappop(tasksHeap))
+        time, count, idle = time + 1, count + 1, idle - 1
+        if count:
+            queued.append((count, task))
+        if (not tasksHeap and queued) or (not idle):
+            time, idle = time + idle, n + 1
+            while queued:
+                heappush(tasksHeap, queued.pop())
+
+    return time
+
+print(leastInterval(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
+
+
+#   ====================  ====================
+# from collections import defaultdict
+
+# def mostVisitedPattern(username, timestamp, website):
+#     userVisits = defaultdict(list)
+#     for i in range(len(username)):
+#         userVisits[username[i]].append((timestamp[i],website[i]))
     
-    patterns = defaultdict(int)
-    for user in userVisits:
-        userVisits[user].sort()
-        se = set()
-        sites = userVisits[user]
-        for i in range(len(sites)-2):
-            for j in range(i+1, len(sites)-1):
-                for k in range(j+1, len(sites)):
-                    seq = (sites[i][1], sites[j][1], sites[k][1])
-                    if seq not in se:
-                        patterns[seq] += 1
-                    se.add(seq)
+#     patterns = defaultdict(int)
+#     for user in userVisits:
+#         userVisits[user].sort()
+#         se = set()
+#         sites = userVisits[user]
+#         for i in range(len(sites)-2):
+#             for j in range(i+1, len(sites)-1):
+#                 for k in range(j+1, len(sites)):
+#                     seq = (sites[i][1], sites[j][1], sites[k][1])
+#                     if seq not in se:
+#                         patterns[seq] += 1
+#                     se.add(seq)
 
-    return next(iter(sorted(patterns, key=lambda x: (-patterns[x], x))))
+#     return next(iter(sorted(patterns, key=lambda x: (-patterns[x], x))))
 
-print(mostVisitedPattern(
-["h","eiy","cq","h","cq","txldsscx","cq","txldsscx","h","cq","cq"],
-[527896567,334462937,517687281,134127993,859112386,159548699,51100299,444082139,926837079,317455832,411747930],
-["hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","yljmntrclw","hibympufi","yljmntrclw"]
-))
+# print(mostVisitedPattern(
+# ["h","eiy","cq","h","cq","txldsscx","cq","txldsscx","h","cq","cq"],
+# [527896567,334462937,517687281,134127993,859112386,159548699,51100299,444082139,926837079,317455832,411747930],
+# ["hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","yljmntrclw","hibympufi","yljmntrclw"]
+# ))
 
 
 #   ================== REVIEW ====================
