@@ -1,6 +1,75 @@
 #   ====================  ====================
-from collections import deque
+from collections import defaultdict
 
+def mostVisitedPattern(username, timestamp, website):
+    userVisits = defaultdict(list)
+    for i in range(len(username)):
+        userVisits[username[i]].append((timestamp[i],website[i]))
+    
+    patterns = defaultdict(int)
+    for user in userVisits:
+        userVisits[user].sort()
+        se = set()
+        sites = userVisits[user]
+        for i in range(len(sites)-2):
+            for j in range(i+1, len(sites)-1):
+                for k in range(j+1, len(sites)):
+                    seq = (sites[i][1], sites[j][1], sites[k][1])
+                    if seq not in se:
+                        patterns[seq] += 1
+                    se.add(seq)
+
+    return next(iter(sorted(patterns, key=lambda x: (-patterns[x], x))))
+
+print(mostVisitedPattern(
+["h","eiy","cq","h","cq","txldsscx","cq","txldsscx","h","cq","cq"],
+[527896567,334462937,517687281,134127993,859112386,159548699,51100299,444082139,926837079,317455832,411747930],
+["hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","hibympufi","yljmntrclw","hibympufi","yljmntrclw"]
+))
+
+
+#   ================== REVIEW ====================
+#   ==================== 131 ====================
+#   ==================== REVIEW ==================
+
+# def partition(s: str):
+#     res = []
+    
+#     def isPal(s):
+#         if s == s[::-1]:
+#             return True
+#         return False
+    
+#     def splitString(s, path=[]):
+#         if not s:
+#             res.append(path)
+#             return
+#         for i in range(1, len(s)+1):
+#             sub = s[:i]
+#             if isPal(sub):
+#                 splitString(s[i:], path+[sub])
+                
+#     splitString(s)
+    
+#     return res
+
+# print(partition("aab"))
+
+
+#   ====================  ====================
+
+# def minSubArrayLen(s: int, nums) -> int:
+#     ans = 2**32
+
+#     su = count = i = j = 0
+#     for i in range(len(nums)):
+#         su, count = su + nums[i], count + 1
+#         while su >= s:
+#             su, j = su - nums[j], j + 1
+#             ans, count = min(ans, count), count - 1
+#     return ans if ans < 2**32 else 0
+
+# from collections import deque
 # def minSubArrayLen(s: int, nums) -> int:
 #     nums = deque(nums)
 #     ans = 2**32
@@ -17,23 +86,7 @@ from collections import deque
 #         i += 1
 #     return ans if ans < 2**32 else 0
 
-def minSubArrayLen(s: int, nums) -> int:
-    # nums = deque(nums)
-    ans = 2**32
-
-    su = count = i = j = 0
-    while i < len(nums):
-        su, count = su + nums[i], count + 1
-        if su >= s:
-            while su >= s:
-                su, j = su - nums[j], j + 1
-                if su >= s:
-                    count -= 1
-            ans, count = min(ans, count), count - 1
-        i += 1
-    return ans if ans < 2**32 else 0
-
-print(minSubArrayLen(s = 7, nums = [2,3,1,2,4,3]))
+# print(minSubArrayLen(s = 7, nums = [2,3,1,2,4,3]))
 
 
 #   ====================  ====================
