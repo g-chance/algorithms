@@ -1,30 +1,46 @@
 #   ====================  ====================
-from collections import Counter
-from heapq import heapify, heappop, heappush
 
-def leastInterval(tasks, n: int) -> int:
+# def numKLenSubstrNoRepeats(S: str, K: int) -> int:
+#     if len(S) < K:
+#         return 0
+    
+#     count = 0
 
-    # time, tasksHeap = 0, list(map(lambda x: (-x[1], x[0]), Counter(tasks).items()))
-    # heapify(tasksHeap)
+#     for i in range(len(S) - K+1):
+#         if len(set(S[i:i+K])) == K:
+#             count += 1
+#     return count
 
-    time, tasksHeap = 0, []
-    for x, y in Counter(tasks).items():
-        heappush(tasksHeap, (-y, x))
+# print(numKLenSubstrNoRepeats(S = "havefunonleetcode", K = 5))
 
-    idle, queued = n + 1, []
-    while tasksHeap:
-        count, task = (heappop(tasksHeap))
-        time, count, idle = time + 1, count + 1, idle - 1
-        if count:
-            queued.append((count, task))
-        if (not tasksHeap and queued) or (not idle):
-            time, idle = time + idle, n + 1
-            while queued:
-                heappush(tasksHeap, queued.pop())
 
-    return time
+#   ====================  ====================
+# from collections import Counter
+# from heapq import heapify, heappop, heappush
 
-print(leastInterval(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
+# def leastInterval(tasks, n: int) -> int:
+
+#     # time, tasksHeap = 0, list(map(lambda x: (-x[1], x[0]), Counter(tasks).items()))
+#     # heapify(tasksHeap)
+
+#     time, tasksHeap = 0, []
+#     for x, y in Counter(tasks).items():
+#         heappush(tasksHeap, (-y, x))
+
+#     idle, queued = n + 1, []
+#     while tasksHeap:
+#         count, task = heappop(tasksHeap)
+#         time, count, idle = time + 1, count + 1, idle - 1
+#         if count:
+#             queued.append((count, task))
+#         if (not tasksHeap and queued) or (not idle):
+#             time, idle = time + idle, n + 1
+#             while queued:
+#                 heappush(tasksHeap, queued.pop())
+
+#     return time
+
+# print(leastInterval(["A","A","A","B","B","B", "C","C","C", "D", "D", "E"], 2))
 
 
 #   ====================  ====================
