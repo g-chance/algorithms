@@ -1,5 +1,31 @@
 #   ====================  ====================
 
+def lengthOfLIS(nums) -> int:
+    dp = [1 for i in range(len(nums))]
+    ans = 1
+    for i in range(len(nums)):
+        for j in range(i):
+            if nums[j] < nums[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
+        ans = max(ans, dp[i])
+    return ans
+
+print(lengthOfLIS([10,22,9,33,21,50,41,60,80]))
+
+
+#   ====================  ====================
+
+# def isRectangleOverlap(rec1, rec2) -> bool:
+#     if max(rec1[0], rec2[0]) < min(rec1[2], rec2[2]) and \
+#         max(rec1[1], rec2[1]) < min(rec1[3], rec2[3]):
+#         return True
+#     return False
+
+# print(isRectangleOverlap(rec1 = [0,0,2,2], rec2 = [1,1,3,3]))
+
+
+#   ====================  ====================
+
 # def numKLenSubstrNoRepeats(S: str, K: int) -> int:
 #     if len(S) < K:
 #         return 0
@@ -4605,7 +4631,7 @@
 # print(smallerNumbersThanCurrent(nums = [8,1,2,2,3]))
 
 
-#   ================== REVIEW =====================
+#   ================== REVIEW ===================== x1
 #   ==================== 168 ======================
 #   =================== REVIEW ====================
 
