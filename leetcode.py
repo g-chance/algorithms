@@ -1,16 +1,46 @@
 #   ====================  ====================
+from collections import deque
 
-def lengthOfLIS(nums) -> int:
-    dp = [1 for i in range(len(nums))]
-    ans = 1
-    for i in range(len(nums)):
-        for j in range(i):
-            if nums[j] < nums[i]:
-                dp[i] = max(dp[i], dp[j] + 1)
-        ans = max(ans, dp[i])
-    return ans
+def minMutation(start: str, end: str, bank) -> int:
+    
+    if end not in bank:
+        return -1
+    
+    d = deque([[start, bank, 0]])
+    
+    while d:
+        cur, bnk, tot = d.popleft()
+        for k, word in enumerate(bnk):
+            for i, c in enumerate(word):
+                if c != cur[i]:
+                    temp = list(cur)
+                    temp[i] = c
+                    if word == ''.join(temp):
+                        if word == end:
+                            return tot + 1
+                        d.append([word, bnk[:k] + bnk[k+1:], tot + 1])
+    
+    return -1
 
-print(lengthOfLIS([10,22,9,33,21,50,41,60,80]))
+print(minMutation(start="AAAAACCC",
+end="AACCCCCC",
+bank=["AAAACCCC", "AAACCCCC", "AACCCCCC"]
+))
+
+
+#   ====================  ====================
+
+# def lengthOfLIS(nums) -> int:
+#     dp = [1 for i in range(len(nums))]
+#     ans = 1
+#     for i in range(len(nums)):
+#         for j in range(i):
+#             if nums[j] < nums[i]:
+#                 dp[i] = max(dp[i], dp[j] + 1)
+#         ans = max(ans, dp[i])
+#     return ans
+
+# print(lengthOfLIS([10,22,9,33,21,50,41,60,80]))
 
 
 #   ====================  ====================
