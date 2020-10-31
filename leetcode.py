@@ -1,31 +1,103 @@
 #   ====================  ====================
-from collections import deque
+import re
+def validIPAddress(IP: str) -> str:
 
-def minMutation(start: str, end: str, bank) -> int:
-    
-    if end not in bank:
-        return -1
-    
-    d = deque([[start, bank, 0]])
-    
-    while d:
-        cur, bnk, tot = d.popleft()
-        for k, word in enumerate(bnk):
-            for i, c in enumerate(word):
-                if c != cur[i]:
-                    temp = list(cur)
-                    temp[i] = c
-                    if word == ''.join(temp):
-                        if word == end:
-                            return tot + 1
-                        d.append([word, bnk[:k] + bnk[k+1:], tot + 1])
-    
-    return -1
+    def checkNum(num):
+        if not num or (len(num) > 1 and num[0] == '0'):
+            return False
+        try:
+            if int(num) > 255:
+                return False
+            return True
+        except ValueError:
+            return False
 
-print(minMutation(start="AAAAACCC",
-end="AACCCCCC",
-bank=["AAAACCCC", "AAACCCCC", "AACCCCCC"]
-))
+    def checkIPV4():
+        num, count = '', 0
+        for i, c in enumerate(IP):
+            if c != '.' and i != len(IP)-1:
+                num += c
+            else:
+                if i == len(IP)-1:
+                    num += c
+                else:
+                    count += 1
+                if not checkNum(num) or count == 4:
+                    return False
+                num = ''
+        return False if count != 3 else True
+    
+    def checkIPV6():
+        regEx = re.compile(r'[0-9a-fA-F]')
+        c1 = c2 = 0
+        for i, c in enumerate(IP):
+            if c != ':':
+                c1 += 1
+                if c1 == 5 or not regEx.match(c):
+                    return False
+            elif c1 == 0:
+                return False
+            else:
+                c1, c2 = 0, c2 + 1
+                if c2 == 8 or i == len(IP)-1:
+                    return False
+        return False if c2 != 7 else True
+
+    if checkIPV4():
+        return 'IPv4'
+    if checkIPV6():
+        return 'IPv6'
+    return 'Neither'
+
+print(validIPAddress("192.0.0.1"))
+
+
+#   ====================  ====================
+
+def insert(intervals, newInterval):
+    ans = []
+    for x, y in enumerate(intervals):
+        i, j = y
+        if newInterval[0] > j:
+            ans.append([i, j])
+        elif newInterval[1] < i:
+            return ans + [newInterval] + intervals[x:]
+        else:
+            newInterval = [min(newInterval[0], i), max(newInterval[1], j)]
+
+    return ans + [newInterval]
+
+print(insert(intervals = [[1,3],[6,9]], newInterval = [2,5]))
+
+
+#   ====================  ====================
+# from collections import deque
+
+# def minMutation(start: str, end: str, bank) -> int:
+    
+#     if end not in bank:
+#         return -1
+    
+#     d = deque([[start, bank, 0]])
+    
+#     while d:
+#         cur, bnk, tot = d.popleft()
+#         for k, word in enumerate(bnk):
+#             for i, c in enumerate(word):
+#                 if c != cur[i]:
+#                     temp = list(cur)
+#                     temp[i] = c
+#                     if word == ''.join(temp):
+#                         if word == end:
+#                             return tot + 1
+#                         d.append([word, bnk[:k] + bnk[k+1:], tot + 1])
+    
+#     return -1
+
+# print(minMutation(start="AAAAACCC",
+# end="AACCCCCC",
+# bank=["AAAACCCC", "AAACCCCC", "AACCCCCC"]
+# ))
 
 
 #   ====================  ====================
