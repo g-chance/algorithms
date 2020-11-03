@@ -1,73 +1,130 @@
+from collections import defaultdict
+
+x = defaultdict(int)
+print(x['1'])
+
+#   ==================== Twitter HackerRank Challenge ====================
+
+def maxEvents(arrival, duration):
+
+    zipped = sorted(zip(arrival, duration), key=lambda x: x[1])
+    arrivalsDict = {}
+    for i, j in zipped:
+        if i not in arrivalsDict:
+            arrivalsDict[i] = j
+    x = sorted(arrivalsDict.items())
+
+# # Alternative to zipping + sorting before creating arrivalsDict
+#     arrivalsDict = {}
+#     for z, i in enumerate(arrival):
+#         if i not in arrivalsDict:
+#             arrivalsDict[i] = duration[z]
+#         else:
+#             arrivalsDict[i] = min(arrivalsDict[i], duration[z])
+#     x = sorted(arrivalsDict.items())
+
+    dp = [1] * len(arrival)
+
+    checkTime = x[-1][0]
+    for i in range(len(x)-2,-1,-1):
+        time, dur = x[i]
+        dp[i] = dp[i+1]
+        if time + dur <= checkTime:
+            dp[i] += 1
+            checkTime = x[i][0]
+    return dp[0]
+
+print(maxEvents([1,3,3,5,7], [2,2,1,2,1]))
+
+
 #   ====================  ====================
-import re
-def validIPAddress(IP: str) -> str:
 
-    def checkNum(num):
-        if not num or (len(num) > 1 and num[0] == '0'):
-            return False
-        try:
-            if int(num) > 255:
-                return False
-            return True
-        except ValueError:
-            return False
-
-    def checkIPV4():
-        num, count = '', 0
-        for i, c in enumerate(IP):
-            if c != '.' and i != len(IP)-1:
-                num += c
-            else:
-                if i == len(IP)-1:
-                    num += c
-                else:
-                    count += 1
-                if not checkNum(num) or count == 4:
-                    return False
-                num = ''
-        return False if count != 3 else True
+# def maxProduct(nums) -> int:
     
-    def checkIPV6():
-        regEx = re.compile(r'[0-9a-fA-F]')
-        c1 = c2 = 0
-        for i, c in enumerate(IP):
-            if c != ':':
-                c1 += 1
-                if c1 == 5 or not regEx.match(c):
-                    return False
-            elif c1 == 0:
-                return False
-            else:
-                c1, c2 = 0, c2 + 1
-                if c2 == 8 or i == len(IP)-1:
-                    return False
-        return False if c2 != 7 else True
+#     ans = 0
+#     for i in range(len(nums)-1,-1,-1):
+#         prod = 1
+#         for j in range(i,-1,-1):
+#             prod *= nums[j]
+#             temp = ans
+#             ans = max(ans, prod)
+#             if ans > temp and j == 0:
+#                 return ans
+#     return ans
 
-    if checkIPV4():
-        return 'IPv4'
-    if checkIPV6():
-        return 'IPv6'
-    return 'Neither'
+# print(maxProduct([2,3,-2,4]))
 
-print(validIPAddress("192.0.0.1"))
+
+#   ====================  ====================
+# import re
+# def validIPAddress(IP: str) -> str:
+
+#     def checkNum(num):
+#         if not num or (len(num) > 1 and num[0] == '0'):
+#             return False
+#         try:
+#             if int(num) > 255:
+#                 return False
+#             return True
+#         except ValueError:
+#             return False
+
+#     def checkIPV4():
+#         num, count = '', 0
+#         for i, c in enumerate(IP):
+#             if c != '.' and i != len(IP)-1:
+#                 num += c
+#             else:
+#                 if i == len(IP)-1:
+#                     num += c
+#                 else:
+#                     count += 1
+#                 if not checkNum(num) or count == 4:
+#                     return False
+#                 num = ''
+#         return False if count != 3 else True
+    
+#     def checkIPV6():
+#         regEx = re.compile(r'[0-9a-fA-F]')
+#         c1 = c2 = 0
+#         for i, c in enumerate(IP):
+#             if c != ':':
+#                 c1 += 1
+#                 if c1 == 5 or not regEx.match(c):
+#                     return False
+#             elif c1 == 0:
+#                 return False
+#             else:
+#                 c1, c2 = 0, c2 + 1
+#                 if c2 == 8 or i == len(IP)-1:
+#                     return False
+#         return False if c2 != 7 else True
+
+#     if checkIPV4():
+#         return 'IPv4'
+#     if checkIPV6():
+#         return 'IPv6'
+#     return 'Neither'
+
+# print(validIPAddress("192.0.0.1"))
 
 
 #   ====================  ====================
 
-def insert(intervals, newInterval):
-    ans = []
-    for x, y in enumerate(intervals):
-        i, j = y
-        if newInterval[0] > j:
-            ans.append([i, j])
-        elif newInterval[1] < i:
-            return ans + [newInterval] + intervals[x:]
-        else:
-            newInterval = [min(newInterval[0], i), max(newInterval[1], j)]
+# def insert(intervals, newInterval):
+#     ans = []
+#     for x, y in enumerate(intervals):
+#         i, j = y
+#         if newInterval[0] > j:
+#             ans.append([i, j])
+#         elif newInterval[1] < i:
+#             return ans + [newInterval] + intervals[x:]
+#         else:
+#             newInterval = [min(newInterval[0], i), max(newInterval[1], j)]
 
-    return ans + [newInterval]
+#     return ans + [newInterval]
 
-print(insert(intervals = [[1,3],[6,9]], newInterval = [2,5]))
+# print(insert(intervals = [[1,3],[6,9]], newInterval = [2,5]))
 
 
 #   ====================  ====================
