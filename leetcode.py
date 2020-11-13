@@ -1,40 +1,88 @@
-from collections import defaultdict
 
-x = defaultdict(int)
-print(x['1'])
+
+#   ====================  ====================
+
+from collections import Counter
+def findAnagrams(s, p):
+
+        # Much faster than below (~150ms)
+    if len(p) > len(s):
+        return []
+    iterations = (len(s) - len(p)) + 1 # might need come back to this
+
+    ans = []
+    
+    sCounts = Counter(s[:len(p)])
+    pCounts = Counter(p)
+
+    for i in range(iterations):
+        if sCounts == pCounts:
+            ans.append(i)
+        sCounts[s[i]] -= 1
+        if not sCounts[s[i]]:
+            del sCounts[s[i]]
+        if i < iterations - 1:
+            sCounts[s[i + len(p)]] += 1 
+    return ans
+
+        # # Slower (~600ms)
+# def findAnagrams(s, p):
+    # if len(p) > len(s):
+    #     return []
+    # iterations = (len(s) - len(p)) + 1 # might need come back to this
+
+    # ans = []
+    # letterCounts = {}
+    # for c in p:
+    #     letterCounts[c] = 1 if c not in letterCounts else letterCounts[c] + 1
+
+    # for i in range(iterations):
+    #     temp = letterCounts.copy()
+    #     for j in range(i, i + len(p)):
+    #         if not s[j] in temp:
+    #             break
+    #         temp[s[j]] -= 1
+    #         if temp[s[j]] < 0:
+    #             break
+    #     else:
+    #         ans.append(i)
+    # return ans
+
+print(findAnagrams(s="cbaebabacd", p="abc"))
+
 
 #   ==================== Twitter HackerRank Challenge ====================
 
-def maxEvents(arrival, duration):
+# def maxEvents(arrival, duration):
 
-    zipped = sorted(zip(arrival, duration), key=lambda x: x[1])
-    arrivalsDict = {}
-    for i, j in zipped:
-        if i not in arrivalsDict:
-            arrivalsDict[i] = j
-    x = sorted(arrivalsDict.items())
-
-# # Alternative to zipping + sorting before creating arrivalsDict
+#     zipped = sorted(zip(arrival, duration), key=lambda x: x[1])
 #     arrivalsDict = {}
-#     for z, i in enumerate(arrival):
+#     for i, j in zipped:
 #         if i not in arrivalsDict:
-#             arrivalsDict[i] = duration[z]
-#         else:
-#             arrivalsDict[i] = min(arrivalsDict[i], duration[z])
+#             arrivalsDict[i] = j
 #     x = sorted(arrivalsDict.items())
 
-    dp = [1] * len(arrival)
+# # # Alternative to zipping + sorting before creating arrivalsDict
+# #     arrivalsDict = {}
+# #     for z, i in enumerate(arrival):
+# #         if i not in arrivalsDict:
+# #             arrivalsDict[i] = duration[z]
+# #         else:
+# #             arrivalsDict[i] = min(arrivalsDict[i], duration[z])
+# #     x = sorted(arrivalsDict.items())
 
-    checkTime = x[-1][0]
-    for i in range(len(x)-2,-1,-1):
-        time, dur = x[i]
-        dp[i] = dp[i+1]
-        if time + dur <= checkTime:
-            dp[i] += 1
-            checkTime = x[i][0]
-    return dp[0]
+#     dp = [1] * len(arrival)
 
-print(maxEvents([1,3,3,5,7], [2,2,1,2,1]))
+#     checkTime = x[-1][0]
+#     for i in range(len(x)-2,-1,-1):
+#         time, dur = x[i]
+#         dp[i] = dp[i+1]
+#         if time + dur <= checkTime:
+#             dp[i] += 1
+#             checkTime = x[i][0]
+#     return dp[0]
+
+# print(maxEvents([1,3,3,5,7], [2,2,1,2,1]))
 
 
 #   ====================  ====================
