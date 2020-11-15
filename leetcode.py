@@ -1,29 +1,98 @@
+#   ====================  ====================
+
+# def compareVersion(version1: str, version2: str) -> int:
+    
+#     def getNum(s):
+#         s = s.lstrip('0')
+#         if not s:
+#             return '0'
+#         return s
+    
+#     version1 = version1.split('.')
+#     version2 = version2.split('.')
+
+#     if len(version1) < len(version2):
+#         diff = len(version2) - len(version1)
+#         version1.extend(['']*diff)
+#     elif len(version2) < len(version1):
+#         diff = len(version1) - len(version2)
+#         version2.extend(['']*diff)
+    
+#     num1, num2 = [], []
+#     for i in range(len(version1)):
+#         num1.append(getNum(version1[i]))
+#         num2.append(getNum(version2[i]))
+
+#     num1, num2, = int(''.join(num1)), int(''.join(num2))
+#     if num1 == num2:
+#         return 0
+#     return -1 if num1 < num2 else 1
+
+# print(compareVersion(version1 = "1.01.03.0445.1.1.2", version2 = "1.001.03.044.9"))
 
 
 #   ====================  ====================
 
-from collections import Counter
-def findAnagrams(s, p):
+# def reverseWords(s: str) -> str:
+#     s = s.strip()
 
-        # Much faster than below (~150ms)
-    if len(p) > len(s):
-        return []
-    iterations = (len(s) - len(p)) + 1 # might need come back to this
+#     wordCache = []
+#     ans = []
+#     for c in s:
+#         if c == ' ':
+#             if wordCache:
+#                 ans.append(''.join(wordCache))
+#                 wordCache = []
+#             print(ans, c)
+#         else:
+#             wordCache.append(c)
+#     ans.append(''.join(wordCache))
 
-    ans = []
+#     return ' '.join(reversed(ans))
+
+# print(reverseWords(s = "  the sky is   blue  "))
+
+
+# def checkForNum(arr, num):
+
+#     lo, hi = 0, len(arr)-1
     
-    sCounts = Counter(s[:len(p)])
-    pCounts = Counter(p)
+#     while lo <= hi:
+#         mid = (lo + hi) // 2
+#         if num == arr[mid]:
+#             return True
+#         elif num > arr[mid]:
+#             lo = mid + 1
+#         else:
+#             hi = mid - 1
+#     return False
 
-    for i in range(iterations):
-        if sCounts == pCounts:
-            ans.append(i)
-        sCounts[s[i]] -= 1
-        if not sCounts[s[i]]:
-            del sCounts[s[i]]
-        if i < iterations - 1:
-            sCounts[s[i + len(p)]] += 1 
-    return ans
+# print(checkForNum([1,2,3,4,5], 2.5))
+
+#   ====================  ====================
+
+# from collections import Counter
+# def findAnagrams(s, p):
+
+#         # Much faster than below (~150ms)
+#     if len(p) > len(s):
+#         return []
+#     iterations = (len(s) - len(p)) + 1 # might need come back to this
+
+#     ans = []
+    
+#     sCounts = Counter(s[:len(p)])
+#     pCounts = Counter(p)
+
+#     for i in range(iterations):
+#         if sCounts == pCounts:
+#             ans.append(i)
+#         sCounts[s[i]] -= 1
+#         if not sCounts[s[i]]:
+#             del sCounts[s[i]]
+#         if i < iterations - 1:
+#             sCounts[s[i + len(p)]] += 1 
+#     return ans
 
         # # Slower (~600ms)
 # def findAnagrams(s, p):
@@ -48,7 +117,7 @@ def findAnagrams(s, p):
     #         ans.append(i)
     # return ans
 
-print(findAnagrams(s="cbaebabacd", p="abc"))
+# print(findAnagrams(s="cbaebabacd", p="abc"))
 
 
 #   ==================== Twitter HackerRank Challenge ====================
