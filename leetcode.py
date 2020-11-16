@@ -1,5 +1,89 @@
 #   ====================  ====================
 
+def removeKdigits(num: str, k: int) -> str:
+    
+    if len(num) == k:
+        return '0'
+    
+    num = list(num)
+    ans = [num[0]]
+    
+    for i in range(1, len(num)):
+        while k and ans and num[i] < ans[-1]:
+            ans.pop()
+            k -= 1
+        if not k:
+            ans.extend(num[i:])
+            break
+        ans.append(num[i])
+    
+    for _ in range(k):
+        ans.pop()
+    
+    num = ''.join(ans).lstrip('0')
+    return num if num else '0'
+
+print(removeKdigits(num = "1432219", k = 3))
+
+
+#   ====================  ====================
+
+# def reverseWords(s) -> None:
+#     s = s[::-1]
+
+#     i = j = 0
+#     for j in range(len(s)):
+#         if s[j] == ' ':
+#             end = j-1
+#             while i < end:
+#                 temp = s[i]
+#                 s[i] = s[end]
+#                 s[end] = temp
+#                 i, end = i+1, end-1
+#             i = j+1
+#     while i < j:
+#         temp = s[i]
+#         s[i] = s[j]
+#         s[j] = temp
+#         i, j = i+1, j-1
+#     return s
+
+# print(reverseWords(["t","h","e"," ","s","k","y"," ","i","s"," ","b","l","u","e"]))
+
+
+#   ====================  ====================
+
+# def searchMatrix(matrix, target):
+#     """
+#     :type matrix: List[List[int]]
+#     :type target: int
+#     :rtype: bool
+#     """
+#     row = 0
+    
+#     while row < len(matrix) and matrix[row]:
+        
+#         if matrix[row][0] <= target <= matrix[row][-1]:
+            
+#             i, j = 0, len(matrix[row])-1
+            
+#             while i <= j:
+#                 mid = (i+j) // 2
+#                 if matrix[row][mid] == target:
+#                     return True
+#                 elif matrix[row][mid] < target:
+#                     i = mid + 1
+#                 else:
+#                     j = mid - 1
+#         row += 1
+    
+#     return False
+
+# print(searchMatrix([[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], 5))
+
+
+#   ====================  ====================
+
 # def compareVersion(version1: str, version2: str) -> int:
     
 #     def getNum(s):
