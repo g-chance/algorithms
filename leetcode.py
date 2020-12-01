@@ -117,24 +117,24 @@ print(removeKdigits(num = "1432219", k = 3))
 
 #   ====================  ====================
 
-def reverseWords(s: str) -> str:
-    s = s.strip()
+# def reverseWords(s: str) -> str:
+#     s = s.strip()
 
-    wordCache = []
-    ans = []
-    for c in s:
-        if c == ' ':
-            if wordCache:
-                ans.append(''.join(wordCache))
-                wordCache = []
-            print(ans, c)
-        else:
-            wordCache.append(c)
-    ans.append(''.join(wordCache))
+#     wordCache = []
+#     ans = []
+#     for c in s:
+#         if c == ' ':
+#             if wordCache:
+#                 ans.append(''.join(wordCache))
+#                 wordCache = []
+#             print(ans, c)
+#         else:
+#             wordCache.append(c)
+#     ans.append(''.join(wordCache))
 
-    return ' '.join(reversed(ans))
+#     return ' '.join(reversed(ans))
 
-print(reverseWords(s = "  the sky is   blue  "))
+# print(reverseWords(s = "  the sky is   blue  "))
 
 
 # def checkForNum(arr, num):
