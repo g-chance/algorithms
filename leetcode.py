@@ -1,29 +1,46 @@
 #   ====================  ====================
 
-def removeKdigits(num: str, k: int) -> str:
-    
-    if len(num) == k:
-        return '0'
-    
-    num = list(num)
-    ans = [num[0]]
-    
-    for i in range(1, len(num)):
-        while k and ans and num[i] < ans[-1]:
-            ans.pop()
-            k -= 1
-        if not k:
-            ans.extend(num[i:])
-            break
-        ans.append(num[i])
-    
-    for _ in range(k):
-        ans.pop()
-    
-    num = ''.join(ans).lstrip('0')
-    return num if num else '0'
+def maxSubArray(nums):
 
-print(removeKdigits(num = "1432219", k = 3))
+    ma = -(2 ** 32)
+    su = 0
+    
+    for i in range(len(nums)):
+        su += nums[i]
+        ma = max(ma, su)
+        if su < 0:
+            su = 0
+    
+    return ma
+
+print(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+
+#   ====================  ====================
+
+# def removeKdigits(num: str, k: int) -> str:
+    
+#     if len(num) == k:
+#         return '0'
+    
+#     num = list(num)
+#     ans = [num[0]]
+    
+#     for i in range(1, len(num)):
+#         while k and ans and num[i] < ans[-1]:
+#             ans.pop()
+#             k -= 1
+#         if not k:
+#             ans.extend(num[i:])
+#             break
+#         ans.append(num[i])
+    
+#     for _ in range(k):
+#         ans.pop()
+    
+#     num = ''.join(ans).lstrip('0')
+#     return num if num else '0'
+
+# print(removeKdigits(num = "1432219", k = 3))
 
 
 #   ====================  ====================

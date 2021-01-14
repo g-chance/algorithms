@@ -1,5 +1,3 @@
-
-
 //  ===== REVERSE STRING II =====
 let s = "abcdefghijk";
 // Output: "bacdfeg"
